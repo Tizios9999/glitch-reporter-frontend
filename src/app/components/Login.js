@@ -1,4 +1,6 @@
-import * as React from 'react';
+'use client';
+import React, { useState, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,6 +13,8 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import { login } from "../actions/auth";
+import { useRouter } from 'next/navigation';
 // import { ThemeProvider } from '@mui/material/styles';
 
 function Copyright(props) {
@@ -26,15 +30,60 @@ function Copyright(props) {
   );
 }
 
-export default function SignIn() {
+export default function Login() {
+
+  const { push } = useRouter();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const { isLoggedIn } = useSelector(state => state.auth);
+  const { message } = useSelector(state => state.message);
+
+  const dispatch = useDispatch();
+
+
+  const onChangeUsername = (event) => {
+    const username = event.target.value;
+    setUsername(username);
+  };
+
+  const onChangePassword = (event) => {
+    const password = event.target.value;
+    setPassword(password);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    setLoading(true);
+
+    
     const data = new FormData(event.currentTarget);
     console.log({
-      email: data.get('email'),
+      username: data.get('username'),
       password: data.get('password'),
     });
+
+    // validate
+
+    // if ok push to internal section
+
+    dispatch(login(username, password))
+    .then(() => {
+      push('./profile');
+      window.location.reload();
+    })
+    .catch(() => {
+      setLoading(false);
+    });
+    
   };
+
+  const validate = () => {
+
+  }
 
   return (
       <Container component="main" maxWidth="xs">
@@ -58,10 +107,12 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              value={username}
+              onChange={onChangeUsername}
               autoFocus
             />
             <TextField
@@ -72,11 +123,9 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
+              value={password}
+              onChange={onChangePassword}
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"
