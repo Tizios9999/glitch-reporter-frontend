@@ -13,10 +13,15 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import HiveIcon from '@mui/icons-material/Hive';
 
+import { useRouter } from 'next/navigation';
+
 const pages = ['Login', 'Register', 'About'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
+
+  const { push } = useRouter();
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -43,8 +48,7 @@ function Navbar() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="/"
+            onClick={() => {push("/")}}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -52,6 +56,7 @@ function Navbar() {
               fontWeight: 700,
               color: 'inherit',
               textDecoration: 'none',
+              cursor: 'pointer'
             }}
           >
             Glitch Reporter
@@ -88,10 +93,7 @@ function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography component="a" href={`/${page.toLowerCase()}`} textAlign="center" sx={{
-                    textDecoration: "none",
-                    color: "black"
-                  }}>{page}</Typography>
+                  <Typography onClick={() => {push(`/${page.toLowerCase()}`)}} textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -101,7 +103,7 @@ function Navbar() {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            onClick={() => {push("/")}}
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -110,6 +112,7 @@ function Navbar() {
               fontWeight: 700,
               color: 'inherit',
               textDecoration: 'none',
+              cursor: 'pointer'
             }}
           >
             G/REP
@@ -118,7 +121,7 @@ function Navbar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => {handleCloseNavMenu(), push(`/${page.toLowerCase()}`)}}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
