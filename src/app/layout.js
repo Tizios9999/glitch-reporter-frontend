@@ -7,6 +7,7 @@ import { CacheProvider } from '@emotion/react';
 import { ThemeProvider } from '@mui/material/styles';
 import createEmotionCache from './createEmotionCache';
 import theme from './theme';
+import Navbar from './components/Navbar'
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -24,7 +25,10 @@ export default function RootLayout({ children }) {
       <Provider store={store}>
         <CacheProvider value={emotionCache}>
           <ThemeProvider theme={theme}>
-            <body>{children}</body>
+            <body>
+              <Navbar />
+              {children}
+            </body>
           </ThemeProvider>
         </CacheProvider>
       </Provider>

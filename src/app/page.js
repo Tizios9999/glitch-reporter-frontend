@@ -11,12 +11,12 @@ import '@fontsource/roboto/700.css';
 
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import Login from './components/Login'
+import Main from './components/Main'
 
 export default function Home() {
   return (
       <div>
-        <Login />
+        <Main />
       {/* <Button variant="contained">Hello World</Button> */}
     </div>
   );
