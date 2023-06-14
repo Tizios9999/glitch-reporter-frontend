@@ -15,7 +15,7 @@ import HiveIcon from '@mui/icons-material/Hive';
 
 import { useRouter } from 'next/navigation';
 
-const pages = ['Login', 'Register', 'About'];
+const pages = ['Login', 'Register', 'About', 'Dashboard'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function Navbar() {
