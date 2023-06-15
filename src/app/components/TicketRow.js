@@ -45,14 +45,6 @@ if (props.type === 'header') {
 
 if (props.type === 'data') {
 
-    // status = props.data.status;
-
-    // const customer = props.data.openingUser;
-    // const subject = props.data.ticketSubject;
-    // const priority = props.data.priority;
-    // const assignedTo = props.data.assignedTo;
-    // const lastUpdated = props.data.lastUpdated;
-
     let priorityColorBgMap = new Map()
 
     priorityColorBgMap.set('low', 'Green')

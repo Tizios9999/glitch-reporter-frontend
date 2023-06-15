@@ -7,8 +7,10 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Box from '@mui/material/Box';
 
 import TicketRow from './TicketRow';
+import CheckboxFilters from './CheckboxFilters';
 
 import tickets from '../testdata/tickets';
+import priority from '../testdata/priority';
 
 export default function UserDashboard() {
 
@@ -31,6 +33,7 @@ const ticketData = Array.from(tickets);
               <Button variant="contained" disableElevation color="success" size="large" endIcon={<AddCircleIcon />}>
                 New ticket
               </Button>
+              <CheckboxFilters name="priority" filters={priority} />
             </Box>
             <Box sx={{
                 gridArea: 'main',
