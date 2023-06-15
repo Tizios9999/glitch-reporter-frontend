@@ -5,12 +5,14 @@ import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Box from '@mui/material/Box';
+import Pagination from '@mui/material/Pagination';
 
 import TicketRow from './TicketRow';
 import CheckboxFilters from './CheckboxFilters';
 
 import tickets from '../testdata/tickets';
 import priority from '../testdata/priority';
+import status from '../testdata/status';
 
 export default function UserDashboard() {
 
@@ -34,6 +36,8 @@ const ticketData = Array.from(tickets);
                 New ticket
               </Button>
               <CheckboxFilters name="priority" filters={priority} />
+              <CheckboxFilters name="status" filters={status} />
+              <CheckboxFilters name="customer" filters={["opened by me", "opened by others"]} />
             </Box>
             <Box sx={{
                 gridArea: 'main',
@@ -48,7 +52,15 @@ const ticketData = Array.from(tickets);
               ))}
 
             </Box>
-
+            
+        </Container>
+        <Container maxWidth="xl" sx={{
+            display: "flex",
+            justifyContent: "center",
+            backgroundColor: "pink",
+            padding: "5px"
+        }}>
+          <Pagination count={10} color="secondary" />
         </Container>
       </div>
     )
