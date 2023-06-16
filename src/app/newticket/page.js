@@ -7,12 +7,13 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import { Select, FormControl, InputLabel, MenuItem } from '@mui/material';
 
 const NewTicket = () => {
 
     const initialState = {
         subject: "",
-        priority: "normal",
+        priority: "medium",
         topic: "other",
         description: "",
     }
@@ -54,13 +55,14 @@ const NewTicket = () => {
              display: 'flex',
              flexDirection: 'column',
              alignItems: 'center',
+             justifyContent: 'center',
              backgroundColor: "pink",
            }}
          >
            <Typography component="h1" variant="h5">
             New Ticket
            </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '100%' }}>
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '100%', display: "flex", flexFlow: 'column nowrap', alignItems: 'center', gap: '30px' }}>
             <TextField
               margin="normal"
               required
@@ -72,7 +74,22 @@ const NewTicket = () => {
               onChange={onChangeHandler}
               autoFocus
             />
-
+            <FormControl sx={{ textAlign: "center"}}>
+              <InputLabel id="priority-label">Priority</InputLabel>
+              <Select
+                labelId="priority-label"
+                id="priority"
+                value={formState.priority}
+                label="Priority"
+                name="priority"
+                onChange={onChangeHandler}
+              >
+                  <MenuItem value="low">Low</MenuItem>
+                  <MenuItem value="medium">Medium</MenuItem>
+                  <MenuItem value="high">High</MenuItem>
+                  <MenuItem value="critical">Critical</MenuItem>
+              </Select>
+            </FormControl>
            </Box>
          </Box>
         </Container>
