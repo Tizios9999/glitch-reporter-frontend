@@ -9,6 +9,10 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { Select, FormControl, InputLabel, MenuItem } from '@mui/material';
 
+import CustomSelect from "../components/CustomSelect"
+
+import priority from '../testdata/priority'
+
 const NewTicket = () => {
 
     const initialState = {
@@ -74,22 +78,8 @@ const NewTicket = () => {
               onChange={onChangeHandler}
               autoFocus
             />
-            <FormControl sx={{ textAlign: "center"}}>
-              <InputLabel id="priority-label">Priority</InputLabel>
-              <Select
-                labelId="priority-label"
-                id="priority"
-                value={formState.priority}
-                label="Priority"
-                name="priority"
-                onChange={onChangeHandler}
-              >
-                  <MenuItem value="low">Low</MenuItem>
-                  <MenuItem value="medium">Medium</MenuItem>
-                  <MenuItem value="high">High</MenuItem>
-                  <MenuItem value="critical">Critical</MenuItem>
-              </Select>
-            </FormControl>
+            <CustomSelect values={priority} name="priority" currentValue={formState.priority} onChange={onChangeHandler} />
+           
            </Box>
          </Box>
         </Container>
