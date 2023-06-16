@@ -8,7 +8,7 @@ export default function CustomSelect(props) {
       
 
     return (
-        <FormControl size="medium" sx={{ textAlign: "center"}}>
+        <FormControl size="medium" sx={{ textAlign: "center", width: props.width}}>
           <InputLabel id={`${props.name}-label`}>{props.label}</InputLabel>
           <Select
             labelId={`${props.name}-label`}
@@ -17,6 +17,7 @@ export default function CustomSelect(props) {
             label={props.label}
             name={props.name}
             onChange={props.onChange}
+            required={props.required}
           >
 
             {props.values.map((value, index) => {

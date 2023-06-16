@@ -1,13 +1,14 @@
 'use client'
 
 import { useState } from "react"
+import { useRouter } from 'next/navigation';
 
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-import { Select, FormControl, InputLabel, MenuItem } from '@mui/material';
+import { Button } from '@mui/material';
 
 import CustomSelect from "../components/CustomSelect"
 
@@ -15,6 +16,8 @@ import priority from '../testdata/priority'
 import topic from '../testdata/topic'
 
 const NewTicket = () => {
+
+    const { push } = useRouter();
 
     const initialState = {
         subject: "",
@@ -28,8 +31,6 @@ const NewTicket = () => {
     function onChangeHandler(event) {
         let name = event.target.name;
         let value = event.target.value;
-    
-        console.log(formState)
 
         setFormState((prevState) => {
             return {
@@ -47,8 +48,10 @@ const NewTicket = () => {
         })
     }
 
-    function handleSubmit() {
+    function handleSubmit(event) {
+        event.preventDefault();
 
+        console.log("Form submitted: ",formState)
     }
 
     return (
@@ -61,7 +64,6 @@ const NewTicket = () => {
              flexDirection: 'column',
              alignItems: 'center',
              justifyContent: 'center',
-             backgroundColor: "pink",
            }}
          >
            <Typography component="h1" variant="h5">
@@ -79,8 +81,33 @@ const NewTicket = () => {
               onChange={onChangeHandler}
               autoFocus
             />
-            <CustomSelect values={priority} name="priority" label="Issue priority" currentValue={formState.priority} onChange={onChangeHandler} />
-            <CustomSelect values={topic} name="topic" label="Area of interest" currentValue={formState.topic} onChange={onChangeHandler} />
+            <CustomSelect required={true} values={priority} width="250px" name="priority" label="Issue priority" currentValue={formState.priority} onChange={onChangeHandler} />
+            <CustomSelect required={true} values={topic} width="250px" name="topic" label="Area of interest" currentValue={formState.topic} onChange={onChangeHandler} />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              multiline
+              minRows={10}
+              placeholder="Please describe here the issue encountered and the steps to reproduce it."
+              id="description"
+              label="Issue description"
+              name="description"
+              value={formState.description}
+              onChange={onChangeHandler}
+            />
+            <Box sx={{ display: 'flex', justifyContent: 'center', gap: '50px'}}>
+                <Button
+                type="submit"
+                variant="contained"
+                sx={{ mb: 2, width: '200px' }}
+                >Create Ticket</Button>
+                <Button
+                variant="outlined"
+                sx={{ mb: 2, width: '200px' }}
+                onClick={() => {push('./dashboard')}}
+                >Abort</Button>
+            </Box>
            </Box>
          </Box>
         </Container>

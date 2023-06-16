@@ -34,13 +34,14 @@ let fieldsList = [];
 let bgColor;
 let fontColor;
 let status;
+let borderStyle;
 
 if (props.type === 'header') {
 
     bgColor = 'secondary.main';
     fontColor = 'white'
     fieldsList = HEADERS_OBJ_ARR;
-
+    borderStyle = "solid";
 } 
 
 if (props.type === 'data') {
@@ -60,6 +61,8 @@ if (props.type === 'data') {
     priorityColorMap.set('critical', 'White')
 
     status = props.data.status;
+
+    borderStyle = "hidden solid solid solid";
 
     const customer = {
         fieldName: props.data.openingUser,
@@ -105,6 +108,9 @@ if (props.type === 'data') {
             color: fontColor,
             fontWeight: '500',
             textAlign: 'center',
+            borderStyle: borderStyle,
+            borderWidth: '1px',
+            borderColor: 'black',
         }}>
             
             <div>x</div>
