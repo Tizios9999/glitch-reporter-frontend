@@ -12,13 +12,14 @@ import { Select, FormControl, InputLabel, MenuItem } from '@mui/material';
 import CustomSelect from "../components/CustomSelect"
 
 import priority from '../testdata/priority'
+import topic from '../testdata/topic'
 
 const NewTicket = () => {
 
     const initialState = {
         subject: "",
         priority: "medium",
-        topic: "other",
+        topic: "Other",
         description: "",
     }
     
@@ -72,14 +73,14 @@ const NewTicket = () => {
               required
               fullWidth
               id="subject"
-              label="Ticket Subject"
+              label="Ticket subject"
               name="subject"
               value={formState.subject}
               onChange={onChangeHandler}
               autoFocus
             />
-            <CustomSelect values={priority} name="priority" currentValue={formState.priority} onChange={onChangeHandler} />
-           
+            <CustomSelect values={priority} name="priority" label="Issue priority" currentValue={formState.priority} onChange={onChangeHandler} />
+            <CustomSelect values={topic} name="topic" label="Area of interest" currentValue={formState.topic} onChange={onChangeHandler} />
            </Box>
          </Box>
         </Container>

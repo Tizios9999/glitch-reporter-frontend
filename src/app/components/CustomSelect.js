@@ -8,13 +8,13 @@ export default function CustomSelect(props) {
       
 
     return (
-        <FormControl sx={{ textAlign: "center"}}>
-          <InputLabel id={`${props.name}-label`}>{capitalize(props.name)}</InputLabel>
+        <FormControl size="medium" sx={{ textAlign: "center"}}>
+          <InputLabel id={`${props.name}-label`}>{props.label}</InputLabel>
           <Select
             labelId={`${props.name}-label`}
             id={`${props.name}`}
             value={props.currentValue}
-            label={capitalize(props.name)}
+            label={props.label}
             name={props.name}
             onChange={props.onChange}
           >
@@ -22,7 +22,7 @@ export default function CustomSelect(props) {
             {props.values.map((value, index) => {
                 return <MenuItem key={index} value={value}>{capitalize(value)}</MenuItem>
             })}
-            
+
           </Select>
   </FormControl>
     ) 
