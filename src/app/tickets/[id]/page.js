@@ -5,6 +5,7 @@ import ticketsData from '../../testdata/tickets'
 import { Container, CssBaseline, Typography, Box, TextField, Button } from '@mui/material';
 
 import TicketMessage from '../../components/TicketMessage'
+import FileUpload from '../../components/FileUpload'
 
 const TicketPage = () => {
 
@@ -107,6 +108,8 @@ const TicketPage = () => {
                 value={newMessage}
                 onChange={onNewMessageChangeHandler}
               />
+
+          <FileUpload />
 
           <Button
                 type="submit"
