@@ -2,7 +2,7 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ticketsData from '../../testdata/tickets'
-import { Container, CssBaseline, Typography } from '@mui/material';
+import { Container, CssBaseline, Typography, Box } from '@mui/material';
 
 import TicketMessage from '../../components/TicketMessage'
 
@@ -73,11 +73,13 @@ const TicketPage = () => {
         <Typography variant="body1" color="initial"><strong>Created:</strong> {ticket.creationDate}</Typography>
         <Typography variant="body1" color="initial"><strong>Last updated:</strong> {ticket.lastUpdated}</Typography>
         
+        <Box sx={{ mt: '50px', border: '1px solid black'}}>
         {ticket.messages.map((message) => {
           return (
             <TicketMessage messageData={message}/>
           )
         })}
+        </Box>
 
         {console.log(ticket, 'ticket')}
       </Container>
