@@ -5,9 +5,13 @@ import Typography from '@mui/material/Typography';
 export default function TicketRow(props) {
 
 const TEMPLATE_COLUMNS_RATIO = '5% 20% 30% 10% 15% 20%';
-const HEADERS = ['Customer', 'Subject', 'Priority', 'Assigned to', 'Last Updated'];
+const HEADERS = ['ID', 'Customer', 'Subject', 'Priority', 'Assigned to', 'Last Updated'];
 
 const HEADERS_OBJ_ARR = [
+    {
+        fieldName: 'ID',
+        type: 'id'
+    },
     {
         fieldName: 'Customer',
         type: 'normal'
@@ -64,6 +68,11 @@ if (props.type === 'data') {
 
     borderStyle = "hidden solid solid solid";
 
+    const id = {
+        fieldName: props.data.ticketId,
+        type: 'id'
+    }
+
     const customer = {
         fieldName: props.data.openingUser,
         type: 'normal'
@@ -95,7 +104,7 @@ if (props.type === 'data') {
 
     bgColor = 'white';
     fontColor = 'black'
-    fieldsList = [ customer, subject, priority, assignedTo, lastUpdated ]
+    fieldsList = [id, customer, subject, priority, assignedTo, lastUpdated ]
 }
 
     return (
@@ -113,9 +122,15 @@ if (props.type === 'data') {
             borderColor: 'black',
         }}>
             
-            <div>x</div>
+            {/* <div>x</div> */}
             {fieldsList.map((field) => {
                 switch (field.type) {
+                  case 'id':
+                    return (
+                        <div key={field}>
+                            <Typography textAlign="center">{field.fieldName}</Typography>
+                        </div>
+                    )
                   case 'normal':
                     return ( 
                         <div key={field}>
