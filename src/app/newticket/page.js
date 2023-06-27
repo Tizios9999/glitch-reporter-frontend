@@ -14,6 +14,7 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import CustomSelect from "../components/CustomSelect"
+import FileUpload from "../components/FileUpload";
 
 import priority from '../testdata/priority'
 import topic from '../testdata/topic'
@@ -137,7 +138,7 @@ const NewTicket = () => {
               onChange={onChangeHandler}
             />
 
-            <Box>
+            {/* <Box>
                 <Button 
                   variant="contained" 
                   color="secondary" 
@@ -171,8 +172,15 @@ const NewTicket = () => {
                         </div>
                     )
                 })}
-            </Box>
+            </Box> */}
 
+            <FileUpload
+                uploadActive={uploadActive}
+                setUploadActive={setUploadActive}
+                handleFileChange={handleFileChange}
+                uploadedFiles={uploadedFiles}
+                handleRemoveFile={handleRemoveFile}
+            />
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: '50px'}}>
                 <Button
                 type="submit"

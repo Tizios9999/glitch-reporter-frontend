@@ -2,7 +2,7 @@
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import ticketsData from '../../testdata/tickets'
-import { Container, CssBaseline, Typography, Box } from '@mui/material';
+import { Container, CssBaseline, Typography, Box, TextField, Button } from '@mui/material';
 
 import TicketMessage from '../../components/TicketMessage'
 
@@ -10,6 +10,7 @@ const TicketPage = () => {
 
   const [id, setId] = useState(null);
   const [ticket, setTicket] = useState(null);
+  const [newMessage, setNewMessage] = useState(null);
   const pathname = usePathname();
 
 // To be moved in its own site
@@ -61,6 +62,18 @@ const TicketPage = () => {
     return <div>Loading ticket data...</div>;
   }
 
+  function onNewMessageChangeHandler(event) {
+    setNewMessage(event.target.value);
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+        console.log("Message submitted: ",newMessage)
+
+        {/* Make use of firebase to handle files uploaded */}
+  }
+
   return (
     <div>
       <CssBaseline />
@@ -82,6 +95,26 @@ const TicketPage = () => {
         </Box>
 
         {console.log(ticket, 'ticket')}
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: '100%', display: "flex", flexFlow: 'column nowrap', alignItems: 'center', gap: '30px' }}>
+          <TextField
+                margin="normal"
+                fullWidth
+                multiline
+                minRows={10}
+                placeholder="Add a new message here"
+                id="newmessage"
+                name="newmessage"
+                value={newMessage}
+                onChange={onNewMessageChangeHandler}
+              />
+
+          <Button
+                type="submit"
+                variant="contained"
+                sx={{ mb: 2, width: '200px' }}
+                >Submit</Button>
+            
+          </Box>
       </Container>
     </div>
   );
