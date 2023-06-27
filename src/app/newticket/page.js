@@ -9,9 +9,9 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { Button, IconButton } from '@mui/material';
-import Input from '@mui/material/Input';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import DeleteIcon from '@mui/icons-material/Delete';
+// import Input from '@mui/material/Input';
+// import FileUploadIcon from '@mui/icons-material/FileUpload';
+// import DeleteIcon from '@mui/icons-material/Delete';
 
 import CustomSelect from "../components/CustomSelect"
 import FileUpload from "../components/FileUpload";
@@ -32,9 +32,9 @@ const NewTicket = () => {
     
     const [formState, setFormState] = useState(initialState);
     
-    const [uploadedFiles, setUploadedFiles] = useState([]);
+    // const [uploadedFiles, setUploadedFiles] = useState([]);
 
-    const [uploadActive, setUploadActive] = useState(false);
+    // const [uploadActive, setUploadActive] = useState(false);
 
     function onChangeHandler(event) {
         let name = event.target.name;
@@ -48,44 +48,44 @@ const NewTicket = () => {
     }
     
     // this function takes the property name and the value to set and changes the state property
-    function setStateProperty(name, value) {
-        setFormState((prevState) => {
-            return {
-                ...prevState, [name]: value
-            }
-        })
-    }
+    // function setStateProperty(name, value) {
+    //     setFormState((prevState) => {
+    //         return {
+    //             ...prevState, [name]: value
+    //         }
+    //     })
+    // }
 
-    function handleFileChange(event) {
+    // function handleFileChange(event) {
 
-        let filesList = uploadedFiles;
+    //     let filesList = uploadedFiles;
         
-        if (event.target.files && event.target.files[0]) {
+    //     if (event.target.files && event.target.files[0]) {
 
-            // In order to upload the file, a check is made to know if another file with the same name exists
+    //         // In order to upload the file, a check is made to know if another file with the same name exists
 
-            const newFilename = event.target.files[0].name;
-            const index = filesList.findIndex((file) => file.name === newFilename);
+    //         const newFilename = event.target.files[0].name;
+    //         const index = filesList.findIndex((file) => file.name === newFilename);
 
-            if (index < 0) {
-                // If the file is a new one, It's simply added to the array.
-                filesList.push(event.target.files[0])   
-            } else {
-                //If not, it's replaced.
-                filesList.splice(index, 1, event.target.files[0]);
-            }
+    //         if (index < 0) {
+    //             // If the file is a new one, It's simply added to the array.
+    //             filesList.push(event.target.files[0])   
+    //         } else {
+    //             //If not, it's replaced.
+    //             filesList.splice(index, 1, event.target.files[0]);
+    //         }
 
-            setUploadedFiles(filesList);
+    //         setUploadedFiles(filesList);
 
-        }
-        console.log(filesList);
-        setUploadActive(false);
-        event.target.value = "";
-    }
+    //     }
+    //     console.log(filesList);
+    //     setUploadActive(false);
+    //     event.target.value = "";
+    // }
 
-    function handleRemoveFile(name) {
-        setUploadedFiles((prevItems) => prevItems.filter((item) => item.name !== name));
-      };
+    // function handleRemoveFile(name) {
+    //     setUploadedFiles((prevItems) => prevItems.filter((item) => item.name !== name));
+    //   };
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -174,13 +174,7 @@ const NewTicket = () => {
                 })}
             </Box> */}
 
-            <FileUpload
-                uploadActive={uploadActive}
-                setUploadActive={setUploadActive}
-                handleFileChange={handleFileChange}
-                uploadedFiles={uploadedFiles}
-                handleRemoveFile={handleRemoveFile}
-            />
+            <FileUpload/>
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: '50px'}}>
                 <Button
                 type="submit"
