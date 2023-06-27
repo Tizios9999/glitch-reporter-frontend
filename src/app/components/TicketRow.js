@@ -43,6 +43,7 @@ export default function TicketRow(props) {
     let fontColor;
     let status;
     let borderStyle;
+    let idStyle;
 
     if (props.type === 'header') {
 
@@ -50,6 +51,7 @@ export default function TicketRow(props) {
         fontColor = 'white'
         fieldsList = HEADERS_OBJ_ARR;
         borderStyle = "solid";
+        idStyle = { color: 'white' }
     } 
 
     if (props.type === 'data') {
@@ -71,6 +73,7 @@ export default function TicketRow(props) {
         status = props.data.status;
 
         borderStyle = "hidden solid solid solid";
+        idStyle = { color: 'primary', cursor: 'pointer', textDecoration: 'underline dotted' }
 
         const id = {
             fieldName: props.data.ticketId,
@@ -132,7 +135,7 @@ export default function TicketRow(props) {
                   case 'id':
                     return (
                         <div key={field}>
-                            <Typography textAlign="center" onClick={() => {push(`/tickets/${field.fieldName}`)}}>{field.fieldName}</Typography>
+                            <Typography textAlign="center" sx={idStyle} onClick={() => {props.type === 'data' && push(`/tickets/${field.fieldName}`)}}>{field.fieldName}</Typography>
                         </div>
                     )
                   case 'normal':
