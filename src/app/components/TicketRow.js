@@ -2,110 +2,114 @@ import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
+import { useRouter } from 'next/navigation'; 
+
 export default function TicketRow(props) {
 
-const TEMPLATE_COLUMNS_RATIO = '5% 20% 30% 10% 15% 20%';
-const HEADERS = ['ID', 'Customer', 'Subject', 'Priority', 'Assigned to', 'Last Updated'];
+    const { push } = useRouter();
 
-const HEADERS_OBJ_ARR = [
-    {
-        fieldName: 'ID',
-        type: 'id'
-    },
-    {
-        fieldName: 'Customer',
-        type: 'normal'
-    },
-    {
-        fieldName: 'Subject',
-        type: 'normal'
-    },
-    {
-        fieldName: 'Priority',
-        type: 'normal'
-    },
-    {
-        fieldName: 'Assigned to',
-        type: 'normal'
-    },
-    {
-        fieldName: 'Last Updated',
-        type: 'normal'
-    },
-]
+    const TEMPLATE_COLUMNS_RATIO = '5% 20% 30% 10% 15% 20%';
+    const HEADERS = ['ID', 'Customer', 'Subject', 'Priority', 'Assigned to', 'Last Updated'];
 
-let fieldsList = [];
-let bgColor;
-let fontColor;
-let status;
-let borderStyle;
+    const HEADERS_OBJ_ARR = [
+        {
+            fieldName: 'ID',
+            type: 'id'
+        },
+        {
+            fieldName: 'Customer',
+            type: 'normal'
+        },
+        {
+            fieldName: 'Subject',
+            type: 'normal'
+        },
+        {
+            fieldName: 'Priority',
+            type: 'normal'
+        },
+        {
+            fieldName: 'Assigned to',
+            type: 'normal'
+        },
+        {
+            fieldName: 'Last Updated',
+            type: 'normal'
+        },
+    ]
 
-if (props.type === 'header') {
+    let fieldsList = [];
+    let bgColor;
+    let fontColor;
+    let status;
+    let borderStyle;
 
-    bgColor = 'secondary.main';
-    fontColor = 'white'
-    fieldsList = HEADERS_OBJ_ARR;
-    borderStyle = "solid";
-} 
+    if (props.type === 'header') {
 
-if (props.type === 'data') {
+        bgColor = 'secondary.main';
+        fontColor = 'white'
+        fieldsList = HEADERS_OBJ_ARR;
+        borderStyle = "solid";
+    } 
 
-    let priorityColorBgMap = new Map()
+    if (props.type === 'data') {
 
-    priorityColorBgMap.set('low', 'Green')
-    priorityColorBgMap.set('medium', 'GoldenRod') 
-    priorityColorBgMap.set('high', 'OrangeRed')
-    priorityColorBgMap.set('critical', 'FireBrick')
+        let priorityColorBgMap = new Map()
 
-    let priorityColorMap = new Map()
+        priorityColorBgMap.set('low', 'Green')
+        priorityColorBgMap.set('medium', 'GoldenRod') 
+        priorityColorBgMap.set('high', 'OrangeRed')
+        priorityColorBgMap.set('critical', 'FireBrick')
 
-    priorityColorMap.set('low', 'Black')
-    priorityColorMap.set('medium', 'Black') 
-    priorityColorMap.set('high', 'White')
-    priorityColorMap.set('critical', 'White')
+        let priorityColorMap = new Map()
 
-    status = props.data.status;
+        priorityColorMap.set('low', 'Black')
+        priorityColorMap.set('medium', 'Black') 
+        priorityColorMap.set('high', 'White')
+        priorityColorMap.set('critical', 'White')
 
-    borderStyle = "hidden solid solid solid";
+        status = props.data.status;
 
-    const id = {
-        fieldName: props.data.ticketId,
-        type: 'id'
+        borderStyle = "hidden solid solid solid";
+
+        const id = {
+            fieldName: props.data.ticketId,
+            type: 'id'
+        }
+
+        const customer = {
+            fieldName: props.data.openingUser,
+            type: 'normal'
+        }
+        const subject = {
+            fieldName: props.data.ticketSubject,
+            type: 'chipBefore',
+            chipBgColor: 'primary.main',
+            chipData: status,
+        };
+        const priority = {
+            fieldName: props.data.priority,
+            type: 'chip',
+            chipBgColor: priorityColorBgMap.get(props.data.priority),
+            chipColor: priorityColorMap.get(props.data.priority),
+        };
+
+        const assignedTo = {
+            fieldName: props.data.assignedTo,
+            type: 'normal',
+        };
+
+        const lastUpdated = {
+            fieldName: props.data.lastUpdated,
+            type: 'normal',
+        };
+
+
+
+        bgColor = 'white';
+        fontColor = 'black'
+        fieldsList = [id, customer, subject, priority, assignedTo, lastUpdated ]
     }
-
-    const customer = {
-        fieldName: props.data.openingUser,
-        type: 'normal'
-    }
-    const subject = {
-        fieldName: props.data.ticketSubject,
-        type: 'chipBefore',
-        chipBgColor: 'primary.main',
-        chipData: status,
-    };
-    const priority = {
-        fieldName: props.data.priority,
-        type: 'chip',
-        chipBgColor: priorityColorBgMap.get(props.data.priority),
-        chipColor: priorityColorMap.get(props.data.priority),
-    };
-
-    const assignedTo = {
-        fieldName: props.data.assignedTo,
-        type: 'normal',
-    };
-
-    const lastUpdated = {
-        fieldName: props.data.lastUpdated,
-        type: 'normal',
-    };
-
-
-
-    bgColor = 'white';
-    fontColor = 'black'
-    fieldsList = [id, customer, subject, priority, assignedTo, lastUpdated ]
-}
 
     return (
         <Box sx={{
@@ -128,7 +132,7 @@ if (props.type === 'data') {
                   case 'id':
                     return (
                         <div key={field}>
-                            <Typography textAlign="center">{field.fieldName}</Typography>
+                            <Typography textAlign="center" onClick={() => {push(`/tickets/${field.fieldName}`)}}>{field.fieldName}</Typography>
                         </div>
                     )
                   case 'normal':
