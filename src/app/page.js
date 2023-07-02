@@ -17,7 +17,6 @@ export default function Home() {
   return (
       <div>
         <Main />
-      {/* <Button variant="contained">Hello World</Button> */}
     </div>
   );
 }
