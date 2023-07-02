@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -46,13 +46,7 @@ export default function Register() {
   const [successful, setSuccessful] = useState(false);
   const [errorsList, setErrorsList] = useState([]);
 
-  // const { isLoggedIn } = useSelector(state => state.auth);
-  // const { message } = useSelector(state => state.message);
-
-  const { isLoggedIn } = useContext(AuthContext);
-  const { message } = useContext(AuthContext);
-
-  // const dispatch = useDispatch();
+  const [state, dispatch, register, login, logout ] = useContext(AuthContext);
 
   const onChangeUsername = (event) => {
     const username = event.target.value;
@@ -94,7 +88,7 @@ export default function Register() {
 
     if (validateForm(formData)) {
 
-        dispatch(register(username, email, password))
+        register(username, email, password)
         .then(() => {
           setSuccessful(true);
           clearForm();

@@ -40,8 +40,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { isLoggedIn } = useContext(AuthContext);
-  const { message } = useContext(AuthContext);
+  const [state, dispatch, register, login, logout ] = useContext(AuthContext);
 
   // const dispatch = useDispatch();
 
@@ -72,9 +71,9 @@ export default function Login() {
 
     // if ok push to internal section
 
-    dispatch(login(username, password))
+    login(username, password)
     .then(() => {
-      push('./profile');
+      push('/dashboard');
       window.location.reload();
     })
     .catch(() => {

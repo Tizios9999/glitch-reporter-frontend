@@ -13,7 +13,7 @@ const AuthContextProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(authReducer, initialState);
 
-  const register = (username, email, password) => (dispatch) => {
+  const register = (username, email, password) => {
     return AuthService.register(username, email, password).then(
       (response) => {
         dispatch({
@@ -49,7 +49,7 @@ const AuthContextProvider = ({ children }) => {
     );
   };
 
-  const login = (username, password) => (dispatch) => {
+  const login = (username, password) => {
     return AuthService.login(username, password).then(
       (data) => {
         dispatch({
