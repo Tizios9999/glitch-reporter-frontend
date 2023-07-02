@@ -27,7 +27,6 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
-      <Provider store={store}>
         <CacheProvider value={emotionCache}>
           <ThemeProvider theme={theme}>
             <AuthContextProvider>
@@ -37,7 +36,6 @@ export default function RootLayout({ children }) {
             </AuthContextProvider>
           </ThemeProvider>
         </CacheProvider>
-      </Provider>
     </html>
   )
 }

@@ -3,8 +3,6 @@ import { useEffect, useContext } from 'react';
 import Navbar from './Navbar'
 import { AuthContext } from "../contexts/AuthContext";
 
-// const inter = Inter({ subsets: ['latin'] })
-
 export const metadata = {
   title: 'Glitch Reporter',
   description: 'Application used for Bug Tracking',

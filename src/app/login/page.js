@@ -1,6 +1,6 @@
 'use client';
-import React, { useState, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useRef, useContext } from "react";
+// import { useDispatch, useSelector } from "react-redux";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,6 +16,8 @@ import Container from '@mui/material/Container';
 import { login } from "../actions/auth";
 import { useRouter } from 'next/navigation';
 // import { ThemeProvider } from '@mui/material/styles';
+
+import { AuthContext } from "../contexts/AuthContext";
 
 function Copyright(props) {
   return (
@@ -38,10 +40,10 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const { isLoggedIn } = useSelector(state => state.auth);
-  const { message } = useSelector(state => state.message);
+  const { isLoggedIn } = useContext(AuthContext);
+  const { message } = useContext(AuthContext);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
 
   const onChangeUsername = (event) => {

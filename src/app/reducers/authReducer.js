@@ -38,6 +38,18 @@ export function authReducer(state, action) {
           user: null,
         };
 
+      case "SET_MESSAGE":
+        return {
+            ...state,
+            message: payload,
+        };
+
+      case "CLEAR_MESSAGE":
+        return {
+            ...state,
+            message: "",
+        };      
+
       default:
         return state;
     }

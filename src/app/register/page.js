@@ -18,6 +18,10 @@ import { useRouter } from 'next/navigation';
 import Alert from '@mui/material/Alert';
 // import { ThemeProvider } from '@mui/material/styles';
 
+import { AuthContext } from "../contexts/AuthContext";
+
+
+
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -42,10 +46,13 @@ export default function Register() {
   const [successful, setSuccessful] = useState(false);
   const [errorsList, setErrorsList] = useState([]);
 
-  const { isLoggedIn } = useSelector(state => state.auth);
-  const { message } = useSelector(state => state.message);
+  // const { isLoggedIn } = useSelector(state => state.auth);
+  // const { message } = useSelector(state => state.message);
 
-  const dispatch = useDispatch();
+  const { isLoggedIn } = useContext(AuthContext);
+  const { message } = useContext(AuthContext);
+
+  // const dispatch = useDispatch();
 
   const onChangeUsername = (event) => {
     const username = event.target.value;

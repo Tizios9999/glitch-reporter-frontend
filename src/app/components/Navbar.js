@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useContext } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -15,6 +15,8 @@ import HiveIcon from '@mui/icons-material/Hive';
 
 import { useRouter } from 'next/navigation';
 
+import { AuthContext } from "../contexts/AuthContext";
+
 const pages = ['Login', 'Register', 'About', 'Dashboard'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -24,6 +26,8 @@ function Navbar() {
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const [state, dispatch, register, login, logout ] = useContext(AuthContext);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -48,7 +52,7 @@ function Navbar() {
           <Typography
             variant="h6"
             noWrap
-            onClick={() => {push("/")}}
+            onClick={() => logout()}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
