@@ -13,12 +13,45 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import HiveIcon from '@mui/icons-material/Hive';
 
+import checkVisibility from '../js/checkVisibility';
+
 import { useRouter } from 'next/navigation';
 
 import { AuthContext } from "../contexts/AuthContext";
 
 const pages = ['Login', 'Register', 'About', 'Dashboard'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages2 = [
+  { label: 'Login',
+    showRule: 'Not logged in',
+  }, 
+  {
+    label: 'Register',
+    showRule: 'Not logged in',
+  }, 
+  {
+    label: 'About',
+    showRule: 'Always',
+  },
+  {
+    label: 'Dashboard',
+    showRule: 'Users level'
+  }
+];
+
+const settingsItems = [
+  {
+    label: 'Profile',
+    action: 'link'
+},
+{
+  label: 'Dashboard',
+  action: 'link'
+},
+{
+  label: 'Logout',
+  action: 'logout'
+},
+]
 
 function Navbar() {
 
@@ -44,6 +77,18 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
+  const settingItemAction = (setting) => {
+
+    if (setting.action === 'link') {
+      return push(`/${setting.label.toLowerCase()}`)
+    }
+
+    if (setting.action === 'logout') {
+      return logout();
+    }
+
+  }
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -52,7 +97,7 @@ function Navbar() {
           <Typography
             variant="h6"
             noWrap
-            onClick={() => logout()}
+            onClick={() => push("/")}
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -95,11 +140,18 @@ function Navbar() {
                 display: { xs: 'block', md: 'none' },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography onClick={() => {push(`/${page.toLowerCase()}`)}} textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
+              {pages2.map((page) => {
+                const isVisible = checkVisibility(state, page.showRule);
+                console.log(page, isVisible)
+                if (isVisible) {
+                  return (
+                    <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                      <Typography onClick={() => {push(`/${page.label.toLowerCase()}`)}} textAlign="center">{page.label}</Typography>
+                    </MenuItem>
+                  )
+                } else return null 
+              }
+              )}
             </Menu>
           </Box>
           <HiveIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -122,18 +174,26 @@ function Navbar() {
             G/REP
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={() => {handleCloseNavMenu(), push(`/${page.toLowerCase()}`)}}
+            {pages2.map((page, id) => {
+              const isVisible = checkVisibility(state, page.showRule);
+              console.log(page, isVisible)
+              if (isVisible) {
+                return (
+                  <Button
+                key={id}
+                onClick={() => {handleCloseNavMenu(), push(`/${page.label.toLowerCase()}`)}}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
-                {page}
+                {page.label}
               </Button>
-            ))}
+                )
+
+            }
+          }
+            )}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {checkVisibility(state, 'Users level') && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -155,13 +215,13 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {settingsItems.map((setting, id) => (
+                <MenuItem key={id} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center" onClick={() => settingItemAction(setting)}>{setting.label}</Typography>
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box>}
         </Toolbar>
       </Container>
     </AppBar>

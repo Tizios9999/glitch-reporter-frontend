@@ -74,7 +74,7 @@ export default function Login() {
     login(username, password)
     .then(() => {
       push('/dashboard');
-      window.location.reload();
+      // window.location.reload();
     })
     .catch(() => {
       setLoading(false);

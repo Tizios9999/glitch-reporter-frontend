@@ -1,15 +1,22 @@
 import React, { createContext, useReducer } from 'react';
 import { authReducer } from '../reducers/authReducer';
+import { useRouter } from 'next/navigation';
+
 
 import AuthService from "../services/auth.service";
 
+
 // Context creation
 const AuthContext = createContext();
+
+
   
 const initialState = { loading: true, isLoggedIn: false, user: null, message:"" };
 
 // Provider for the global state
 const AuthContextProvider = ({ children }) => {
+
+  const { push } = useRouter();
 
   const [state, dispatch] = useReducer(authReducer, initialState);
 
@@ -24,6 +31,8 @@ const AuthContextProvider = ({ children }) => {
           type: "SET_MESSAGE",
           payload: response.data.message,
         });
+
+        push("/");
   
         return Promise.resolve();
       },
@@ -57,6 +66,8 @@ const AuthContextProvider = ({ children }) => {
           payload: { user: data },
         });
   
+        push("/dashboard");
+
         return Promise.resolve();
       },
       (error) => {
@@ -75,7 +86,7 @@ const AuthContextProvider = ({ children }) => {
           type: "SET_MESSAGE",
           payload: message,
         });
-  
+
         return Promise.reject();
       }
     );
@@ -89,6 +100,8 @@ const AuthContextProvider = ({ children }) => {
     dispatch({
       type: "LOGOUT",
     });
+
+    push("/");
   };
 
   return (
