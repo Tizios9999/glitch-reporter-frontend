@@ -2,8 +2,6 @@
 import './globals.css'
 import { useEffect, useContext } from 'react';
 import { Inter } from 'next/font/google'
-import { Provider } from "react-redux";
-import store from "./store";
 import { CacheProvider } from '@emotion/react';
 import { ThemeProvider } from '@mui/material/styles';
 import createEmotionCache from './createEmotionCache';

@@ -8,11 +8,14 @@ import Typography from '@mui/material/Typography';
 import { useRouter } from 'next/navigation';
 import UserDashboard from '../components/UserDashboard'
 
+import ProtectedRoute from '../protectedRoutes/ProtectedRoute'
+
 export default function Dashboard() {
 
   const { push } = useRouter();
 
     return (
+      <ProtectedRoute>
       <Container component="main" maxWidth="l">
         <CssBaseline />
         <Box sx={{
@@ -21,6 +24,7 @@ export default function Dashboard() {
         <UserDashboard />
         </Box>
       </Container>
+      </ProtectedRoute>
     )
     
 }

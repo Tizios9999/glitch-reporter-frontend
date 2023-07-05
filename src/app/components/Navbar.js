@@ -142,7 +142,6 @@ function Navbar() {
             >
               {pages2.map((page) => {
                 const isVisible = checkVisibility(state, page.showRule);
-                console.log(page, isVisible)
                 if (isVisible) {
                   return (
                     <MenuItem key={page.label} onClick={handleCloseNavMenu}>

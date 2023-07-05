@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useRef, useContext } from "react";
-// import { useDispatch, useSelector } from "react-redux";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -13,7 +12,6 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { login } from "../actions/auth";
 import { useRouter } from 'next/navigation';
 // import { ThemeProvider } from '@mui/material/styles';
 

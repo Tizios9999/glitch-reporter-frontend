@@ -29,7 +29,7 @@ export default function Main() {
             }}
         >
           <Typography component="h1" variant="h5">
-            Welcome to Glitch Reporter!
+            Welcome to Glitch Reporter{state.user && `, ${state.user.username}`}!
           </Typography>
           {checkVisibility(state, 'Not logged in') ? <Box sx={{ display: 'flex' , flexDirection: 'column', alignItems: 'center',}}>
             <Button variant="contained" sx={{ mt: 3, mb: 2 }} onClick={() => {push('./login')}}>Login</Button>
