@@ -8,6 +8,7 @@ export default [
         "openingUser" : "Davide",
         "assignedTo" : "Guy",
         "lastUpdated" : "24-02-2023, 10:00",
+        "topic": "Feature malfunction",
         "messages" : [
             {
                 "sender" : "Davide",
@@ -44,6 +45,7 @@ export default [
         "openingUser" : "Karen",
         "assignedTo" : "Charlie",
         "lastUpdated" : "22-03-2023, 17:01",
+        "topic": "Feature malfunction",
         "messages" : [
             {
                 "sender" : "Karen",
@@ -74,6 +76,7 @@ export default [
             "openingUser" : "Karen",
             "assignedTo" : "Guy",
             "lastUpdated" : "02-04-2023, 06:01",
+            "topic": "Feature malfunction",
             "messages" : [
                 {
                     "sender" : "Karen",

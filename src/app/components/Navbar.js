@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -18,6 +18,8 @@ import checkVisibility from '../js/checkVisibility';
 import { useRouter } from 'next/navigation';
 
 import { AuthContext } from "../contexts/AuthContext";
+
+import getMetadata from '../services/metadata.service'
 
 const pages = ['Login', 'Register', 'About', 'Dashboard'];
 const pages2 = [
@@ -88,6 +90,17 @@ function Navbar() {
     }
 
   }
+
+  useEffect(() => {
+
+  if (state.user) {
+    getMetadata().then(
+      (response) => { console.log('metadata', response.data)})
+  }
+
+  
+}
+  , [state.user])
 
   return (
     <AppBar position="static">
