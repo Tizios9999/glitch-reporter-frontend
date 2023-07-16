@@ -6,26 +6,14 @@ import Typography from "@mui/material/Typography";
 
 import { useRouter } from "next/navigation";
 
+import getMetadataObject from "../js/getMetadataObject";
+
 import { AuthContext } from "../contexts/AuthContext";
 import { AppContext } from "../contexts/AppContext";
 
 export default function TicketRow(props) {
   const [authState] = useContext(AuthContext);
   const [appState] = useContext(AppContext);
-
-  function getMetadataObject(propertyName, id, metadata) {
-    if (
-      !metadata ||
-      !metadata[propertyName] ||
-      !Array.isArray(metadata[propertyName])
-    ) {
-      return null; // La proprietà metadata o l'array specificato non esistono
-    }
-
-    console.log("propertyName", propertyName, "id", id, "metadata", metadata);
-
-    return metadata[propertyName].find((obj) => obj.id == id) || null;
-  }
 
   const { push } = useRouter();
 
