@@ -1,21 +1,21 @@
-import React, { createContext, useReducer } from 'react';
-import { authReducer } from '../reducers/authReducer';
-import { useRouter } from 'next/navigation';
-
+import React, { createContext, useReducer } from "react";
+import { authReducer } from "../reducers/authReducer";
+import { useRouter } from "next/navigation";
 
 import AuthService from "../services/auth.service";
-
 
 // Context creation
 const AuthContext = createContext();
 
-
-  
-const initialState = { loading: true, isLoggedIn: false, user: null, message:"" };
+const initialState = {
+  loading: true,
+  isLoggedIn: false,
+  user: null,
+  message: "",
+};
 
 // Provider for the global state
 const AuthContextProvider = ({ children }) => {
-
   const { push } = useRouter();
 
   const [state, dispatch] = useReducer(authReducer, initialState);
@@ -26,14 +26,14 @@ const AuthContextProvider = ({ children }) => {
         dispatch({
           type: "REGISTER_SUCCESS",
         });
-  
+
         dispatch({
           type: "SET_MESSAGE",
           payload: response.data.message,
         });
 
         push("/");
-  
+
         return Promise.resolve();
       },
       (error) => {
@@ -43,16 +43,16 @@ const AuthContextProvider = ({ children }) => {
             error.response.data.message) ||
           error.message ||
           error.toString();
-  
+
         dispatch({
           type: "REGISTER_FAIL",
         });
-  
+
         dispatch({
           type: "SET_MESSAGE",
           payload: message,
         });
-  
+
         return Promise.reject();
       }
     );
@@ -65,7 +65,7 @@ const AuthContextProvider = ({ children }) => {
           type: "LOGIN_SUCCESS",
           payload: { user: data },
         });
-  
+
         push("/dashboard");
 
         return Promise.resolve();
@@ -77,11 +77,11 @@ const AuthContextProvider = ({ children }) => {
             error.response.data.message) ||
           error.message ||
           error.toString();
-  
+
         dispatch({
           type: "LOGIN_FAIL",
         });
-  
+
         dispatch({
           type: "SET_MESSAGE",
           payload: message,
@@ -94,8 +94,8 @@ const AuthContextProvider = ({ children }) => {
 
   const logout = () => {
     AuthService.logout();
-  
-    console.log("logging out")
+
+    console.log("logging out");
 
     dispatch({
       type: "LOGOUT",

@@ -1,10 +1,23 @@
+import { useContext } from 'react'
+
 import Chip from '@mui/material/Chip';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 import { useRouter } from 'next/navigation'; 
 
+import { AuthContext } from "../contexts/AuthContext";
+
 export default function TicketRow(props) {
+
+    const [state] = useContext(AuthContext);
+
+    function getColorFromMetadataProp(table, property, tagColorProperty ) {
+
+        
+
+        return '';
+    }
 
     const { push } = useRouter();
 
@@ -62,6 +75,11 @@ export default function TicketRow(props) {
         priorityColorBgMap.set('medium', 'GoldenRod') 
         priorityColorBgMap.set('high', 'OrangeRed')
         priorityColorBgMap.set('critical', 'FireBrick')
+
+        // const propertyObj = state.properties.find(( { name }) => name === props.data.property)
+
+        // const chipTextColor = "#" + propertyObj.textColorCode;
+        // const chipBgColor = "#" + propertyObj.bgColorCode;
 
         let priorityColorMap = new Map()
 

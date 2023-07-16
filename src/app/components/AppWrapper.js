@@ -1,44 +1,50 @@
-"use client"
-import { useEffect, useContext } from 'react';
-import Navbar from './Navbar'
+"use client";
+import { useEffect, useContext } from "react";
+import Navbar from "./Navbar";
+import Loading from "./Loading";
 import { AuthContext } from "../contexts/AuthContext";
+import { AppContext } from "../contexts/AppContext";
 
-export const metadata = {
-  title: 'Glitch Reporter',
-  description: 'Application used for Bug Tracking',
-}
+export const siteInfo = {
+  title: "Glitch Reporter",
+  description: "Application used for Bug Tracking",
+};
 
 export default function AppWrapper({ children }) {
-
-  const [state, dispatch] = useContext(AuthContext);
-
+  const [authState, authDispatch] = useContext(AuthContext);
+  const [appState, appDispatch, loadMetadata] = useContext(AppContext);
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
 
-    if (state.loading) {
-      const user = JSON.parse(localStorage.getItem("user"));
-
-      const savedInfo = user ? { isLoggedIn: true, user }
+    const savedInfo = user
+      ? { isLoggedIn: true, user }
       : { isLoggedIn: false, user: null };
-    
-      dispatch({
-        type: "LOAD_LOCALSTORAGE",
-        payload: savedInfo,
-      });
+
+    authDispatch({
+      type: "LOAD_LOCALSTORAGE",
+      payload: savedInfo,
+    });
+  }, []);
+
+  useEffect(() => {
+    if (appState.loading || appState.metadata === null) {
+      loadMetadata();
     }
-
-    
-  
-  }, [] ) 
-
+  }, []);
 
   return (
-         <body>
-            {state.loading ? <div>loading</div> :  <>
-                                                    <Navbar />
-                                                    {children}
-                                                    {console.log(state)}
-                                                   </>}
-         </body>
-  )
+    <body>
+      {authState.loading || appState.loading ? (
+        <Loading />
+      ) : (
+        <>
+          <Navbar />
+          {children}
+          {console.log("auth", authState)}
+          {console.log("appState", appState)}
+        </>
+      )}
+    </body>
+  );
 }
