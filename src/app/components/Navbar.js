@@ -21,8 +21,7 @@ import { AuthContext } from "../contexts/AuthContext";
 
 import getMetadata from "../services/metadata.service";
 
-const pages = ["Login", "Register", "About", "Dashboard"];
-const pages2 = [
+const pages = [
   { label: "Login", showRule: "Not logged in" },
   {
     label: "Register",
@@ -144,7 +143,7 @@ function Navbar() {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages2.map((page) => {
+              {pages.map((page) => {
                 const isVisible = checkVisibility(state, page.showRule);
                 if (isVisible) {
                   return (
@@ -185,7 +184,7 @@ function Navbar() {
             G/REP
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages2.map((page, id) => {
+            {pages.map((page, id) => {
               const isVisible = checkVisibility(state, page.showRule);
               console.log(page, isVisible);
               if (isVisible) {
