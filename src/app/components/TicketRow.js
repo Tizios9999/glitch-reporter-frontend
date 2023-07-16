@@ -83,8 +83,6 @@ export default function TicketRow(props) {
   }
 
   if (props.type === "data") {
-    let priorityColorBgMap = new Map();
-
     priorityObj = getMetadataObject(
       "priorities",
       props.data.priorityId,
@@ -95,26 +93,6 @@ export default function TicketRow(props) {
       props.data.statusId,
       appState.metadata
     );
-
-    console.log(props.data.priorityId);
-    console.log(props.data.statusId);
-
-    priorityColorBgMap.set("low", "Green");
-    priorityColorBgMap.set("medium", "GoldenRod");
-    priorityColorBgMap.set("high", "OrangeRed");
-    priorityColorBgMap.set("critical", "FireBrick");
-
-    // const propertyObj = state.properties.find(( { name }) => name === props.data.property)
-
-    // const chipTextColor = "#" + propertyObj.textColorCode;
-    // const chipBgColor = "#" + propertyObj.bgColorCode;
-
-    let priorityColorMap = new Map();
-
-    priorityColorMap.set("low", "Black");
-    priorityColorMap.set("medium", "Black");
-    priorityColorMap.set("high", "White");
-    priorityColorMap.set("critical", "White");
 
     status = props.data.status;
 
@@ -138,14 +116,14 @@ export default function TicketRow(props) {
       fieldName: props.data.ticketSubject,
       type: "chipBefore",
       chipBgColor: `#${statusObj.bgColorCode}`,
-      chipColor: `${statusObj.textColorCode}`,
+      chipColor: `#${statusObj.textColorCode}`,
       chipData: status,
     };
     const priority = {
       fieldName: props.data.priority,
       type: "chip",
       chipBgColor: `#${priorityObj.bgColorCode}`,
-      chipColor: `${priorityObj.textColorCode}`,
+      chipColor: `#${priorityObj.textColorCode}`,
     };
 
     const assignedTo = {
