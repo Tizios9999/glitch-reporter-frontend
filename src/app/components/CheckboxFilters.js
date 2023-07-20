@@ -1,3 +1,4 @@
+"use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import FormLabel from "@mui/material/FormLabel";
@@ -7,12 +8,16 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 import Checkbox from "@mui/material/Checkbox";
 
+import { AppContext } from "../contexts/AppContext";
+
 export default function CheckboxFilters(props) {
   // I will take the possible choices and make an object out of it to set the initial state
   const initialState = props.filters.reduce((acc, value) => {
     acc[value] = false;
     return acc;
   }, {});
+
+  const [appState, appDispatch, loadMetadata] = React.useContext(AppContext);
 
   const [state, setState] = React.useState(initialState);
 
@@ -22,6 +27,18 @@ export default function CheckboxFilters(props) {
       [event.target.name]: event.target.checked,
     });
   };
+
+  // updating the activeFilters on AppState context
+  React.useEffect(() => {
+    const checkboxArr = Object.keys(state).filter((key) => state[key]);
+
+    console.log("checkboxArr", props.name, checkboxArr);
+
+    appDispatch({
+      type: "UPDATE_FILTERS",
+      payload: { name: props.name, values: [...checkboxArr] },
+    });
+  }, [state]);
 
   return (
     <Box sx={{ display: "flex" }}>

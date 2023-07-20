@@ -4,7 +4,15 @@ import { appReducer } from "../reducers/appReducer";
 
 const AppContext = createContext();
 
-const initialState = { metadata: null, loading: true };
+const initialState = {
+  metadata: null,
+  loading: true,
+  activeFilters: {
+    priority: [],
+    status: [],
+    customer: [],
+  },
+};
 
 const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);

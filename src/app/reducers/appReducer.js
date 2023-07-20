@@ -9,6 +9,15 @@ export function appReducer(state, action) {
         loading: false,
       };
 
+    case "UPDATE_FILTERS":
+      return {
+        ...state,
+        activeFilters: {
+          ...state.activeFilters,
+          [payload.name]: payload.values,
+        },
+      };
+
     default:
       return state;
   }
