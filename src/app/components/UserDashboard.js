@@ -1,4 +1,6 @@
 "use client";
+import * as React from "react";
+
 import { useRouter } from "next/navigation";
 
 import Container from "@mui/material/Container";
@@ -16,10 +18,19 @@ import tickets from "../testdata/tickets";
 import priority from "../testdata/priority";
 import status from "../testdata/status";
 
+import { AppContext } from "../contexts/AppContext";
+
 export default function UserDashboard() {
   const { push } = useRouter();
 
   const ticketData = Array.from(tickets);
+
+  const [appState, appDispatch] = React.useContext(AppContext);
+
+  const customerFilter = [
+    { id: 1, name: "Opened by me" },
+    { id: 2, name: "Opened by others" },
+  ];
 
   return (
     <div>
@@ -51,11 +62,21 @@ export default function UserDashboard() {
           >
             New ticket
           </Button>
-          <CheckboxFilters name="priority" filters={priority} />
-          <CheckboxFilters name="status" filters={status} />
+
+          <CheckboxFilters
+            name="priority"
+            filters={priority}
+            filtersArr={appState.metadata.priorities}
+          />
+          <CheckboxFilters
+            name="status"
+            filters={status}
+            filtersArr={appState.metadata.statuses}
+          />
           <CheckboxFilters
             name="customer"
             filters={["opened by me", "opened by others"]}
+            filtersArr={customerFilter}
           />
         </Box>
         <Box

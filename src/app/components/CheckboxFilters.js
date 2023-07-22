@@ -12,14 +12,31 @@ import { AppContext } from "../contexts/AppContext";
 
 export default function CheckboxFilters(props) {
   // I will take the possible choices and make an object out of it to set the initial state
-  const initialState = props.filters.reduce((acc, value) => {
-    acc[value] = false;
-    return acc;
-  }, {});
+  const initialValue = {};
+  const initialState = props.filtersArr.reduce(
+    (acc, current) => ({ ...acc, [current.name]: false }),
+    initialValue
+  );
 
-  const [appState, appDispatch, loadMetadata] = React.useContext(AppContext);
+  const [appState, appDispatch] = React.useContext(AppContext);
 
-  const [state, setState] = React.useState(initialState);
+  const startingState = {};
+  props.filtersArr.forEach((obj) => {
+    if (appState.activeFilters[props.name].includes(obj.name)) {
+      startingState[obj.name] = true;
+    } else {
+      startingState[obj.name] = false;
+    }
+
+    console.log("starting state", startingState);
+    console.log(
+      "appState.filter",
+      appState.activeFilters[props.name],
+      appState.activeFilters
+    );
+  });
+
+  const [state, setState] = React.useState(startingState);
 
   const handleChange = (event) => {
     setState({
@@ -39,6 +56,10 @@ export default function CheckboxFilters(props) {
       payload: { name: props.name, values: [...checkboxArr] },
     });
   }, [state]);
+
+  React.useEffect(() => {
+    // Runs the query to update the page
+  }, [appState.activeFilters]);
 
   return (
     <Box sx={{ display: "flex" }}>

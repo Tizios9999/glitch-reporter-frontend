@@ -28,7 +28,7 @@ export default function AppWrapper({ children }) {
   }, []);
 
   useEffect(() => {
-    if (appState.loading || appState.metadata === null) {
+    if (appState.metadata === null) {
       loadMetadata();
     }
   }, []);

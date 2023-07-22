@@ -7,6 +7,9 @@ export function appReducer(state, action) {
         ...state,
         metadata: payload.data.data,
         loading: false,
+        activeFilters: {
+          ...state.activeFilters,
+        },
       };
 
     case "UPDATE_FILTERS":
