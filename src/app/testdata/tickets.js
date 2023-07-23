@@ -10,6 +10,7 @@ export default [
     openingUser: "Davide",
     assignedTo: "Guy",
     lastUpdated: "24-02-2023, 10:00",
+    topicId: "2",
     topic: "Feature malfunction",
     messages: [
       {
@@ -49,6 +50,7 @@ export default [
     openingUser: "Karen",
     assignedTo: "Charlie",
     lastUpdated: "22-03-2023, 17:01",
+    topicId: "2",
     topic: "Feature malfunction",
     messages: [
       {
@@ -82,6 +84,7 @@ export default [
     openingUser: "Karen",
     assignedTo: "Guy",
     lastUpdated: "02-04-2023, 06:01",
+    topicId: "2",
     topic: "Feature malfunction",
     messages: [
       {

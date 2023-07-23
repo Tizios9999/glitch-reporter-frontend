@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useContext } from "react";
 import { firebaseConfig, app } from "../firebase/firebaseConfig";
 import { getFirestore } from "firebase/firestore";
 
@@ -16,27 +17,27 @@ import { Button, IconButton } from "@mui/material";
 // import FileUploadIcon from '@mui/icons-material/FileUpload';
 // import DeleteIcon from '@mui/icons-material/Delete';
 
+import { AuthContext } from "../contexts/AuthContext";
+import { AppContext } from "../contexts/AppContext";
+
 import CustomSelect from "../components/CustomSelect";
 import FileUpload from "../components/FileUpload";
-
-import priority from "../testdata/priority";
-import topic from "../testdata/topic";
 
 const NewTicket = () => {
   const { push } = useRouter();
 
   const initialState = {
     subject: "",
-    priority: "medium",
-    topic: "Other",
-    description: "",
+    priority: "",
+    topic: "",
+    message: "",
   };
 
+  const [authState, authDispatch] = useContext(AuthContext);
+  const [appState, appDispatch] = useContext(AppContext);
+
   const [formState, setFormState] = useState(initialState);
-
-  // const [uploadedFiles, setUploadedFiles] = useState([]);
-
-  // const [uploadActive, setUploadActive] = useState(false);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
 
   function onChangeHandler(event) {
     let name = event.target.name;
@@ -48,6 +49,10 @@ const NewTicket = () => {
         [name]: value,
       };
     });
+  }
+
+  function handleFileChange(files) {
+    setUploadedFiles(files);
   }
 
   // Firestore loading
@@ -95,10 +100,74 @@ const NewTicket = () => {
   //     setUploadedFiles((prevItems) => prevItems.filter((item) => item.name !== name));
   //   };
 
+  function uploadFilesOnStore() {
+    return true;
+  }
+
+  function getCurrentDateTimeISO() {
+    const currentDate = new Date();
+
+    // Ottieni il fuso orario locale in formato ISO (es. '+02:00')
+    const timezoneOffset = currentDate.getTimezoneOffset();
+    const timezoneOffsetISO =
+      (timezoneOffset < 0 ? "+" : "-") +
+      ("0" + Math.abs(Math.floor(timezoneOffset / 60))).slice(-2) +
+      ":" +
+      ("0" + Math.abs(timezoneOffset % 60)).slice(-2);
+
+    // Formatta la data in formato ISO con inclusi ore e minuti
+    const dateTimeISO =
+      currentDate.toISOString().slice(0, -1) + timezoneOffsetISO;
+
+    return dateTimeISO;
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log("Form submitted: ", formState);
+    // Form control
+
+    const formValues = Object.values(formState);
+
+    // Verifica se tutti i valori dell'array sono diversi da ''
+    const allFieldsFilled = formValues.every((value) => value !== "");
+
+    if (!allFieldsFilled) {
+      console.error("You missed some fields");
+
+      return false;
+    }
+
+    // Form conversion into json
+
+    const currentUser = authState.user;
+
+    const currentDateTimeISO = getCurrentDateTimeISO();
+    console.log("isoDate", currentDateTimeISO);
+
+    const ticketMessage = {
+      sender: currentUser.username,
+      senderId: currentUser.id,
+      messageDate: currentDateTimeISO,
+      message: formState.message,
+      uploadedFiles: uploadedFiles,
+    };
+
+    const ticketData = {
+      ticketSubject: formState.subject,
+      creationDate: currentDateTimeISO,
+      lastUpdated: currentDateTimeISO,
+      priorityId: formState.priority,
+      topicId: formState.topic,
+      openingUser: currentUser.id,
+      statusId: 1,
+      assignedTo: null,
+      messages: [ticketMessage],
+    };
+
+    // Form submit
+
+    console.log(ticketData);
 
     {
       /* Make use of firebase to handle files uploaded */
@@ -146,7 +215,7 @@ const NewTicket = () => {
           />
           <CustomSelect
             required={true}
-            values={priority}
+            values={appState.metadata.priorities}
             width="250px"
             name="priority"
             label="Issue priority"
@@ -155,7 +224,7 @@ const NewTicket = () => {
           />
           <CustomSelect
             required={true}
-            values={topic}
+            values={appState.metadata.topics}
             width="250px"
             name="topic"
             label="Area of interest"
@@ -169,10 +238,10 @@ const NewTicket = () => {
             multiline
             minRows={10}
             placeholder="Please describe here the issue encountered and the steps to reproduce it."
-            id="description"
+            id="message"
             label="Issue description"
-            name="description"
-            value={formState.description}
+            name="message"
+            value={formState.message}
             onChange={onChangeHandler}
           />
 
@@ -212,7 +281,7 @@ const NewTicket = () => {
                 })}
             </Box> */}
 
-          <FileUpload />
+          <FileUpload onFileChange={handleFileChange} />
           <Box sx={{ display: "flex", justifyContent: "center", gap: "50px" }}>
             <Button
               type="submit"
