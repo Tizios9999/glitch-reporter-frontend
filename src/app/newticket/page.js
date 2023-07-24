@@ -23,6 +23,8 @@ import { AppContext } from "../contexts/AppContext";
 import CustomSelect from "../components/CustomSelect";
 import FileUpload from "../components/FileUpload";
 
+import uploadFilesToFirestore from "../js/uploadFilesToFirestore";
+
 const NewTicket = () => {
   const { push } = useRouter();
 
@@ -33,6 +35,7 @@ const NewTicket = () => {
     message: "",
   };
 
+  const db = getFirestore(app);
   const [authState, authDispatch] = useContext(AuthContext);
   const [appState, appDispatch] = useContext(AppContext);
 
@@ -56,9 +59,7 @@ const NewTicket = () => {
   }
 
   // Firestore loading
-  useEffect(() => {
-    const db = getFirestore(app);
-  }, []);
+  useEffect(() => {}, []);
 
   // this function takes the property name and the value to set and changes the state property
   // function setStateProperty(name, value) {
@@ -129,7 +130,6 @@ const NewTicket = () => {
 
     const formValues = Object.values(formState);
 
-    // Verifica se tutti i valori dell'array sono diversi da ''
     const allFieldsFilled = formValues.every((value) => value !== "");
 
     if (!allFieldsFilled) {
@@ -137,6 +137,12 @@ const NewTicket = () => {
 
       return false;
     }
+
+    // Check on files to be uploaded
+
+    // Upload files on Firestore and creation of array of link objects
+
+    const fileLinksToFirestore = uploadFilesToFirestore(uploadedFiles, db);
 
     // Form conversion into json
 
@@ -150,7 +156,7 @@ const NewTicket = () => {
       senderId: currentUser.id,
       messageDate: currentDateTimeISO,
       message: formState.message,
-      uploadedFiles: uploadedFiles,
+      uploadedFiles: fileLinksToFirestore,
     };
 
     const ticketData = {
