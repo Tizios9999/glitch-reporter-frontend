@@ -3,6 +3,7 @@
 import { useEffect, useContext } from "react";
 import { firebaseConfig, app } from "../firebase/firebaseConfig";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -23,7 +24,7 @@ import { AppContext } from "../contexts/AppContext";
 import CustomSelect from "../components/CustomSelect";
 import FileUpload from "../components/FileUpload";
 
-import uploadFilesToFirestore from "../js/uploadFilesToFirestore";
+import uploadFilesToCloud from "../js/uploadFilesToCloud";
 
 const NewTicket = () => {
   const { push } = useRouter();
@@ -36,6 +37,7 @@ const NewTicket = () => {
   };
 
   const db = getFirestore(app);
+  const storage = getStorage(app);
   const [authState, authDispatch] = useContext(AuthContext);
   const [appState, appDispatch] = useContext(AppContext);
 
@@ -101,10 +103,6 @@ const NewTicket = () => {
   //     setUploadedFiles((prevItems) => prevItems.filter((item) => item.name !== name));
   //   };
 
-  function uploadFilesOnStore() {
-    return true;
-  }
-
   function getCurrentDateTimeISO() {
     const currentDate = new Date();
 
@@ -140,40 +138,46 @@ const NewTicket = () => {
 
     // Check on files to be uploaded
 
-    // Upload files on Firestore and creation of array of link objects
+    async function createTicketWithFiles(formState, uploadedFiles, storage) {
+      try {
+        // Upload files to Firestore and get the file links.
+        const fileLinks = await uploadFilesToCloud(uploadedFiles, storage);
 
-    const fileLinksToFirestore = uploadFilesToFirestore(uploadedFiles, db);
+        // Form conversion into json
+        const currentUser = authState.user;
+        const currentDateTimeISO = getCurrentDateTimeISO();
+        console.log("isoDate", currentDateTimeISO);
 
-    // Form conversion into json
+        const ticketMessage = {
+          sender: currentUser.username,
+          senderId: currentUser.id,
+          messageDate: currentDateTimeISO,
+          message: formState.message,
+          uploadedFiles: fileLinks,
+        };
 
-    const currentUser = authState.user;
+        const ticketData = {
+          ticketSubject: formState.subject,
+          creationDate: currentDateTimeISO,
+          lastUpdated: currentDateTimeISO,
+          priorityId: formState.priority,
+          topicId: formState.topic,
+          openingUser: currentUser.id,
+          statusId: 1,
+          assignedTo: null,
+          messages: [ticketMessage],
+        };
 
-    const currentDateTimeISO = getCurrentDateTimeISO();
-    console.log("isoDate", currentDateTimeISO);
+        // Form submit
+        console.log(ticketData);
+        // Proceed with saving the ticketData or performing other actions.
+      } catch (error) {
+        console.error("Error creating ticket with files:", error);
+        // Handle any errors that occurred during the file upload or ticket creation process.
+      }
+    }
 
-    const ticketMessage = {
-      sender: currentUser.username,
-      senderId: currentUser.id,
-      messageDate: currentDateTimeISO,
-      message: formState.message,
-      uploadedFiles: fileLinksToFirestore,
-    };
-
-    const ticketData = {
-      ticketSubject: formState.subject,
-      creationDate: currentDateTimeISO,
-      lastUpdated: currentDateTimeISO,
-      priorityId: formState.priority,
-      topicId: formState.topic,
-      openingUser: currentUser.id,
-      statusId: 1,
-      assignedTo: null,
-      messages: [ticketMessage],
-    };
-
-    // Form submit
-
-    console.log(ticketData);
+    createTicketWithFiles(formState, uploadedFiles, storage);
 
     {
       /* Make use of firebase to handle files uploaded */
