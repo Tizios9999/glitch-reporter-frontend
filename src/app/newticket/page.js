@@ -26,6 +26,8 @@ import FileUpload from "../components/FileUpload";
 
 import uploadFilesToCloud from "../js/uploadFilesToCloud";
 
+import createTicket from "../services/ticket.service";
+
 const NewTicket = () => {
   const { push } = useRouter();
 
@@ -36,7 +38,6 @@ const NewTicket = () => {
     message: "",
   };
 
-  const db = getFirestore(app);
   const storage = getStorage(app);
   const [authState, authDispatch] = useContext(AuthContext);
   const [appState, appDispatch] = useContext(AppContext);
@@ -59,49 +60,6 @@ const NewTicket = () => {
   function handleFileChange(files) {
     setUploadedFiles(files);
   }
-
-  // Firestore loading
-  useEffect(() => {}, []);
-
-  // this function takes the property name and the value to set and changes the state property
-  // function setStateProperty(name, value) {
-  //     setFormState((prevState) => {
-  //         return {
-  //             ...prevState, [name]: value
-  //         }
-  //     })
-  // }
-
-  // function handleFileChange(event) {
-
-  //     let filesList = uploadedFiles;
-
-  //     if (event.target.files && event.target.files[0]) {
-
-  //         // In order to upload the file, a check is made to know if another file with the same name exists
-
-  //         const newFilename = event.target.files[0].name;
-  //         const index = filesList.findIndex((file) => file.name === newFilename);
-
-  //         if (index < 0) {
-  //             // If the file is a new one, It's simply added to the array.
-  //             filesList.push(event.target.files[0])
-  //         } else {
-  //             //If not, it's replaced.
-  //             filesList.splice(index, 1, event.target.files[0]);
-  //         }
-
-  //         setUploadedFiles(filesList);
-
-  //     }
-  //     console.log(filesList);
-  //     setUploadActive(false);
-  //     event.target.value = "";
-  // }
-
-  // function handleRemoveFile(name) {
-  //     setUploadedFiles((prevItems) => prevItems.filter((item) => item.name !== name));
-  //   };
 
   function getCurrentDateTimeISO() {
     const currentDate = new Date();
@@ -162,7 +120,7 @@ const NewTicket = () => {
           lastUpdated: currentDateTimeISO,
           priorityId: formState.priority,
           topicId: formState.topic,
-          openingUser: currentUser.id,
+          openingUserId: currentUser.id,
           statusId: 1,
           assignedTo: null,
           messages: [ticketMessage],
@@ -171,6 +129,8 @@ const NewTicket = () => {
         // Form submit
         console.log(ticketData);
         // Proceed with saving the ticketData or performing other actions.
+
+        await createTicket(ticketData);
       } catch (error) {
         console.error("Error creating ticket with files:", error);
         // Handle any errors that occurred during the file upload or ticket creation process.
@@ -254,42 +214,6 @@ const NewTicket = () => {
             value={formState.message}
             onChange={onChangeHandler}
           />
-
-          {/* <Box>
-                <Button 
-                  variant="contained" 
-                  color="secondary" 
-                  startIcon={<FileUploadIcon />} 
-                  onClick={() => setUploadActive(true)}
-                  sx={{ display: uploadActive ? 'none' : 'inline-block' }}>
-                    Add file
-                </Button>
-                <Button 
-                  variant="outlined" 
-                  color="secondary"  
-                  onClick={() => setUploadActive(false)}
-                  sx={{ display: uploadActive ? 'inline-block' : 'none' }}>
-                    UNDO
-                </Button>
-            </Box>
-            <Box sx={{ width: '100%'}}>
-                <Input sx={{ display: uploadActive ? 'block' : 'none' }}
-                    component="input"
-                    type="file"
-                    id="file-upload"
-                    accept=".png, .jpg, .jpeg"
-                    onChange={handleFileChange}
-                />
-                {uploadedFiles[0] && <Typography variant="body1" color="initial" sx={{ fontWeight: 'bold', mt: '15px', mb: '5px'}}>Files Uploaded</Typography> }
-                {uploadedFiles[0] && uploadedFiles.map((file, index) => {
-                    return (
-                        <div key={index}>{file.name} <IconButton aria-label="delete" color="error" size="large" onClick={() => handleRemoveFile(file.name)}>
-                          <DeleteIcon />
-                         </IconButton>
-                        </div>
-                    )
-                })}
-            </Box> */}
 
           <FileUpload onFileChange={handleFileChange} />
           <Box sx={{ display: "flex", justifyContent: "center", gap: "50px" }}>
