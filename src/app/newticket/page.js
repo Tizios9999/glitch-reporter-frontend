@@ -122,7 +122,7 @@ const NewTicket = () => {
           topicId: formState.topic,
           openingUserId: currentUser.id,
           openingUser: currentUser.username,
-          statusId: 1,
+          statusId: null,
           assignedTo: null,
           messages: [ticketMessage],
         };
