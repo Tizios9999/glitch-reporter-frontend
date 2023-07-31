@@ -121,6 +121,7 @@ const NewTicket = () => {
           priorityId: formState.priority,
           topicId: formState.topic,
           openingUserId: currentUser.id,
+          openingUser: currentUser.username,
           statusId: 1,
           assignedTo: null,
           messages: [ticketMessage],

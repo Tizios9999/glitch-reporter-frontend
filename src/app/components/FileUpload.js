@@ -4,8 +4,6 @@ import { Box, Button, Input, Typography, IconButton } from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-// Need to syncronize the state on an upper level
-
 const FileUpload = ({ onFileChange }) => {
   const [uploadActive, setUploadActive] = useState(false);
   const [uploadedFiles, setUploadedFiles] = useState([]);
