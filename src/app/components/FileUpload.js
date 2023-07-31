@@ -9,7 +9,7 @@ const FileUpload = ({ onFileChange }) => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   const handleFileChange = (event) => {
-    let filesList = uploadedFiles;
+    let filesList = [...uploadedFiles];
 
     if (event.target.files && event.target.files[0]) {
       const newFilename = event.target.files[0].name;
@@ -32,9 +32,11 @@ const FileUpload = ({ onFileChange }) => {
   };
 
   const handleRemoveFile = (name) => {
-    setUploadedFiles((prevItems) =>
-      prevItems.filter((item) => item.name !== name)
-    );
+    let filesList = uploadedFiles.filter((item) => item.name !== name);
+
+    setUploadedFiles(filesList);
+
+    onFileChange(filesList);
   };
 
   return (
