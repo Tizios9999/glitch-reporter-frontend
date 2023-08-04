@@ -147,8 +147,6 @@ export default function TicketRowElement(props) {
     >
       {/* <div>x</div> */}
       {fieldsList.map((field, rowId) => {
-        console.log("priorObj, statusObj", priorityObj, statusObj);
-        console.log("data", props.data);
         switch (field.type) {
           case "id":
             return (
