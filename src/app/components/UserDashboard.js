@@ -30,6 +30,7 @@ export default function UserDashboard() {
 
   const [appState, appDispatch] = React.useContext(AppContext);
   const [ticketsList, setTicketsList] = React.useState([]);
+  const [totalPages, setTotalPages] = React.useState(1);
 
   const customerFilter = [
     { id: 1, name: "Opened by me" },
@@ -37,8 +38,14 @@ export default function UserDashboard() {
   ];
 
   React.useEffect(() => {
-    getPage(1, 15).then((response) => {
+    getPage(1, appState.ticketsPerPage).then((response) => {
       console.log("tickets: ", response.data);
+      // const pageOffset = response.data.totalTickets % 15 === 0 ? 0 : 1;
+
+      setTotalPages(
+        Math.ceil(response.data.totalTickets / appState.ticketsPerPage)
+      );
+
       setTicketsList(response.data.ticketList);
     });
   }, []);
@@ -121,7 +128,7 @@ export default function UserDashboard() {
               padding: "5px",
             }}
           >
-            <Pagination count={10} color="secondary" />
+            <Pagination count={totalPages} color="secondary" />
           </Container>
         </Box>
       </Container>
