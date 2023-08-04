@@ -12,6 +12,7 @@ import Box from "@mui/material/Box";
 import Pagination from "@mui/material/Pagination";
 
 import TicketRow from "./TicketRow";
+import TicketRowElement from "./TicketRowElement";
 import CheckboxFilters from "./CheckboxFilters";
 
 import tickets from "../testdata/tickets";
@@ -28,6 +29,7 @@ export default function UserDashboard() {
   const ticketData = Array.from(tickets);
 
   const [appState, appDispatch] = React.useContext(AppContext);
+  const [ticketsList, setTicketsList] = React.useState([]);
 
   const customerFilter = [
     { id: 1, name: "Opened by me" },
@@ -37,6 +39,7 @@ export default function UserDashboard() {
   React.useEffect(() => {
     getPage(1, 15).then((response) => {
       console.log("tickets: ", response.data);
+      setTicketsList(response.data.ticketList);
     });
   }, []);
 
@@ -96,12 +99,20 @@ export default function UserDashboard() {
             justifyContent: "space-between",
           }}
         >
-          <Box>
+          {/* <Box>
             <TicketRow type="header" />
             {ticketData.map((ticket, id) => (
               <TicketRow type="data" key={id} data={ticket} />
             ))}
-          </Box>
+          </Box> */}
+          {ticketsList[0] && (
+            <Box>
+              <TicketRowElement type="header" />
+              {ticketsList.map((ticket, id) => (
+                <TicketRowElement type="data" key={id} data={ticket} />
+              ))}
+            </Box>
+          )}
           <Container
             maxWidth="xl"
             sx={{
