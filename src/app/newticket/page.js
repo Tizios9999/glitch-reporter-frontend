@@ -26,7 +26,7 @@ import FileUpload from "../components/FileUpload";
 
 import uploadFilesToCloud from "../js/uploadFilesToCloud";
 
-import createTicket from "../services/ticket.service";
+import { createTicket } from "../services/ticket.service";
 
 const NewTicket = () => {
   const { push } = useRouter();

@@ -21,4 +21,10 @@ const createTicket = (ticket) => {
     });
 };
 
-export default createTicket;
+const getPage = (page, pageSize) => {
+  return axios.get(API_URL + "getpage", {
+    params: { page: page, pageSize: pageSize },
+  });
+};
+
+export { createTicket, getPage };

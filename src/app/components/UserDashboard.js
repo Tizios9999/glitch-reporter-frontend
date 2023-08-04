@@ -18,6 +18,8 @@ import tickets from "../testdata/tickets";
 import priority from "../testdata/priority";
 import status from "../testdata/status";
 
+import { getPage } from "../services/ticket.service";
+
 import { AppContext } from "../contexts/AppContext";
 
 export default function UserDashboard() {
@@ -31,6 +33,12 @@ export default function UserDashboard() {
     { id: 1, name: "Opened by me" },
     { id: 2, name: "Opened by others" },
   ];
+
+  React.useEffect(() => {
+    getPage(1, 15).then((response) => {
+      console.log("tickets: ", response.data);
+    });
+  }, []);
 
   return (
     <div>
