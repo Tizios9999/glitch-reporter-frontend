@@ -4,6 +4,8 @@ import { useEffect, useState, useContext } from "react";
 
 import ticketsData from "../../testdata/tickets";
 
+import { getTicketById } from "@/app/services/ticket.service";
+
 import { AppContext } from "../../contexts/AppContext";
 
 import {
@@ -16,6 +18,7 @@ import {
 } from "@mui/material";
 
 import getMetadataObject from "../../js/getMetadataObject";
+import convertISOStringToLocalFormat from "@/app/js/convertISOStringToLocalFormat";
 
 import TicketMessage from "../../components/TicketMessage";
 import FileUpload from "../../components/FileUpload";
@@ -38,17 +41,25 @@ const TicketPage = () => {
     };
 
     fetchId();
+
+    console.log("fetching id");
   }, [pathname]);
 
   // Utilizza l'ID del ticket per recuperare i dati relativi a quel ticket
   useEffect(() => {
-    const getTicketById = () => {
-      const ticket = ticketsData.find((ticket) => ticket.ticketId === id);
-      setTicket(ticket);
-    };
+    // const getTicketById = () => {
+    //   const ticket = ticketsData.find((ticket) => ticket.ticketId === id);
+    //   setTicket(ticket);
+    // };
+
+    console.log("getting ticket id");
 
     if (id) {
-      getTicketById();
+      getTicketById(id).then((response) => {
+        console.log("ticket arrived: ", response);
+
+        setTicket(response.data);
+      });
     }
   }, [id]);
 
@@ -124,7 +135,7 @@ const TicketPage = () => {
                 : {}
             }
           >
-            {ticket.priority}
+            {priorityObj.name}
           </span>
         </Typography>
         <Typography variant="body1" color="initial">
@@ -140,17 +151,19 @@ const TicketPage = () => {
                 : {}
             }
           >
-            {ticket.status}
+            {statusObj.name}
           </span>
         </Typography>
         <Typography variant="body1" color="initial">
           <strong>Assigned to:</strong> {ticket.assignedTo}
         </Typography>
         <Typography variant="body1" color="initial">
-          <strong>Created:</strong> {ticket.creationDate}
+          <strong>Created:</strong>{" "}
+          {convertISOStringToLocalFormat(ticket.creationDate)}
         </Typography>
         <Typography variant="body1" color="initial">
-          <strong>Last updated:</strong> {ticket.lastUpdated}
+          <strong>Last updated:</strong>{" "}
+          {convertISOStringToLocalFormat(ticket.lastUpdated)}
         </Typography>
 
         <Box sx={{ mt: "50px", border: "1px solid black" }}>

@@ -27,4 +27,9 @@ const getPage = (page, pageSize) => {
   });
 };
 
-export { createTicket, getPage };
+const getTicketById = (id) => {
+  console.log("request started");
+  return axios.get(API_URL + id);
+};
+
+export { createTicket, getPage, getTicketById };
