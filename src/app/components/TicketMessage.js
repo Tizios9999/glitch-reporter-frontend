@@ -1,4 +1,5 @@
 import { Box, Typography } from "@mui/material";
+import UploadedFileElement from "./UploadedFileElement";
 
 import convertISOStringToLocalFormat from "../js/convertISOStringToLocalFormat";
 
@@ -22,9 +23,9 @@ export default function TicketMessage({ messageData }) {
         </Typography>
       </Box>
       <Box sx={{ p: "5px", minHeight: "100px" }}>{messageData.message}</Box>
-      <Box sx={{ backgroundColor: "gray" }}>
+      <Box sx={{ backgroundColor: "#cccccc" }}>
         {messageData.uploadedFiles.map((file) => {
-          return <div key={file.id}>{file.name}</div>;
+          return <UploadedFileElement file={file} key={file.id} />;
         })}
       </Box>
     </Box>

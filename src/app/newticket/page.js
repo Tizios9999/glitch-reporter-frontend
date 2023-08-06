@@ -2,7 +2,6 @@
 
 import { useEffect, useContext } from "react";
 import { firebaseConfig, app } from "../firebase/firebaseConfig";
-import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 import { useState } from "react";
