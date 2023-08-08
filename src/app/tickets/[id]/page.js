@@ -2,11 +2,13 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useContext } from "react";
 
-import ticketsData from "../../testdata/tickets";
+import TicketManagementBox from "@/app/components/TicketManagementBox";
 
 import { getTicketById } from "@/app/services/ticket.service";
 
 import { AppContext } from "../../contexts/AppContext";
+
+import { AuthContext } from "@/app/contexts/AuthContext";
 
 import {
   Container,
@@ -32,6 +34,7 @@ const TicketPage = () => {
   const pathname = usePathname();
 
   const [appState] = useContext(AppContext);
+  const [authState] = useContext(AuthContext);
 
   useEffect(() => {
     const fetchId = async () => {
@@ -119,53 +122,61 @@ const TicketPage = () => {
           #{id} - {ticket.ticketSubject}
         </h1>
         {/* Mostra i dettagli del ticket */}
-        <Typography variant="body1" color="initial">
-          <strong>Opened by:</strong> {ticket.openingUser}
-        </Typography>
-        <Typography variant="body1" color="initial">
-          <strong>Priority:</strong>{" "}
-          <span
-            style={
-              priorityObj
-                ? {
-                    color: `#${priorityObj.textColorCode}`,
-                    backgroundColor: `#${priorityObj.bgColorCode}`,
-                    padding: "3px",
-                  }
-                : {}
-            }
-          >
-            {priorityObj.name}
-          </span>
-        </Typography>
-        <Typography variant="body1" color="initial">
-          <strong>Status:</strong>{" "}
-          <span
-            style={
-              statusObj
-                ? {
-                    color: `#${statusObj.textColorCode}`,
-                    backgroundColor: `#${statusObj.bgColorCode}`,
-                    padding: "3px",
-                  }
-                : {}
-            }
-          >
-            {statusObj.name}
-          </span>
-        </Typography>
-        <Typography variant="body1" color="initial">
-          <strong>Assigned to:</strong> {ticket.assignedTo}
-        </Typography>
-        <Typography variant="body1" color="initial">
-          <strong>Created:</strong>{" "}
-          {convertISOStringToLocalFormat(ticket.creationDate)}
-        </Typography>
-        <Typography variant="body1" color="initial">
-          <strong>Last updated:</strong>{" "}
-          {convertISOStringToLocalFormat(ticket.lastUpdated)}
-        </Typography>
-
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box>
+            <Typography variant="body1" color="initial">
+              <strong>Opened by:</strong> {ticket.openingUser}
+            </Typography>
+            <Typography variant="body1" color="initial">
+              <strong>Priority:</strong>{" "}
+              <span
+                style={
+                  priorityObj
+                    ? {
+                        color: `#${priorityObj.textColorCode}`,
+                        backgroundColor: `#${priorityObj.bgColorCode}`,
+                        padding: "3px",
+                      }
+                    : {}
+                }
+              >
+                {priorityObj.name}
+              </span>
+            </Typography>
+            <Typography variant="body1" color="initial">
+              <strong>Status:</strong>{" "}
+              <span
+                style={
+                  statusObj
+                    ? {
+                        color: `#${statusObj.textColorCode}`,
+                        backgroundColor: `#${statusObj.bgColorCode}`,
+                        padding: "3px",
+                      }
+                    : {}
+                }
+              >
+                {statusObj.name}
+              </span>
+            </Typography>
+            <Typography variant="body1" color="initial">
+              <strong>Assigned to:</strong> {ticket.assignedTo}
+            </Typography>
+            <Typography variant="body1" color="initial">
+              <strong>Created:</strong>{" "}
+              {convertISOStringToLocalFormat(ticket.creationDate)}
+            </Typography>
+            <Typography variant="body1" color="initial">
+              <strong>Last updated:</strong>{" "}
+              {convertISOStringToLocalFormat(ticket.lastUpdated)}
+            </Typography>
+          </Box>
+          <TicketManagementBox
+            user={authState.user}
+            ticket={ticket}
+            statuses={appState.metadata.statuses}
+          />
+        </Box>
         <Box sx={{ mt: "50px", border: "1px solid black" }}>
           {ticket.messages.map((message, key) => {
             return <TicketMessage messageData={message} key={key} />;
