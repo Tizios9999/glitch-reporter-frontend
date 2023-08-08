@@ -6,7 +6,9 @@ function UploadedFileElement({ file }) {
   function handleClick() {
     const storage = getStorage(app);
 
-    getDownloadURL(ref(storage, file.path))
+    getDownloadURL(
+      ref(storage, `gs://glitchreporter-store.appspot.com/${file.path}`)
+    )
       .then((url) => {
         // `url` is the download URL for 'images/stars.jpg'
 
@@ -15,6 +17,17 @@ function UploadedFileElement({ file }) {
         xhr.responseType = "blob";
         xhr.onload = (event) => {
           const blob = xhr.response;
+
+          const blobURL = URL.createObjectURL(blob);
+
+          // Create a link element and simulate a click to trigger download
+          const link = document.createElement("a");
+          link.href = blobURL;
+          link.download = file.name;
+          link.click();
+
+          // Clean up the blob object URL
+          URL.revokeObjectURL(blobURL);
         };
         xhr.open("GET", url);
         xhr.send();
