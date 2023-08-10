@@ -12,11 +12,35 @@ import capitalizeString from "../js/capitalizeString";
 function TicketManagementBox({ user, ticket, statuses }) {
   const allowedUserRoles = ["ROLE_ADMIN", "ROLE_AGENT"];
 
-  const managedByThisAgent = ticket.assignedToId === user.id;
+  //   const managedByThisAgent = ticket.assignedToId === user.id;
 
-  function handleAssignmentButtonClick() {}
+  const [managedByThisAgent, setManagedByThisAgent] = useState(
+    ticket.assignedToId === user.id
+  );
 
-  function handleUpdateButtonClick() {}
+  const [newAssignedUserId, setNewAssignedUserId] = useState(
+    ticket.assignedToId
+  );
+
+  const [ticketStatusValue, setTicketStatusValue] = useState(ticket.statusId);
+
+  function handleAssignmentButtonClick() {
+    if (!managedByThisAgent) {
+      setManagedByThisAgent(true);
+      setNewAssignedUserId(user.id);
+    } else {
+      setManagedByThisAgent(false);
+      setNewAssignedUserId(ticket.assignedToId);
+    }
+  }
+
+  function handleStatusChange(event) {
+    setTicketStatusValue(event.target.value);
+  }
+
+  function handleUpdateButtonClick() {
+    console.log("Update ticket: ", ticketStatusValue, newAssignedUserId);
+  }
 
   return (
     <Box>
@@ -48,8 +72,9 @@ function TicketManagementBox({ user, ticket, statuses }) {
             </FormLabel>
             <RadioGroup
               aria-labelledby="demo-radio-buttons-group-label"
-              defaultValue={statuses[0].id}
+              value={ticketStatusValue}
               name="radio-buttons-group"
+              onChange={handleStatusChange}
             >
               {statuses.map((status) => {
                 return (
@@ -57,6 +82,7 @@ function TicketManagementBox({ user, ticket, statuses }) {
                     value={status.id}
                     control={<Radio />}
                     label={capitalizeString(status.name)}
+                    key={status.id}
                   />
                 );
               })}
