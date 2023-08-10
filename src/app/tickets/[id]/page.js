@@ -1,13 +1,18 @@
 "use client";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, useContext } from "react";
+import { firebaseConfig, app } from "../../firebase/firebaseConfig";
+import { getStorage } from "firebase/storage";
 
 import TicketManagementBox from "@/app/components/TicketManagementBox";
 
 import { getTicketById } from "@/app/services/ticket.service";
+import { addMessage } from "@/app/services/ticket.service";
+
+import uploadFilesToCloud from "@/app/js/uploadFilesToCloud";
+import getCurrentDateTimeISO from "@/app/js/getCurrentDateTimeISO";
 
 import { AppContext } from "../../contexts/AppContext";
-
 import { AuthContext } from "@/app/contexts/AuthContext";
 
 import {
@@ -26,11 +31,14 @@ import TicketMessage from "../../components/TicketMessage";
 import FileUpload from "../../components/FileUpload";
 
 const TicketPage = () => {
+  const storage = getStorage(app);
+
   const [id, setId] = useState(null);
   const [ticket, setTicket] = useState(null);
-  const [newMessage, setNewMessage] = useState("");
+  const [messageText, setMessageText] = useState("");
   const [priorityObj, setPriorityObj] = useState(null);
   const [statusObj, setStatusObj] = useState(null);
+  const [uploadedFiles, setUploadedFiles] = useState([]);
   const pathname = usePathname();
 
   const [appState] = useContext(AppContext);
@@ -48,13 +56,7 @@ const TicketPage = () => {
     console.log("fetching id");
   }, [pathname]);
 
-  // Utilizza l'ID del ticket per recuperare i dati relativi a quel ticket
   useEffect(() => {
-    // const getTicketById = () => {
-    //   const ticket = ticketsData.find((ticket) => ticket.ticketId === id);
-    //   setTicket(ticket);
-    // };
-
     console.log("getting ticket id");
 
     if (id) {
@@ -66,7 +68,6 @@ const TicketPage = () => {
     }
   }, [id]);
 
-  // Utilizza l'ID del ticket per recuperare i dati relativi a quel ticket
   useEffect(() => {
     if (ticket) {
       const priority = getMetadataObject(
@@ -101,13 +102,32 @@ const TicketPage = () => {
   }
 
   function onNewMessageChangeHandler(event) {
-    setNewMessage(event.target.value);
+    setMessageText(event.target.value);
   }
 
-  function handleSubmit(event) {
+  function handleFileChange(files) {
+    setUploadedFiles(files);
+  }
+
+  async function handleSubmit(event) {
     event.preventDefault();
 
-    console.log("Message submitted: ", newMessage);
+    const fileLinks = await uploadFilesToCloud(uploadedFiles, storage);
+
+    console.log(authState, "authState");
+
+    const currentDateTimeISO = getCurrentDateTimeISO();
+
+    const ticketMessage = {
+      ticketId: ticket.ticketId,
+      senderId: authState.user.id,
+      sender: authState.user.username,
+      message: messageText,
+      messageDate: currentDateTimeISO,
+      uploadedFiles: fileLinks,
+    };
+
+    addMessage(ticketMessage, ticket.ticketId);
 
     {
       /* Make use of firebase to handle files uploaded */
@@ -205,11 +225,11 @@ const TicketPage = () => {
             placeholder="Add a new message here"
             id="newmessage"
             name="newmessage"
-            value={newMessage}
+            value={messageText}
             onChange={onNewMessageChangeHandler}
           />
 
-          <FileUpload />
+          <FileUpload onFileChange={handleFileChange} />
 
           <Button
             type="submit"

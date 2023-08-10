@@ -43,4 +43,15 @@ const updateTicketStatus = (updateData, ticketId) => {
     });
 };
 
-export { createTicket, getPage, getTicketById, updateTicketStatus };
+const addMessage = (message, ticketId) => {
+  return axios
+    .post(API_URL + `${ticketId}/add-message`, message)
+    .then((response) => {
+      console.log("Added message: ");
+    })
+    .catch((error) => {
+      console.error("Error when sending message: ", error);
+    });
+};
+
+export { createTicket, getPage, getTicketById, updateTicketStatus, addMessage };
