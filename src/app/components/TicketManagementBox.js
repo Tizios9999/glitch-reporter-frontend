@@ -44,7 +44,7 @@ function TicketManagementBox({ user, ticket, statuses }) {
     /* If the ticket is still unassigned during the update, 
        it will be assigned automatically to whoever updates it first. */
     const updateData = {
-      ticketStatusId: ticketStatusValue,
+      ticketStatusId: Number(ticketStatusValue),
       newAssignedUserId: newAssignedUserId == 0 ? user.id : newAssignedUserId,
     };
 

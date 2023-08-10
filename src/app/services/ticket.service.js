@@ -34,7 +34,7 @@ const getTicketById = (id) => {
 
 const updateTicketStatus = (updateData, ticketId) => {
   return axios
-    .put(API_URL + `${ticketId}`, updateData)
+    .put(API_URL + `${ticketId}/update-status`, updateData)
     .then((response) => {
       console.log("Ticket updated: ", response.data);
     })
