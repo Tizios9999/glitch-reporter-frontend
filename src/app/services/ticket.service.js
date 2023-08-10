@@ -32,4 +32,15 @@ const getTicketById = (id) => {
   return axios.get(API_URL + id);
 };
 
-export { createTicket, getPage, getTicketById };
+const updateTicketStatus = (updateData, ticketId) => {
+  return axios
+    .put(API_URL + `${ticketId}`, updateData)
+    .then((response) => {
+      console.log("Ticket updated: ", response.data);
+    })
+    .catch((error) => {
+      console.error("Error during ticket update: ", error);
+    });
+};
+
+export { createTicket, getPage, getTicketById, updateTicketStatus };

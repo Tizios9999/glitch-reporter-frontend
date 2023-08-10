@@ -7,12 +7,12 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
+import { updateTicketStatus } from "../services/ticket.service";
+
 import capitalizeString from "../js/capitalizeString";
 
 function TicketManagementBox({ user, ticket, statuses }) {
   const allowedUserRoles = ["ROLE_ADMIN", "ROLE_AGENT"];
-
-  //   const managedByThisAgent = ticket.assignedToId === user.id;
 
   const [managedByThisAgent, setManagedByThisAgent] = useState(
     ticket.assignedToId === user.id
@@ -40,6 +40,15 @@ function TicketManagementBox({ user, ticket, statuses }) {
 
   function handleUpdateButtonClick() {
     console.log("Update ticket: ", ticketStatusValue, newAssignedUserId);
+
+    /* If the ticket is still unassigned during the update, 
+       it will be assigned automatically to whoever updates it first. */
+    const updateData = {
+      ticketStatusId: ticketStatusValue,
+      newAssignedUserId: newAssignedUserId == 0 ? user.id : newAssignedUserId,
+    };
+
+    updateTicketStatus(updateData, ticket.ticketId);
   }
 
   return (
