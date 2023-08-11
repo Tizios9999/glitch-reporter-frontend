@@ -101,7 +101,8 @@ function TicketManagementBox({ user, ticket, statuses }) {
 
         await addMessage(automatedMessage, ticket.ticketId);
 
-        // Refresh the page
+        // Reload the page
+        location.reload();
       } catch (error) {
         console.error("Error during update and message addition: ", error);
         // Handle the error
