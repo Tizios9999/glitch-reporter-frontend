@@ -113,7 +113,9 @@ const NewTicket = () => {
         console.log(ticketData);
         // Proceed with saving the ticketData or performing other actions.
 
-        await createTicket(ticketData);
+        const createdTicket = await createTicket(ticketData);
+
+        push(`/tickets/${createdTicket}`);
       } catch (error) {
         console.error("Error creating ticket with files:", error);
         // Handle any errors that occurred during the file upload or ticket creation process.

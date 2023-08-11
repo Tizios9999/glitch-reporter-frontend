@@ -127,11 +127,10 @@ const TicketPage = () => {
       uploadedFiles: fileLinks,
     };
 
-    addMessage(ticketMessage, ticket.ticketId);
+    await addMessage(ticketMessage, ticket.ticketId);
 
-    {
-      /* Make use of firebase to handle files uploaded */
-    }
+    // Reload the page
+    location.reload();
   }
 
   return (
