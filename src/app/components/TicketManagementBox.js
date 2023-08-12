@@ -19,9 +19,7 @@ function TicketManagementBox({ user, ticket, statuses }) {
 
   const allowedUserRoles = ["ROLE_ADMIN", "ROLE_AGENT"];
 
-  const [managedByThisAgent, setManagedByThisAgent] = useState(
-    ticket.assignedToId === user.id
-  );
+  const alreadyManagedByThisAgent = ticket.assignedToId == user.id;
 
   const [newAssignedUserId, setNewAssignedUserId] = useState(
     ticket.assignedToId
@@ -33,14 +31,14 @@ function TicketManagementBox({ user, ticket, statuses }) {
   let statusMessageText = "";
 
   function handleAssignmentButtonClick() {
-    if (!managedByThisAgent) {
-      setManagedByThisAgent(true);
-      setNewAssignedUserId(user.id);
-      ticketManagementUserText = generateAgentText(user.username);
-    } else {
-      setManagedByThisAgent(false);
-      setNewAssignedUserId(ticket.assignedToId);
-      ticketManagementUserText = "";
+    if (!alreadyManagedByThisAgent) {
+      if (newAssignedUserId != user.id) {
+        setNewAssignedUserId(user.id);
+        ticketManagementUserText = generateAgentText(user.username);
+      } else {
+        setNewAssignedUserId(ticket.assignedToId);
+        ticketManagementUserText = "";
+      }
     }
   }
 
@@ -84,9 +82,10 @@ function TicketManagementBox({ user, ticket, statuses }) {
           ? generateStatusText(user.username, ticketStatusValue, statuses)
           : "";
 
-        ticketManagementUserText = assignedUserChanged
-          ? generateAgentText(user.username)
-          : "";
+        ticketManagementUserText =
+          assignedUserChanged || ticket.assignedToId === 0
+            ? generateAgentText(user.username)
+            : "";
 
         const automatedMessageText = `Automated message: ${ticketManagementUserText} ${statusMessageText}`;
 
@@ -137,11 +136,11 @@ function TicketManagementBox({ user, ticket, statuses }) {
             Ticket Management
           </Typography>
           <Button
-            variant={managedByThisAgent ? "outlined" : "contained"}
+            variant={newAssignedUserId == user.id ? "outlined" : "contained"}
             color="warning"
             onClick={handleAssignmentButtonClick}
           >
-            {managedByThisAgent ? "Assigned to me" : "Assign to me"}
+            {newAssignedUserId == user.id ? "Assigned to me" : "Assign to me"}
           </Button>
           <Typography variant="bold" color="initial"></Typography>
           <FormControl>
