@@ -6,18 +6,13 @@ import { useRouter } from "next/navigation";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Button from "@mui/material/Button";
-import SendIcon from "@mui/icons-material/Send";
+
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Box from "@mui/material/Box";
 import Pagination from "@mui/material/Pagination";
 
-import TicketRow from "./TicketRow";
 import TicketRowElement from "./TicketRowElement";
 import CheckboxFilters from "./CheckboxFilters";
-
-import tickets from "../testdata/tickets";
-import priority from "../testdata/priority";
-import status from "../testdata/status";
 
 import { getPage } from "../services/ticket.service";
 
@@ -26,11 +21,10 @@ import { AppContext } from "../contexts/AppContext";
 export default function UserDashboard() {
   const { push } = useRouter();
 
-  const ticketData = Array.from(tickets);
-
   const [appState, appDispatch] = React.useContext(AppContext);
   const [ticketsList, setTicketsList] = React.useState([]);
   const [totalPages, setTotalPages] = React.useState(1);
+  const [currentPage, setCurrentPage] = React.useState(1);
 
   const customerFilter = [
     { id: 1, name: "Opened by me" },
@@ -38,7 +32,7 @@ export default function UserDashboard() {
   ];
 
   React.useEffect(() => {
-    getPage(1, appState.ticketsPerPage).then((response) => {
+    getPage(currentPage, appState.ticketsPerPage).then((response) => {
       console.log("tickets: ", response.data);
       // const pageOffset = response.data.totalTickets % 15 === 0 ? 0 : 1;
 
@@ -48,7 +42,11 @@ export default function UserDashboard() {
 
       setTicketsList(response.data.ticketList);
     });
-  }, []);
+  }, [currentPage]);
+
+  function handlePageChange(event, value) {
+    setCurrentPage(value);
+  }
 
   return (
     <div>
@@ -83,18 +81,11 @@ export default function UserDashboard() {
 
           <CheckboxFilters
             name="priority"
-            filters={priority}
             filtersArr={appState.metadata.priorities}
           />
           <CheckboxFilters
             name="status"
-            filters={status}
             filtersArr={appState.metadata.statuses}
-          />
-          <CheckboxFilters
-            name="customer"
-            filters={["opened by me", "opened by others"]}
-            filtersArr={customerFilter}
           />
         </Box>
         <Box
@@ -128,7 +119,12 @@ export default function UserDashboard() {
               padding: "5px",
             }}
           >
-            <Pagination count={totalPages} color="secondary" />
+            <Pagination
+              count={totalPages}
+              page={currentPage}
+              onChange={handlePageChange}
+              color="secondary"
+            />
           </Container>
         </Box>
       </Container>

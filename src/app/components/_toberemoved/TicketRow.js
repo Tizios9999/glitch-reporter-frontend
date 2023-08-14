@@ -6,10 +6,10 @@ import Typography from "@mui/material/Typography";
 
 import { useRouter } from "next/navigation";
 
-import getMetadataObject from "../js/getMetadataObject";
+import getMetadataObject from "../../js/getMetadataObject";
 
-import { AuthContext } from "../contexts/AuthContext";
-import { AppContext } from "../contexts/AppContext";
+import { AuthContext } from "../../contexts/AuthContext";
+import { AppContext } from "../../contexts/AppContext";
 
 export default function TicketRow(props) {
   const [authState] = useContext(AuthContext);

@@ -11,13 +11,6 @@ import Checkbox from "@mui/material/Checkbox";
 import { AppContext } from "../contexts/AppContext";
 
 export default function CheckboxFilters(props) {
-  // I will take the possible choices and make an object out of it to set the initial state
-  const initialValue = {};
-  const initialState = props.filtersArr.reduce(
-    (acc, current) => ({ ...acc, [current.name]: false }),
-    initialValue
-  );
-
   const [appState, appDispatch] = React.useContext(AppContext);
 
   const startingState = {};
@@ -28,12 +21,12 @@ export default function CheckboxFilters(props) {
       startingState[obj.name] = false;
     }
 
-    console.log("starting state", startingState);
-    console.log(
-      "appState.filter",
-      appState.activeFilters[props.name],
-      appState.activeFilters
-    );
+    // console.log("starting state", startingState);
+    // console.log(
+    //   "appState.filter",
+    //   appState.activeFilters[props.name],
+    //   appState.activeFilters
+    // );
   });
 
   const [state, setState] = React.useState(startingState);
@@ -49,17 +42,28 @@ export default function CheckboxFilters(props) {
   React.useEffect(() => {
     const checkboxArr = Object.keys(state).filter((key) => state[key]);
 
-    console.log("checkboxArr", props.name, checkboxArr);
+    const idArr = [];
+
+    // Converting them to Ids to have a more precise query
+    checkboxArr.forEach((name) => {
+      idArr.push(mapFilterNameToId(name, props.filtersArr));
+    });
 
     appDispatch({
       type: "UPDATE_FILTERS",
-      payload: { name: props.name, values: [...checkboxArr] },
+      payload: { name: props.name, values: [...idArr] },
     });
   }, [state]);
 
   React.useEffect(() => {
     // Runs the query to update the page
   }, [appState.activeFilters]);
+
+  function mapFilterNameToId(name, filterObj) {
+    const found = filterObj.find((element) => element.name === name);
+
+    return Number(found.id);
+  }
 
   return (
     <Box sx={{ display: "flex" }}>
