@@ -14,7 +14,7 @@ import Pagination from "@mui/material/Pagination";
 import TicketRowElement from "./TicketRowElement";
 import CheckboxFilters from "./CheckboxFilters";
 
-import { getPage } from "../services/ticket.service";
+import { getPage, getFilteredPage } from "../services/ticket.service";
 
 import { AppContext } from "../contexts/AppContext";
 
@@ -32,9 +32,8 @@ export default function UserDashboard() {
   ];
 
   React.useEffect(() => {
-    getPage(currentPage, appState.ticketsPerPage).then((response) => {
+    pageRequest(currentPage, appState).then((response) => {
       console.log("tickets: ", response.data);
-      // const pageOffset = response.data.totalTickets % 15 === 0 ? 0 : 1;
 
       setTotalPages(
         Math.ceil(response.data.totalTickets / appState.ticketsPerPage)
@@ -42,10 +41,35 @@ export default function UserDashboard() {
 
       setTicketsList(response.data.ticketList);
     });
-  }, [currentPage]);
+  }, [currentPage, appState.activeFilters]);
 
   function handlePageChange(event, value) {
     setCurrentPage(value);
+  }
+
+  function pageRequest(page, state) {
+    let filtersAreActive = false;
+
+    for (let prop in state.activeFilters) {
+      if (
+        Array.isArray(state.activeFilters[prop]) &&
+        state.activeFilters[prop].length !== 0
+      ) {
+        filtersAreActive = true;
+        break;
+      }
+    }
+
+    if (filtersAreActive) {
+      return getFilteredPage(
+        page,
+        state.ticketsPerPage,
+        state.activeFilters.priority,
+        state.activeFilters.status
+      );
+    } else {
+      return getPage(page, state.ticketsPerPage);
+    }
   }
 
   return (

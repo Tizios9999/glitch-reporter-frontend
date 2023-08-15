@@ -11,7 +11,6 @@ const initialState = {
   activeFilters: {
     priority: [],
     status: [],
-    customer: [],
   },
 };
 

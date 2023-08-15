@@ -1,4 +1,5 @@
 import axios from "axios";
+import qs from "qs";
 
 const API_URL = "http://localhost:8080/api/ticket/";
 
@@ -24,6 +25,35 @@ const createTicket = (ticket) => {
 const getPage = (page, pageSize) => {
   return axios.get(API_URL + "getpage", {
     params: { page: page, pageSize: pageSize },
+  });
+};
+
+const getFilteredPage = (page, pageSize, priorityIds, statusIds) => {
+  const validPriorityIds = priorityIds.length > 0 ? priorityIds : [0];
+  const validStatusIds = statusIds.length > 0 ? statusIds : [0];
+
+  // custom serializeArray function
+  function serializeArray(array) {
+    let arrayString = "";
+    array.forEach((element, index) => {
+      if (index > 0) {
+        arrayString = arrayString + ",";
+      }
+      arrayString = arrayString + `${element}`;
+    });
+    return `[${arrayString}]`;
+  }
+
+  return axios.get(API_URL + "getfilteredpage", {
+    params: {
+      page: page,
+      pageSize: pageSize,
+      priorityIds: serializeArray(validPriorityIds),
+      statusIds: serializeArray(validStatusIds),
+    },
+    paramsSerializer: (params) => {
+      return qs.stringify(params, { arrayFormat: "comma" });
+    },
   });
 };
 
@@ -54,4 +84,11 @@ const addMessage = (message, ticketId) => {
     });
 };
 
-export { createTicket, getPage, getTicketById, updateTicketStatus, addMessage };
+export {
+  createTicket,
+  getPage,
+  getFilteredPage,
+  getTicketById,
+  updateTicketStatus,
+  addMessage,
+};

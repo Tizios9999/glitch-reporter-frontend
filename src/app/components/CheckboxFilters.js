@@ -62,7 +62,7 @@ export default function CheckboxFilters(props) {
   function mapFilterNameToId(name, filterObj) {
     const found = filterObj.find((element) => element.name === name);
 
-    return Number(found.id);
+    return found.id.toString();
   }
 
   return (
