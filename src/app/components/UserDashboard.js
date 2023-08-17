@@ -48,28 +48,36 @@ export default function UserDashboard() {
   }
 
   function pageRequest(page, state) {
-    let filtersAreActive = false;
+    // This function returns all possible filters activated if none of them is.
+    function setQueryFilterIds(currentActiveFilters, allFiltersArray) {
+      let queryFilter = [];
 
-    for (let prop in state.activeFilters) {
-      if (
-        Array.isArray(state.activeFilters[prop]) &&
-        state.activeFilters[prop].length !== 0
-      ) {
-        filtersAreActive = true;
-        break;
+      if (currentActiveFilters.length === 0) {
+        allFiltersArray.forEach((element) => {
+          queryFilter.push(element.id);
+        });
+      } else {
+        queryFilter = currentActiveFilters;
       }
+
+      return queryFilter;
     }
 
-    if (filtersAreActive) {
-      return getFilteredPage(
-        page,
-        state.ticketsPerPage,
-        state.activeFilters.priority,
-        state.activeFilters.status
-      );
-    } else {
-      return getPage(page, state.ticketsPerPage);
-    }
+    const priorityFilters = setQueryFilterIds(
+      state.activeFilters.priority,
+      state.metadata.priorities
+    );
+    const statusFilters = setQueryFilterIds(
+      state.activeFilters.status,
+      state.metadata.statuses
+    );
+
+    return getFilteredPage(
+      page,
+      state.ticketsPerPage,
+      priorityFilters,
+      statusFilters
+    );
   }
 
   return (
