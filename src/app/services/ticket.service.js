@@ -22,6 +22,7 @@ const createTicket = (ticket) => {
     });
 };
 
+// Old function, use getFilteredPage instead
 const getPage = (page, pageSize) => {
   return axios.get(API_URL + "getpage", {
     params: { page: page, pageSize: pageSize },

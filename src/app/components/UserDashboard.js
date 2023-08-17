@@ -14,7 +14,7 @@ import Pagination from "@mui/material/Pagination";
 import TicketRowElement from "./TicketRowElement";
 import CheckboxFilters from "./CheckboxFilters";
 
-import { getPage, getFilteredPage } from "../services/ticket.service";
+import { getFilteredPage } from "../services/ticket.service";
 
 import { AppContext } from "../contexts/AppContext";
 
