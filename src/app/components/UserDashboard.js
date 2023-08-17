@@ -43,6 +43,10 @@ export default function UserDashboard() {
     });
   }, [currentPage, appState.activeFilters]);
 
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [appState.activeFilters]);
+
   function handlePageChange(event, value) {
     setCurrentPage(value);
   }
