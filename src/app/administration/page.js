@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect } from "react";
 import CssBaseline from "@mui/material/CssBaseline";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -10,6 +11,8 @@ import UserTable from "../components/UserTable";
 
 import ProtectedRoute from "../protectedRoutes/ProtectedRoute";
 
+import { getAll } from "../services/users.service";
+
 export default function Administration() {
   const { push } = useRouter();
 
@@ -18,6 +21,15 @@ export default function Administration() {
     { id: 2, username: "user2", roles: ["user", "agent"] },
     { id: 3, username: "admin1", roles: ["admin"] },
   ];
+
+  const [usersList, setUsersList] = useState(null);
+
+  useEffect(() => {
+    getAll().then((response) => {
+      setUsersList(response.data);
+      console.log(response.data);
+    });
+  }, []);
 
   return (
     <ProtectedRoute>
@@ -32,7 +44,7 @@ export default function Administration() {
           <Typography variant="h3" color="initial">
             Admin board
           </Typography>
-          <UserTable users={users} />
+          {usersList && <UserTable users={usersList} />}
         </Box>
       </Container>
     </ProtectedRoute>

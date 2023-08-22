@@ -26,27 +26,63 @@ const UserTable = ({ users }) => {
     setEditDialogOpen(false);
   };
 
+  const HEADERS = ["Id", "Username", "Roles", "Edit"];
+
+  const centeredCell = (content, hasBorder) => {
+    return (
+      <TableCell
+        sx={{
+          textAlign: "center",
+          borderRight: hasBorder ? "1px solid lightgray" : "none",
+        }}
+      >
+        {content}
+      </TableCell>
+    );
+  };
+
   return (
     <div>
       <TableContainer component={Paper}>
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Id</TableCell>
-              <TableCell>Username</TableCell>
-              <TableCell>Roles</TableCell>
-              <TableCell>Edit</TableCell>
+              {HEADERS.map((header, key) => {
+                return (
+                  <TableCell
+                    key={key}
+                    sx={{
+                      fontWeight: "bold",
+                      textAlign: "center",
+                      backgroundColor: "lightgray",
+                      borderRight:
+                        key + 1 === HEADERS.length ? "none" : "1px solid white",
+                    }}
+                  >
+                    {header}
+                  </TableCell>
+                );
+              })}
             </TableRow>
           </TableHead>
           <TableBody>
             {users.map((user) => (
               <TableRow key={user.id}>
-                <TableCell>{user.id}</TableCell>
-                <TableCell>{user.username}</TableCell>
-                <TableCell>{user.roles.join(", ")}</TableCell>
-                <TableCell>
-                  <Button onClick={() => handleEditClick(user)}>Edit</Button>
-                </TableCell>
+                {centeredCell(user.id, true)}
+                {centeredCell(user.username, true)}
+
+                {centeredCell(user.roles[0].name, true)}
+                {centeredCell(
+                  <Button
+                    variant="contained"
+                    onClick={() => handleEditClick(user)}
+                  >
+                    Edit
+                  </Button>
+                )}
+                {/* <TableCell>
+                  
+                </TableCell> */}
               </TableRow>
             ))}
           </TableBody>

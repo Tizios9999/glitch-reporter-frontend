@@ -7,58 +7,50 @@ import {
   Button,
   FormControl,
   FormControlLabel,
-  Checkbox,
+  Radio,
+  RadioGroup,
 } from "@mui/material";
 
 const EditUserDialog = ({ open, onClose, user }) => {
-  const [selectedRoles, setSelectedRoles] = useState(user.roles);
+  const [selectedRole, setSelectedRole] = useState(user.roles[0].name || ""); // Assuming user.roles[0] is the selected role
 
-  const handleRoleChange = (role) => {
-    if (selectedRoles.includes(role)) {
-      setSelectedRoles(selectedRoles.filter((r) => r !== role));
-    } else {
-      setSelectedRoles([...selectedRoles, role]);
-    }
+  const handleRoleChange = (event) => {
+    setSelectedRole(event.target.value);
   };
 
   const handleSave = () => {
-    // Call your API or update logic here with the updated roles
+    // Call your API or update logic here with the updated role
     // After updating, you can close the dialog
     onClose();
   };
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Edit Roles for {user.username}</DialogTitle>
+      <DialogTitle>Edit Role for {user.username}</DialogTitle>
       <DialogContent>
         <FormControl component="fieldset">
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={selectedRoles.includes("user")}
-                onChange={() => handleRoleChange("user")}
-              />
-            }
-            label="User"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={selectedRoles.includes("agent")}
-                onChange={() => handleRoleChange("agent")}
-              />
-            }
-            label="Agent"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={selectedRoles.includes("admin")}
-                onChange={() => handleRoleChange("admin")}
-              />
-            }
-            label="Admin"
-          />
+          <RadioGroup
+            aria-label="role"
+            name="role"
+            value={selectedRole}
+            onChange={handleRoleChange}
+          >
+            <FormControlLabel
+              value="ROLE_USER"
+              control={<Radio />}
+              label="User"
+            />
+            <FormControlLabel
+              value="ROLE_AGENT"
+              control={<Radio />}
+              label="Agent"
+            />
+            <FormControlLabel
+              value="ROLE_ADMIN"
+              control={<Radio />}
+              label="Admin"
+            />
+          </RadioGroup>
         </FormControl>
       </DialogContent>
       <DialogActions>
