@@ -11,12 +11,11 @@ const getAll = () => {
 
 const changeRole = (id, role) => {
   return axios
-    .put(API_URL + `changerole/${id}`, {
-      headers: authHeader(),
-      params: {
-        ERole: role,
-      },
-    })
+    .put(
+      API_URL + `changerole/${id}`,
+      { newRoleString: role },
+      { headers: authHeader() }
+    )
     .then((response) => {
       console.log("User role updated: ", response.data);
     })

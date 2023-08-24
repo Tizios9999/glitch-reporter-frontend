@@ -19,6 +19,8 @@ import { useRouter } from "next/navigation";
 
 import { AuthContext } from "../contexts/AuthContext";
 
+import CheckTokenComponent from "./CheckTokenComponent";
+
 import getMetadata from "../services/metadata.service";
 
 const pages = [
@@ -245,6 +247,7 @@ function Navbar() {
           )}
         </Toolbar>
       </Container>
+      <CheckTokenComponent />
     </AppBar>
   );
 }

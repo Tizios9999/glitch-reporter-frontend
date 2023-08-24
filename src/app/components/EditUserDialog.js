@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+
+import { changeRole } from "../services/users.service";
+
 import {
   Dialog,
   DialogActions,
@@ -21,7 +24,18 @@ const EditUserDialog = ({ open, onClose, user }) => {
   const handleSave = () => {
     // Call your API or update logic here with the updated role
     // After updating, you can close the dialog
-    onClose();
+
+    console.log("selected role ", selectedRole);
+    console.log("user id", user.id);
+
+    changeRole(user.id, selectedRole)
+      .then((response) => {
+        onClose();
+        location.reload();
+      })
+      .catch((error) => {
+        console.log("Error uploading user role: ", error);
+      });
   };
 
   return (
