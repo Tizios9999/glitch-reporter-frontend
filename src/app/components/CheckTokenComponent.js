@@ -6,14 +6,16 @@ function CheckTokenComponent() {
 
   const currentTime = Date.now();
 
-  const tokenExpiryDate = new Date(state.user.expiration).getTime();
+  const tokenExpiryDate = state.user
+    ? new Date(state.user.expiration).getTime()
+    : null;
 
   console.log(
     "valid login: ",
-    state.isLoggedIn && tokenExpiryDate > currentTime
+    tokenExpiryDate && tokenExpiryDate > currentTime
   );
 
-  if (state.isLoggedIn && tokenExpiryDate < currentTime) {
+  if (tokenExpiryDate && tokenExpiryDate < currentTime) {
     // Logout
     logout();
   }
