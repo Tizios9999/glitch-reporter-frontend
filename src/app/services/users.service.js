@@ -24,4 +24,15 @@ const changeRole = (id, role) => {
     });
 };
 
-export { getAll, changeRole };
+const deleteUser = (id) => {
+  return axios
+    .delete(API_URL + `${id}`, { headers: authHeader() })
+    .then((response) => {
+      console.log("User deleted: ", response.data);
+    })
+    .catch((error) => {
+      console.error("Error while deleting user: ", error);
+    });
+};
+
+export { getAll, changeRole, deleteUser };

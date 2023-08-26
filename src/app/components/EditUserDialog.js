@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-import { changeRole } from "../services/users.service";
+import { changeRole, deleteUser } from "../services/users.service";
+
+import AlertDialog from "./AlertDialog";
 
 import {
   Dialog,
@@ -17,14 +19,19 @@ import {
 const EditUserDialog = ({ open, onClose, user }) => {
   const [selectedRole, setSelectedRole] = useState(user.roles[0].name || ""); // Assuming user.roles[0] is the selected role
 
+  const [showAlertDialog, setShowAlertDialog] = useState(false);
+
   const handleRoleChange = (event) => {
     setSelectedRole(event.target.value);
   };
 
-  const handleSave = () => {
-    // Call your API or update logic here with the updated role
-    // After updating, you can close the dialog
+  const handleDelete = () => {
+    console.log("Deleting user: ", user.id);
 
+    setShowAlertDialog(true);
+  };
+
+  const handleSave = () => {
     console.log("selected role ", selectedRole);
     console.log("user id", user.id);
 
@@ -38,10 +45,21 @@ const EditUserDialog = ({ open, onClose, user }) => {
       });
   };
 
+  const handleDeleteConfirmed = () => {
+    deleteUser(user.id)
+      .then((response) => {
+        onClose();
+        location.reload();
+      })
+      .catch((error) => {
+        console.log("Error deleting user: ", error);
+      });
+  };
+
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle>Edit Role for {user.username}</DialogTitle>
-      <DialogContent>
+      <DialogContent sx={{ display: "flex", flexFlow: "column" }}>
         <FormControl component="fieldset">
           <RadioGroup
             aria-label="role"
@@ -66,7 +84,17 @@ const EditUserDialog = ({ open, onClose, user }) => {
             />
           </RadioGroup>
         </FormControl>
+        <Button onClick={handleDelete} color="error">
+          DELETE USER
+        </Button>
       </DialogContent>
+      {showAlertDialog && (
+        <AlertDialog
+          message="Are you sure you want to delete this user? This action cannot be undone."
+          onClose={() => setShowAlertDialog(false)}
+          onProceed={handleDeleteConfirmed}
+        />
+      )}
       <DialogActions>
         <Button onClick={onClose} color="primary">
           Cancel
