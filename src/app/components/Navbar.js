@@ -37,6 +37,10 @@ const pages = [
     label: "Dashboard",
     showRule: "Users level",
   },
+  {
+    label: "Administration",
+    showRule: "Admin only",
+  },
 ];
 
 const settingsItems = [

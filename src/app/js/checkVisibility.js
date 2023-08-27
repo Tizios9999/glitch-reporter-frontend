@@ -1,12 +1,18 @@
 export default function checkVisibility(authState, rule) {
-   
-    const isLoggedIn = authState.user === null ? false : authState.isLoggedIn
+  const isLoggedIn = authState.user === null ? false : authState.isLoggedIn;
 
-    if (rule === 'Always') return true;
+  if (rule === "Always") return true;
 
-    if (rule === 'Not logged in') return !isLoggedIn;
+  if (rule === "Not logged in") return !isLoggedIn;
 
-    if (rule === 'Users level') return isLoggedIn;
-   
-    return false;
+  if (rule === "Users level") return isLoggedIn;
+
+  if (rule === "Admin only") {
+    const userIsAdmin =
+      isLoggedIn && authState.user.roles.includes("ROLE_ADMIN") ? true : false;
+
+    return userIsAdmin;
   }
+
+  return false;
+}
