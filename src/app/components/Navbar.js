@@ -45,14 +45,6 @@ const pages = [
 
 const settingsItems = [
   {
-    label: "Profile",
-    action: "link",
-  },
-  {
-    label: "Dashboard",
-    action: "link",
-  },
-  {
     label: "Logout",
     action: "logout",
   },
