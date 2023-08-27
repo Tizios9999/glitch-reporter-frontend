@@ -133,12 +133,6 @@ export default function UserDashboard() {
             justifyContent: "space-between",
           }}
         >
-          {/* <Box>
-            <TicketRow type="header" />
-            {ticketData.map((ticket, id) => (
-              <TicketRow type="data" key={id} data={ticket} />
-            ))}
-          </Box> */}
           {ticketsList[0] && (
             <Box>
               <TicketRowElement type="header" />
