@@ -22,6 +22,7 @@ import {
   Box,
   TextField,
   Button,
+  Chip,
 } from "@mui/material";
 
 import getMetadataObject from "../../js/getMetadataObject";
@@ -148,35 +149,40 @@ const TicketPage = () => {
             </Typography>
             <Typography variant="body1" color="initial">
               <strong>Priority:</strong>{" "}
-              <span
+              <Chip
                 style={
                   priorityObj
                     ? {
                         color: `#${priorityObj.textColorCode}`,
                         backgroundColor: `#${priorityObj.bgColorCode}`,
-                        padding: "3px",
+                        minWidth: "100px",
+                        fontWeight: "bold",
+                        marginTop: "3px",
+                        marginBottom: "3px",
                       }
                     : {}
                 }
-              >
-                {priorityObj.name}
-              </span>
+                label={priorityObj.name}
+                size="small"
+              />
             </Typography>
             <Typography variant="body1" color="initial">
               <strong>Status:</strong>{" "}
-              <span
-                style={
+              <Chip
+                sx={
                   statusObj
                     ? {
                         color: `#${statusObj.textColorCode}`,
                         backgroundColor: `#${statusObj.bgColorCode}`,
-                        padding: "3px",
+                        minWidth: "100px",
+                        fontWeight: "bold",
+                        marginBottom: "3px",
                       }
                     : {}
                 }
-              >
-                {statusObj.name}
-              </span>
+                label={statusObj.name}
+                size="small"
+              />
             </Typography>
             <Typography variant="body1" color="initial">
               <strong>Assigned to:</strong> {ticket.assignedTo}
