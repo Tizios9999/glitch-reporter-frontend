@@ -133,13 +133,12 @@ export default function TicketRowElement(props) {
     <Box
       sx={{
         width: "100%",
-        height: "30px",
+        maxHeight: "90px",
         display: "grid",
         gridTemplateColumns: TEMPLATE_COLUMNS_RATIO,
         backgroundColor: bgColor,
         color: fontColor,
         fontWeight: "500",
-        textAlign: "center",
         borderStyle: borderStyle,
         borderWidth: "1px",
         borderColor: "black",
@@ -181,9 +180,10 @@ export default function TicketRowElement(props) {
                   sx={{
                     backgroundColor: field.chipBgColor,
                     color: field.chipColor,
-                    width: "70px",
+                    minWidth: "100px",
                     mr: "2px",
-                    mt: "1px",
+                    mt: "3px",
+                    mb: "3px",
                   }}
                 />
                 <Typography>{field.fieldName}</Typography>
@@ -191,13 +191,19 @@ export default function TicketRowElement(props) {
             );
           case "chip":
             return (
-              <div key={`${field.fieldname}${rowId}`}>
+              <div
+                key={`${field.fieldname}${rowId}`}
+                style={{ textAlign: "center" }}
+              >
                 <Chip
                   label={field.fieldName}
                   size="small"
                   sx={{
                     backgroundColor: field.chipBgColor,
                     color: field.chipColor,
+                    minWidth: "70px",
+                    mt: "3px",
+                    mb: "3px",
                   }}
                 />
               </div>

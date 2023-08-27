@@ -7,6 +7,7 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormHelperText from "@mui/material/FormHelperText";
 import Checkbox from "@mui/material/Checkbox";
+import { Paper } from "@mui/material";
 
 import { AppContext } from "../contexts/AppContext";
 
@@ -66,7 +67,15 @@ export default function CheckboxFilters(props) {
   }
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box
+      sx={{
+        display: "flex",
+        backgroundColor: "white",
+        maxWidth: "165px",
+        marginTop: "10px",
+        borderRadius: "12px",
+      }}
+    >
       <FormControl sx={{ m: 2 }} component="fieldset" variant="standard">
         <FormLabel component="legend" sx={{ fontWeight: "bold" }}>
           {props.name.charAt(0).toUpperCase() + props.name.slice(1)}
