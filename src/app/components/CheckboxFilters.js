@@ -21,13 +21,6 @@ export default function CheckboxFilters(props) {
     } else {
       startingState[obj.name] = false;
     }
-
-    // console.log("starting state", startingState);
-    // console.log(
-    //   "appState.filter",
-    //   appState.activeFilters[props.name],
-    //   appState.activeFilters
-    // );
   });
 
   const [state, setState] = React.useState(startingState);
