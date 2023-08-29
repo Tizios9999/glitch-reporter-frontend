@@ -26,9 +26,31 @@ export default function UserDashboard() {
   const [totalPages, setTotalPages] = React.useState(1);
   const [currentPage, setCurrentPage] = React.useState(1);
 
-  const customerFilter = [
-    { id: 1, name: "Opened by me" },
-    { id: 2, name: "Opened by others" },
+  const ticketHeaders = [
+    {
+      fieldName: "ID",
+      type: "id",
+    },
+    {
+      fieldName: "Customer",
+      type: "normal",
+    },
+    {
+      fieldName: "Subject",
+      type: "normal",
+    },
+    {
+      fieldName: "Priority",
+      type: "normal",
+    },
+    {
+      fieldName: "Assigned to",
+      type: "normal",
+    },
+    {
+      fieldName: "Last Updated",
+      type: "normal",
+    },
   ];
 
   React.useEffect(() => {
@@ -135,7 +157,7 @@ export default function UserDashboard() {
         >
           {ticketsList[0] && (
             <Box>
-              <TicketRowElement type="header" />
+              <TicketRowElement type="header" headers={ticketHeaders} />
               {ticketsList.map((ticket, id) => (
                 <TicketRowElement type="data" key={id} data={ticket} />
               ))}

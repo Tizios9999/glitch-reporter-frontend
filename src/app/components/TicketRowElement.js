@@ -1,6 +1,5 @@
 import { useContext } from "react";
 
-import Chip from "@mui/material/Chip";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
@@ -11,78 +10,40 @@ import getMetadataObject from "../js/getMetadataObject";
 import { AuthContext } from "../contexts/AuthContext";
 import { AppContext } from "../contexts/AppContext";
 
+import renderChipField from "../rendering/renderChipField";
+
 import convertISOStringToLocalFormat from "../js/convertISOStringToLocalFormat";
 
 export default function TicketRowElement(props) {
+  const { type, data, headers } = props;
+
   const [authState] = useContext(AuthContext);
   const [appState] = useContext(AppContext);
 
   const { push } = useRouter();
 
   const TEMPLATE_COLUMNS_RATIO = "5% 20% 30% 10% 15% 20%";
-  const HEADERS = [
-    "ID",
-    "Customer",
-    "Subject",
-    "Priority",
-    "Assigned to",
-    "Last Updated",
-  ];
-
-  const HEADERS_OBJ_ARR = [
-    {
-      fieldName: "ID",
-      type: "id",
-    },
-    {
-      fieldName: "Customer",
-      type: "normal",
-    },
-    {
-      fieldName: "Subject",
-      type: "normal",
-    },
-    {
-      fieldName: "Priority",
-      type: "normal",
-    },
-    {
-      fieldName: "Assigned to",
-      type: "normal",
-    },
-    {
-      fieldName: "Last Updated",
-      type: "normal",
-    },
-  ];
 
   let fieldsList = [];
   let bgColor;
   let fontColor;
-  let status;
   let borderStyle;
   let idStyle;
   let priorityObj, statusObj;
 
-  if (props.type === "header") {
+  if (type === "header") {
     bgColor = "secondary.main";
     fontColor = "white";
-    fieldsList = HEADERS_OBJ_ARR;
+    fieldsList = headers;
     borderStyle = "solid";
     idStyle = { color: "white" };
-  }
-
-  if (props.type === "data") {
+  } else if (type === "data") {
     priorityObj = getMetadataObject(
       "priorities",
-      props.data.priorityId,
+      data.priorityId,
       appState.metadata
     );
-    statusObj = getMetadataObject(
-      "statuses",
-      props.data.statusId,
-      appState.metadata
-    );
+    statusObj = getMetadataObject("statuses", data.statusId, appState.metadata);
 
     borderStyle = "hidden solid solid solid";
     idStyle = {
@@ -92,16 +53,16 @@ export default function TicketRowElement(props) {
     };
 
     const id = {
-      fieldName: props.data.ticketId,
+      fieldName: data.ticketId,
       type: "id",
     };
 
     const customer = {
-      fieldName: props.data.customer,
+      fieldName: data.customer,
       type: "normal",
     };
     const subject = {
-      fieldName: props.data.subject,
+      fieldName: data.subject,
       type: "chipBefore",
       chipBgColor: `#${statusObj.bgColorCode}`,
       chipColor: `#${statusObj.textColorCode}`,
@@ -115,12 +76,12 @@ export default function TicketRowElement(props) {
     };
 
     const assignedTo = {
-      fieldName: props.data.assignedTo,
+      fieldName: data.assignedTo,
       type: "normal",
     };
 
     const lastUpdated = {
-      fieldName: convertISOStringToLocalFormat(props.data.lastUpdated),
+      fieldName: convertISOStringToLocalFormat(data.lastUpdated),
       type: "normal",
     };
 
@@ -144,7 +105,6 @@ export default function TicketRowElement(props) {
         borderColor: "black",
       }}
     >
-      {/* <div>x</div> */}
       {fieldsList.map((field, rowId) => {
         switch (field.type) {
           case "id":
@@ -174,18 +134,12 @@ export default function TicketRowElement(props) {
                 key={`${field.fieldname}${rowId}`}
                 style={{ display: "flex" }}
               >
-                <Chip
-                  label={field.chipData}
-                  size="small"
-                  sx={{
-                    backgroundColor: field.chipBgColor,
-                    color: field.chipColor,
-                    minWidth: "100px",
-                    mr: "2px",
-                    mt: "3px",
-                    mb: "3px",
-                  }}
-                />
+                {renderChipField(
+                  field.chipData,
+                  field.chipBgColor,
+                  field.chipColor,
+                  "100px"
+                )}
                 <Typography>{field.fieldName}</Typography>
               </div>
             );
@@ -195,24 +149,18 @@ export default function TicketRowElement(props) {
                 key={`${field.fieldname}${rowId}`}
                 style={{ textAlign: "center" }}
               >
-                <Chip
-                  label={field.fieldName}
-                  size="small"
-                  sx={{
-                    backgroundColor: field.chipBgColor,
-                    color: field.chipColor,
-                    minWidth: "70px",
-                    mt: "3px",
-                    mb: "3px",
-                  }}
-                />
+                {renderChipField(
+                  field.fieldName,
+                  field.chipBgColor,
+                  field.chipColor,
+                  "70px"
+                )}
               </div>
             );
           default:
             return null;
         }
       })}
-      {/* <Chip label="Chip Filled" /> */}
     </Box>
   );
 }
