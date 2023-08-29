@@ -109,15 +109,17 @@ export default function TicketCardElement(props) {
             </Typography>
           )}
           {field.type === "chip" && (
-            <Typography>
-              <strong>{field.fieldTitle}: </strong>
+            <div style={{ display: "flex" }}>
+              <Typography sx={{ marginRight: "5px" }}>
+                <strong>{field.fieldTitle}: </strong>
+              </Typography>
               {renderChipField(
                 field.fieldValue,
                 field.chipBgColor,
                 field.chipColor,
                 "100px"
               )}
-            </Typography>
+            </div>
           )}
         </Box>
       ))}

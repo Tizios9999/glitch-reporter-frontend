@@ -19,7 +19,7 @@ import { getFilteredPage } from "../services/ticket.service";
 
 import { AppContext } from "../contexts/AppContext";
 
-import CompactMediaQuery from "../rendering/compactMediaQuery";
+import compactMediaQuery from "../rendering/compactMediaQuery";
 
 export default function UserDashboard() {
   const { push } = useRouter();
@@ -29,7 +29,7 @@ export default function UserDashboard() {
   const [totalPages, setTotalPages] = React.useState(1);
   const [currentPage, setCurrentPage] = React.useState(1);
 
-  const isDesktopMode = CompactMediaQuery();
+  const size = compactMediaQuery();
 
   const ticketHeaders = [
     {
@@ -114,7 +114,7 @@ export default function UserDashboard() {
   return (
     <div>
       <CssBaseline />
-      {console.log("compact mode: ", !CompactMediaQuery())}
+      {console.log("Size: ", compactMediaQuery())}
       <Container
         maxWidth="xl"
         sx={{
@@ -161,7 +161,7 @@ export default function UserDashboard() {
             justifyContent: "center",
           }}
         >
-          {isDesktopMode
+          {size === "desktopSize"
             ? ticketsList[0] && (
                 <Box>
                   <TicketRowElement type="header" headers={ticketHeaders} />
