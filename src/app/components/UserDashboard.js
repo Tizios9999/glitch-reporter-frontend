@@ -12,11 +12,14 @@ import Box from "@mui/material/Box";
 import Pagination from "@mui/material/Pagination";
 
 import TicketRowElement from "./TicketRowElement";
+import TicketCardElement from "./TicketCardElement";
 import CheckboxFilters from "./CheckboxFilters";
 
 import { getFilteredPage } from "../services/ticket.service";
 
 import { AppContext } from "../contexts/AppContext";
+
+import CompactMediaQuery from "../rendering/compactMediaQuery";
 
 export default function UserDashboard() {
   const { push } = useRouter();
@@ -25,6 +28,8 @@ export default function UserDashboard() {
   const [ticketsList, setTicketsList] = React.useState([]);
   const [totalPages, setTotalPages] = React.useState(1);
   const [currentPage, setCurrentPage] = React.useState(1);
+
+  const isDesktopMode = CompactMediaQuery();
 
   const ticketHeaders = [
     {
@@ -109,6 +114,7 @@ export default function UserDashboard() {
   return (
     <div>
       <CssBaseline />
+      {console.log("compact mode: ", !CompactMediaQuery())}
       <Container
         maxWidth="xl"
         sx={{
@@ -155,14 +161,27 @@ export default function UserDashboard() {
             justifyContent: "space-between",
           }}
         >
-          {ticketsList[0] && (
-            <Box>
-              <TicketRowElement type="header" headers={ticketHeaders} />
-              {ticketsList.map((ticket, id) => (
-                <TicketRowElement type="data" key={id} data={ticket} />
-              ))}
-            </Box>
-          )}
+          {isDesktopMode
+            ? ticketsList[0] && (
+                <Box>
+                  <TicketRowElement type="header" headers={ticketHeaders} />
+                  {ticketsList.map((ticket, id) => (
+                    <TicketRowElement type="data" key={id} data={ticket} />
+                  ))}
+                </Box>
+              )
+            : ticketsList[0] && (
+                <Box sx={{ display: "flex", flexFlow: "column wrap" }}>
+                  {ticketsList.map((ticket, id) => (
+                    <TicketCardElement
+                      headers={ticketHeaders}
+                      data={ticket}
+                      key={id}
+                    />
+                  ))}
+                </Box>
+              )}
+
           <Container
             maxWidth="xl"
             sx={{
