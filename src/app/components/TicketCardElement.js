@@ -33,7 +33,7 @@ export default function TicketCardElement(props) {
   const id = {
     fieldTitle: "ID",
     fieldValue: data.ticketId,
-    type: "id",
+    type: "normal",
   };
 
   const customer = {
@@ -85,18 +85,24 @@ export default function TicketCardElement(props) {
     lastUpdated,
   ];
 
+  const handleClick = (id) => {
+    push(`/tickets/${id}`);
+  };
+
   return (
     <Box
       sx={{
+        margin: "auto",
+        marginBottom: "10px",
         border: "1px solid black",
         backgroundColor: "white",
         padding: "20px",
-        maxWidth: "100%",
+        width: "350px",
       }}
     >
       {console.log("data: ", data)}
       {fieldsArr.map((field, index) => (
-        <Box key={index} sx={{}}>
+        <Box key={index} sx={{ display: "flex" }}>
           {field.type === "normal" && (
             <Typography>
               <strong>{field.fieldTitle}: </strong> {field.fieldValue}
@@ -115,7 +121,16 @@ export default function TicketCardElement(props) {
           )}
         </Box>
       ))}
-      <Button color="secondary" variant="contained">
+      <Button
+        color="secondary"
+        variant="contained"
+        onClick={() => handleClick(data.ticketId)}
+        sx={{
+          display: "block",
+          margin: "auto",
+          marginTop: "10px", // Add margin-top for spacing
+        }}
+      >
         See Ticket
       </Button>
     </Box>

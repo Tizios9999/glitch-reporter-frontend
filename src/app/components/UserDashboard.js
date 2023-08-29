@@ -158,7 +158,7 @@ export default function UserDashboard() {
             width: "100%",
             display: "flex",
             flexFlow: "column",
-            justifyContent: "space-between",
+            justifyContent: "center",
           }}
         >
           {isDesktopMode
@@ -171,7 +171,14 @@ export default function UserDashboard() {
                 </Box>
               )
             : ticketsList[0] && (
-                <Box sx={{ display: "flex", flexFlow: "column wrap" }}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexFlow: "column wrap",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
                   {ticketsList.map((ticket, id) => (
                     <TicketCardElement
                       headers={ticketHeaders}
