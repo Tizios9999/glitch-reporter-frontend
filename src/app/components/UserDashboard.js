@@ -8,6 +8,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Button from "@mui/material/Button";
 
 import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AddIcon from "@mui/icons-material/Add";
+import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import Fab from "@mui/material/Fab";
 import Box from "@mui/material/Box";
 import Pagination from "@mui/material/Pagination";
 
@@ -130,18 +133,43 @@ export default function UserDashboard() {
             gridArea: "sidebar",
           }}
         >
-          <Button
-            variant="contained"
-            disableElevation
-            color="success"
-            size="large"
-            endIcon={<AddCircleIcon />}
-            onClick={() => {
-              push("./newticket");
-            }}
-          >
-            New ticket
-          </Button>
+          {size !== "mobileSize" && (
+            <Button
+              variant="contained"
+              disableElevation
+              color="success"
+              size="large"
+              endIcon={<AddCircleIcon />}
+              onClick={() => {
+                push("./newticket");
+              }}
+            >
+              New ticket
+            </Button>
+          )}
+          {size === "mobileSize" && (
+            <Fab
+              sx={{ position: "fixed", bottom: "16px", right: "16px" }}
+              color="success"
+              aria-label="New ticket"
+              onClick={() => {
+                push("./newticket");
+              }}
+            >
+              <AddIcon />
+            </Fab>
+          )}
+
+          {size === "mobileSize" && (
+            <Fab
+              sx={{ position: "fixed", bottom: "80px", right: "16px" }}
+              color="info"
+              aria-label="filter"
+              onClick={() => {}}
+            >
+              <FilterAltIcon />
+            </Fab>
+          )}
 
           <CheckboxFilters
             name="priority"
@@ -152,6 +180,7 @@ export default function UserDashboard() {
             filtersArr={appState.metadata.statuses}
           />
         </Box>
+
         <Box
           sx={{
             gridArea: "main",

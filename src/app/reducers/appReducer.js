@@ -21,6 +21,15 @@ export function appReducer(state, action) {
         },
       };
 
+    case "CLEAR_FILTERS":
+      return {
+        ...state,
+        activeFilters: {
+          priority: [],
+          status: [],
+        },
+      };
+
     default:
       return state;
   }
