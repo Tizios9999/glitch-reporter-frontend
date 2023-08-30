@@ -91,7 +91,10 @@ function Navbar() {
   }, [state.user]);
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="fixed"
+      sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <HiveIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />

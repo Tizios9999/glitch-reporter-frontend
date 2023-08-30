@@ -6,17 +6,19 @@ import { useRouter } from "next/navigation";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Button from "@mui/material/Button";
-
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Fab from "@mui/material/Fab";
+import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import Pagination from "@mui/material/Pagination";
 
 import TicketRowElement from "./TicketRowElement";
 import TicketCardElement from "./TicketCardElement";
 import CheckboxFilters from "./CheckboxFilters";
+import FiltersDrawer from "./FiltersDrawer";
+import NewTicketButton from "./NewTicketButton";
 
 import { getFilteredPage } from "../services/ticket.service";
 
@@ -31,6 +33,7 @@ export default function UserDashboard() {
   const [ticketsList, setTicketsList] = React.useState([]);
   const [totalPages, setTotalPages] = React.useState(1);
   const [currentPage, setCurrentPage] = React.useState(1);
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
 
   const size = compactMediaQuery();
 
@@ -114,6 +117,17 @@ export default function UserDashboard() {
     );
   }
 
+  function countActiveFilters(filters) {
+    // Calcola il conteggio totale degli elementi in tutti gli array
+    const totalCount = Object.values(filters).reduce((acc, array) => {
+      return acc + array.length;
+    }, 0);
+
+    console.log(totalCount);
+
+    return totalCount;
+  }
+
   return (
     <div>
       <CssBaseline />
@@ -133,51 +147,40 @@ export default function UserDashboard() {
             gridArea: "sidebar",
           }}
         >
-          {size !== "mobileSize" && (
-            <Button
-              variant="contained"
-              disableElevation
-              color="success"
-              size="large"
-              endIcon={<AddCircleIcon />}
-              onClick={() => {
-                push("./newticket");
-              }}
-            >
-              New ticket
-            </Button>
-          )}
-          {size === "mobileSize" && (
-            <Fab
-              sx={{ position: "fixed", bottom: "16px", right: "16px" }}
-              color="success"
-              aria-label="New ticket"
-              onClick={() => {
-                push("./newticket");
-              }}
-            >
-              <AddIcon />
-            </Fab>
-          )}
+          {size === "mobileSize" && <NewTicketButton type="icon" />}
 
           {size === "mobileSize" && (
-            <Fab
-              sx={{ position: "fixed", bottom: "80px", right: "16px" }}
-              color="info"
-              aria-label="filter"
-              onClick={() => {}}
+            <Badge
+              color="secondary"
+              overlap="circular"
+              badgeContent={countActiveFilters(appState.activeFilters)}
+              sx={{
+                position: "fixed",
+                bottom: "128px",
+                right: "20px",
+                zIndex: "2",
+              }}
             >
-              <FilterAltIcon />
-            </Fab>
+              <Fab
+                sx={{
+                  position: "fixed",
+                  bottom: "80px",
+                  right: "16px",
+                  zIndex: "1",
+                }}
+                color="info"
+                aria-label="filter"
+                onClick={() => setDrawerOpen(true)}
+              >
+                <FilterAltIcon />
+              </Fab>
+            </Badge>
           )}
 
-          <CheckboxFilters
-            name="priority"
-            filtersArr={appState.metadata.priorities}
-          />
-          <CheckboxFilters
-            name="status"
-            filtersArr={appState.metadata.statuses}
+          <FiltersDrawer
+            open={drawerOpen}
+            setOpen={setDrawerOpen}
+            size={size}
           />
         </Box>
 
