@@ -13,11 +13,15 @@ import renderChipField from "../rendering/renderChipField";
 
 import convertISOStringToLocalFormat from "../js/convertISOStringToLocalFormat";
 
+import compactMediaQuery from "../rendering/compactMediaQuery";
+
 export default function TicketCardElement(props) {
   const { data, headers } = props;
   const [appState] = useContext(AppContext);
 
   const { push } = useRouter();
+
+  const size = compactMediaQuery();
 
   const priorityObj = getMetadataObject(
     "priorities",
@@ -97,7 +101,7 @@ export default function TicketCardElement(props) {
         border: "1px solid black",
         backgroundColor: "white",
         padding: "20px",
-        width: "350px",
+        width: size === "mobileSize" ? "250px" : "350px",
       }}
     >
       {console.log("data: ", data)}

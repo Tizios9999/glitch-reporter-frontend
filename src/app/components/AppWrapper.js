@@ -34,7 +34,7 @@ export default function AppWrapper({ children }) {
   }, []);
 
   return (
-    <body>
+    <body style={{ marginTop: "80px " }}>
       {authState.loading || appState.loading ? (
         <Loading />
       ) : (

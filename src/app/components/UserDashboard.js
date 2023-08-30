@@ -5,9 +5,6 @@ import { useRouter } from "next/navigation";
 
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
-import Button from "@mui/material/Button";
-import AddCircleIcon from "@mui/icons-material/AddCircle";
-import AddIcon from "@mui/icons-material/Add";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import Fab from "@mui/material/Fab";
 import Badge from "@mui/material/Badge";
@@ -16,7 +13,6 @@ import Pagination from "@mui/material/Pagination";
 
 import TicketRowElement from "./TicketRowElement";
 import TicketCardElement from "./TicketCardElement";
-import CheckboxFilters from "./CheckboxFilters";
 import FiltersDrawer from "./FiltersDrawer";
 import NewTicketButton from "./NewTicketButton";
 
@@ -27,8 +23,6 @@ import { AppContext } from "../contexts/AppContext";
 import compactMediaQuery from "../rendering/compactMediaQuery";
 
 export default function UserDashboard() {
-  const { push } = useRouter();
-
   const [appState, appDispatch] = React.useContext(AppContext);
   const [ticketsList, setTicketsList] = React.useState([]);
   const [totalPages, setTotalPages] = React.useState(1);
@@ -132,21 +126,8 @@ export default function UserDashboard() {
     <div>
       <CssBaseline />
       {console.log("Size: ", compactMediaQuery())}
-      <Container
-        maxWidth="xl"
-        sx={{
-          borderRadius: "5px",
-          display: "grid",
-          gridTemplateColumns: "repeat(5, 1fr)",
-          gridTemplateRows: "auto",
-          gridTemplateAreas: `"sidebar main main main main"`,
-        }}
-      >
-        <Box
-          sx={{
-            gridArea: "sidebar",
-          }}
-        >
+      <Container maxWidth="xl" sx={{ display: "flex" }}>
+        <Box sx={{ marginLeft: size === "mobileSize" ? "0" : "200px" }}>
           {size === "mobileSize" && <NewTicketButton type="icon" />}
 
           {size === "mobileSize" && (
@@ -186,7 +167,6 @@ export default function UserDashboard() {
 
         <Box
           sx={{
-            gridArea: "main",
             width: "100%",
             display: "flex",
             flexFlow: "column",

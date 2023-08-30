@@ -21,7 +21,7 @@ export default function FiltersDrawer(props) {
       sx={{
         width: anchor === "top" || anchor === "bottom" ? "auto" : 220,
         zIndex: "-200",
-        marginTop: "80px", // Adjust this value as needed to avoid overlapping with the navbar
+        marginTop: "90px", // Adjust this value as needed to avoid overlapping with the navbar
       }}
       role="presentation"
     >
