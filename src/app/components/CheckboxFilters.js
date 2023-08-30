@@ -1,13 +1,10 @@
-"use client";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import FormHelperText from "@mui/material/FormHelperText";
 import Checkbox from "@mui/material/Checkbox";
-import { Paper } from "@mui/material";
 
 import { AppContext } from "../contexts/AppContext";
 
@@ -16,42 +13,34 @@ export default function CheckboxFilters(props) {
 
   const startingState = {};
   props.filtersArr.forEach((obj) => {
-    if (appState.activeFilters[props.name].includes(obj.name)) {
-      startingState[obj.name] = true;
-    } else {
-      startingState[obj.name] = false;
-    }
+    startingState[obj.name] = appState.activeFilters[props.name].includes(
+      obj.name
+    );
   });
 
   const [state, setState] = React.useState(startingState);
 
   const handleChange = (event) => {
-    setState({
-      ...state,
-      [event.target.name]: event.target.checked,
-    });
+    const { name, checked } = event.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: checked,
+    }));
   };
 
   // updating the activeFilters on AppState context
   React.useEffect(() => {
     const checkboxArr = Object.keys(state).filter((key) => state[key]);
 
-    const idArr = [];
-
-    // Converting them to Ids to have a more precise query
-    checkboxArr.forEach((name) => {
-      idArr.push(mapFilterNameToId(name, props.filtersArr));
-    });
+    const idArr = checkboxArr.map((name) =>
+      mapFilterNameToId(name, props.filtersArr)
+    );
 
     appDispatch({
       type: "UPDATE_FILTERS",
       payload: { name: props.name, values: [...idArr] },
     });
   }, [state]);
-
-  React.useEffect(() => {
-    // Runs the query to update the page
-  }, [appState.activeFilters]);
 
   function mapFilterNameToId(name, filterObj) {
     const found = filterObj.find((element) => element.name === name);
@@ -91,7 +80,6 @@ export default function CheckboxFilters(props) {
             );
           })}
         </FormGroup>
-        {/* <FormHelperText>Be careful</FormHelperText> */}
       </FormControl>
     </Box>
   );
