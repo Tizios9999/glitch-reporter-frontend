@@ -1,7 +1,7 @@
 "use client";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-export default function compactMediaQuery() {
+export default function getScreenSize() {
   const sizes = [
     {
       name: "desktopSize",

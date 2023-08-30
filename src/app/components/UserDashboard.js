@@ -20,7 +20,7 @@ import { getFilteredPage } from "../services/ticket.service";
 
 import { AppContext } from "../contexts/AppContext";
 
-import compactMediaQuery from "../rendering/compactMediaQuery";
+import getScreenSize from "../rendering/getScreenSize";
 
 export default function UserDashboard() {
   const [appState, appDispatch] = React.useContext(AppContext);
@@ -29,7 +29,7 @@ export default function UserDashboard() {
   const [currentPage, setCurrentPage] = React.useState(1);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
 
-  const size = compactMediaQuery();
+  const size = getScreenSize();
 
   const ticketHeaders = [
     {
@@ -125,7 +125,7 @@ export default function UserDashboard() {
   return (
     <div>
       <CssBaseline />
-      {console.log("Size: ", compactMediaQuery())}
+      {console.log("Size: ", getScreenSize())}
       <Container maxWidth="xl" sx={{ display: "flex" }}>
         <Box sx={{ marginLeft: size === "mobileSize" ? "0" : "200px" }}>
           {size === "mobileSize" && <NewTicketButton type="icon" />}

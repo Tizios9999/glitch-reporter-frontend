@@ -13,7 +13,7 @@ import renderChipField from "../rendering/renderChipField";
 
 import convertISOStringToLocalFormat from "../js/convertISOStringToLocalFormat";
 
-import compactMediaQuery from "../rendering/compactMediaQuery";
+import getScreenSize from "../rendering/getScreenSize";
 
 export default function TicketCardElement(props) {
   const { data, headers } = props;
@@ -21,7 +21,7 @@ export default function TicketCardElement(props) {
 
   const { push } = useRouter();
 
-  const size = compactMediaQuery();
+  const size = getScreenSize();
 
   const priorityObj = getMetadataObject(
     "priorities",
