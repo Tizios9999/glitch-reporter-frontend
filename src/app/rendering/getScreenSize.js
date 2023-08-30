@@ -1,3 +1,8 @@
+/**
+ * This function uses the media query of Material UI and returns a type of screen.
+ *
+ * @returns {size} A String that describes the length of the screen: either "desktopSize", "compactSize" or "mobileSize"
+ */
 "use client";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
