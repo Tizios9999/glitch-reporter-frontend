@@ -1,8 +1,6 @@
 "use client";
 import * as React from "react";
 
-import { useRouter } from "next/navigation";
-
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
@@ -116,8 +114,6 @@ export default function UserDashboard() {
     const totalCount = Object.values(filters).reduce((acc, array) => {
       return acc + array.length;
     }, 0);
-
-    console.log(totalCount);
 
     return totalCount;
   }
