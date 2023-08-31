@@ -201,7 +201,14 @@ const NewTicket = () => {
           />
 
           <FileUpload onFileChange={handleFileChange} />
-          <Box sx={{ display: "flex", justifyContent: "center", gap: "50px" }}>
+          <Box
+            sx={{
+              display: "flex",
+              width: "80%",
+              justifyContent: "space-evenly",
+              flexFlow: "row wrap",
+            }}
+          >
             <Button
               type="submit"
               variant="contained"
