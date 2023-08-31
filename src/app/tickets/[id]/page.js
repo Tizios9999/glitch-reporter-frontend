@@ -28,6 +28,8 @@ import {
 import getMetadataObject from "../../js/getMetadataObject";
 import convertISOStringToLocalFormat from "@/app/js/convertISOStringToLocalFormat";
 
+import getScreenSize from "@/app/rendering/getScreenSize";
+
 import TicketMessage from "../../components/TicketMessage";
 import FileUpload from "../../components/FileUpload";
 
@@ -44,6 +46,8 @@ const TicketPage = () => {
 
   const [appState] = useContext(AppContext);
   const [authState] = useContext(AuthContext);
+
+  const size = getScreenSize();
 
   useEffect(() => {
     const fetchId = async () => {
@@ -142,7 +146,14 @@ const TicketPage = () => {
           #{id} - {ticket.ticketSubject}
         </h1>
         {/* Mostra i dettagli del ticket */}
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            flexFlow: size === "mobileSize" ? "column wrap" : "row wrap",
+            gap: size === "mobileSize" ? "50px" : "0",
+          }}
+        >
           <Box>
             <Typography variant="body1" color="initial">
               <strong>Opened by:</strong> {ticket.openingUser}
