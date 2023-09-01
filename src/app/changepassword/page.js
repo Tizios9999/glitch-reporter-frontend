@@ -7,7 +7,12 @@ import {
   Grid,
   Paper,
   Typography,
+  Alert,
 } from "@mui/material";
+
+import AuthService from "../services/auth.service";
+
+import validateForm from "../js/validateForm";
 
 function PasswordChangeForm() {
   const [username, setUsername] = useState("");
@@ -40,6 +45,18 @@ function PasswordChangeForm() {
     /* If there are no errors, the form will be sent to the backend,
        alternatively the errors will be collected on the errorsList 
        state and shown on the alerts. */
+
+    if (errors.length === 0) {
+      AuthService.modifyPassword(username, email, newPassword)
+        .then(() => {
+          setSuccessful(true);
+        })
+        .catch(() => {
+          setSuccessful(false);
+        });
+    } else {
+      setErrorsList(errors);
+    }
   };
 
   return (
@@ -50,7 +67,7 @@ function PasswordChangeForm() {
           errorsList.map((error, index) => (
             <Alert
               key={index}
-              style={{ width: "100%", textAlign: "center" }}
+              style={{ width: "90%", textAlign: "center", marginTop: "15px" }}
               severity="error"
             >
               {error}
@@ -60,10 +77,10 @@ function PasswordChangeForm() {
         {successful && (
           <Alert
             severity="success"
-            style={{ width: "100%", textAlign: "center", marginTop: "15px" }}
+            style={{ width: "90%", textAlign: "center", marginTop: "15px" }}
             color="success"
           >
-            Registration successful!
+            Password change successful!
           </Alert>
         )}
         <form onSubmit={handleSubmit}>

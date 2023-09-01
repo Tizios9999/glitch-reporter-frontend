@@ -29,8 +29,17 @@ const logout = () => {
   localStorage.removeItem("user");
 };
 
+const modifyPassword = (username, email, password) => {
+  return axios.put(API_URL + "changepassword", {
+    username,
+    email,
+    password,
+  });
+};
+
 export default {
   register,
   login,
   logout,
+  modifyPassword,
 };
