@@ -36,6 +36,10 @@ function PasswordChangeForm() {
     };
 
     const errors = validateForm(formData);
+
+    /* If there are no errors, the form will be sent to the backend,
+       alternatively the errors will be collected on the errorsList 
+       state and shown on the alerts. */
   };
 
   return (
