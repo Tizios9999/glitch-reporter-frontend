@@ -42,8 +42,6 @@ export default function Login() {
 
   const [state, dispatch, register, login, logout] = useContext(AuthContext);
 
-  // const dispatch = useDispatch();
-
   const onChangeUsername = (event) => {
     const username = event.target.value;
     setUsername(username);
@@ -65,10 +63,6 @@ export default function Login() {
       password: data.get("password"),
     });
 
-    // validate
-
-    // if ok push to internal section
-
     login(username, password)
       .then(() => {
         push("/");
@@ -77,8 +71,6 @@ export default function Login() {
         setLoading(false);
       });
   };
-
-  const validate = () => {};
 
   return (
     <PublicRoute>
