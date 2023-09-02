@@ -15,6 +15,8 @@ import getCurrentDateTimeISO from "@/app/js/getCurrentDateTimeISO";
 import { AppContext } from "../../contexts/AppContext";
 import { AuthContext } from "@/app/contexts/AuthContext";
 
+import ProtectedRoute from "@/app/protectedRoutes/ProtectedRoute";
+
 import {
   Container,
   CssBaseline,
@@ -139,124 +141,126 @@ const TicketPage = () => {
   }
 
   return (
-    <div>
-      <CssBaseline />
-      <Container size="xl">
-        <h1>
-          #{id} - {ticket.ticketSubject}
-        </h1>
-        {/* Mostra i dettagli del ticket */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            flexFlow: size === "mobileSize" ? "column wrap" : "row wrap",
-            gap: size === "mobileSize" ? "50px" : "0",
-          }}
-        >
-          <Box>
-            <Typography variant="body1" color="initial">
-              <strong>Opened by:</strong> {ticket.openingUser}
-            </Typography>
-            <Typography variant="body1" color="initial">
-              <strong>Priority:</strong>{" "}
-              <Chip
-                style={
-                  priorityObj
-                    ? {
-                        color: `#${priorityObj.textColorCode}`,
-                        backgroundColor: `#${priorityObj.bgColorCode}`,
-                        minWidth: "100px",
-                        fontWeight: "bold",
-                        marginTop: "3px",
-                        marginBottom: "3px",
-                      }
-                    : {}
-                }
-                label={priorityObj.name}
-                size="small"
-              />
-            </Typography>
-            <Typography variant="body1" color="initial">
-              <strong>Status:</strong>{" "}
-              <Chip
-                sx={
-                  statusObj
-                    ? {
-                        color: `#${statusObj.textColorCode}`,
-                        backgroundColor: `#${statusObj.bgColorCode}`,
-                        minWidth: "100px",
-                        fontWeight: "bold",
-                        marginBottom: "3px",
-                      }
-                    : {}
-                }
-                label={statusObj.name}
-                size="small"
-              />
-            </Typography>
-            <Typography variant="body1" color="initial">
-              <strong>Assigned to:</strong> {ticket.assignedTo}
-            </Typography>
-            <Typography variant="body1" color="initial">
-              <strong>Created:</strong>{" "}
-              {convertISOStringToLocalFormat(ticket.creationDate)}
-            </Typography>
-            <Typography variant="body1" color="initial">
-              <strong>Last updated:</strong>{" "}
-              {convertISOStringToLocalFormat(ticket.lastUpdated)}
-            </Typography>
-          </Box>
-          <TicketManagementBox
-            user={authState.user}
-            ticket={ticket}
-            statuses={appState.metadata.statuses}
-          />
-        </Box>
-        <Box sx={{ mt: "50px", border: "1px solid black" }}>
-          {ticket.messages.map((message, key) => {
-            return <TicketMessage messageData={message} key={key} />;
-          })}
-        </Box>
-
-        {console.log(ticket, "ticket")}
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          noValidate
-          sx={{
-            mt: 1,
-            width: "100%",
-            display: "flex",
-            flexFlow: "column nowrap",
-            alignItems: "center",
-            gap: "30px",
-          }}
-        >
-          <TextField
-            margin="normal"
-            fullWidth
-            multiline
-            minRows={10}
-            placeholder="Add a new message here"
-            id="newmessage"
-            name="newmessage"
-            value={messageText}
-            onChange={onNewMessageChangeHandler}
-          />
-
-          <FileUpload onFileChange={handleFileChange} />
-
-          <Button
-            type="submit"
-            variant="contained"
-            sx={{ mb: 2, width: "200px" }}
+    <ProtectedRoute>
+      <div>
+        <CssBaseline />
+        <Container size="xl">
+          <h1>
+            #{id} - {ticket.ticketSubject}
+          </h1>
+          {/* Mostra i dettagli del ticket */}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              flexFlow: size === "mobileSize" ? "column wrap" : "row wrap",
+              gap: size === "mobileSize" ? "50px" : "0",
+            }}
           >
-            Submit
-          </Button>
-        </Box>
-      </Container>
-    </div>
+            <Box>
+              <Typography variant="body1" color="initial">
+                <strong>Opened by:</strong> {ticket.openingUser}
+              </Typography>
+              <Typography variant="body1" color="initial">
+                <strong>Priority:</strong>{" "}
+                <Chip
+                  style={
+                    priorityObj
+                      ? {
+                          color: `#${priorityObj.textColorCode}`,
+                          backgroundColor: `#${priorityObj.bgColorCode}`,
+                          minWidth: "100px",
+                          fontWeight: "bold",
+                          marginTop: "3px",
+                          marginBottom: "3px",
+                        }
+                      : {}
+                  }
+                  label={priorityObj.name}
+                  size="small"
+                />
+              </Typography>
+              <Typography variant="body1" color="initial">
+                <strong>Status:</strong>{" "}
+                <Chip
+                  sx={
+                    statusObj
+                      ? {
+                          color: `#${statusObj.textColorCode}`,
+                          backgroundColor: `#${statusObj.bgColorCode}`,
+                          minWidth: "100px",
+                          fontWeight: "bold",
+                          marginBottom: "3px",
+                        }
+                      : {}
+                  }
+                  label={statusObj.name}
+                  size="small"
+                />
+              </Typography>
+              <Typography variant="body1" color="initial">
+                <strong>Assigned to:</strong> {ticket.assignedTo}
+              </Typography>
+              <Typography variant="body1" color="initial">
+                <strong>Created:</strong>{" "}
+                {convertISOStringToLocalFormat(ticket.creationDate)}
+              </Typography>
+              <Typography variant="body1" color="initial">
+                <strong>Last updated:</strong>{" "}
+                {convertISOStringToLocalFormat(ticket.lastUpdated)}
+              </Typography>
+            </Box>
+            <TicketManagementBox
+              user={authState.user}
+              ticket={ticket}
+              statuses={appState.metadata.statuses}
+            />
+          </Box>
+          <Box sx={{ mt: "50px", border: "1px solid black" }}>
+            {ticket.messages.map((message, key) => {
+              return <TicketMessage messageData={message} key={key} />;
+            })}
+          </Box>
+
+          {console.log(ticket, "ticket")}
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{
+              mt: 1,
+              width: "100%",
+              display: "flex",
+              flexFlow: "column nowrap",
+              alignItems: "center",
+              gap: "30px",
+            }}
+          >
+            <TextField
+              margin="normal"
+              fullWidth
+              multiline
+              minRows={10}
+              placeholder="Add a new message here"
+              id="newmessage"
+              name="newmessage"
+              value={messageText}
+              onChange={onNewMessageChangeHandler}
+            />
+
+            <FileUpload onFileChange={handleFileChange} />
+
+            <Button
+              type="submit"
+              variant="contained"
+              sx={{ mb: 2, width: "200px" }}
+            >
+              Submit
+            </Button>
+          </Box>
+        </Container>
+      </div>
+    </ProtectedRoute>
   );
 };
 

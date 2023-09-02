@@ -28,6 +28,8 @@ import getCurrentDateTimeISO from "../js/getCurrentDateTimeISO";
 
 import { createTicket } from "../services/ticket.service";
 
+import ProtectedRoute from "../protectedRoutes/ProtectedRoute";
+
 const NewTicket = () => {
   const { push } = useRouter();
 
@@ -130,105 +132,107 @@ const NewTicket = () => {
   }
 
   return (
-    <Container component="main" maxWidth="md">
-      <CssBaseline />
-      <Box
-        sx={{
-          marginTop: 5,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <Typography component="h1" variant="h5">
-          New Ticket
-        </Typography>
+    <ProtectedRoute allowedRoles={["ROLE_USER", "ROLE_AGENT", "ROLE_USER"]}>
+      <Container component="main" maxWidth="md">
+        <CssBaseline />
         <Box
-          component="form"
-          onSubmit={handleSubmit}
-          noValidate
           sx={{
-            mt: 1,
-            width: "100%",
+            marginTop: 5,
             display: "flex",
-            flexFlow: "column nowrap",
+            flexDirection: "column",
             alignItems: "center",
-            gap: "30px",
+            justifyContent: "center",
           }}
         >
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="subject"
-            label="Ticket subject"
-            name="subject"
-            value={formState.subject}
-            onChange={onChangeHandler}
-            autoFocus
-          />
-          <CustomSelect
-            required={true}
-            values={appState.metadata.priorities}
-            width="250px"
-            name="priority"
-            label="Issue priority"
-            currentValue={formState.priority}
-            onChange={onChangeHandler}
-          />
-          <CustomSelect
-            required={true}
-            values={appState.metadata.topics}
-            width="250px"
-            name="topic"
-            label="Area of interest"
-            currentValue={formState.topic}
-            onChange={onChangeHandler}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            multiline
-            minRows={10}
-            placeholder="Please describe here the issue encountered and the steps to reproduce it."
-            id="message"
-            label="Issue description"
-            name="message"
-            value={formState.message}
-            onChange={onChangeHandler}
-          />
-
-          <FileUpload onFileChange={handleFileChange} />
+          <Typography component="h1" variant="h5">
+            New Ticket
+          </Typography>
           <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
             sx={{
+              mt: 1,
+              width: "100%",
               display: "flex",
-              width: "80%",
-              justifyContent: "space-evenly",
-              flexFlow: "row wrap",
+              flexFlow: "column nowrap",
+              alignItems: "center",
+              gap: "30px",
             }}
           >
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{ mb: 2, width: "200px" }}
-            >
-              Create Ticket
-            </Button>
-            <Button
-              variant="outlined"
-              sx={{ mb: 2, width: "200px" }}
-              onClick={() => {
-                push("./dashboard");
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="subject"
+              label="Ticket subject"
+              name="subject"
+              value={formState.subject}
+              onChange={onChangeHandler}
+              autoFocus
+            />
+            <CustomSelect
+              required={true}
+              values={appState.metadata.priorities}
+              width="250px"
+              name="priority"
+              label="Issue priority"
+              currentValue={formState.priority}
+              onChange={onChangeHandler}
+            />
+            <CustomSelect
+              required={true}
+              values={appState.metadata.topics}
+              width="250px"
+              name="topic"
+              label="Area of interest"
+              currentValue={formState.topic}
+              onChange={onChangeHandler}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              multiline
+              minRows={10}
+              placeholder="Please describe here the issue encountered and the steps to reproduce it."
+              id="message"
+              label="Issue description"
+              name="message"
+              value={formState.message}
+              onChange={onChangeHandler}
+            />
+
+            <FileUpload onFileChange={handleFileChange} />
+            <Box
+              sx={{
+                display: "flex",
+                width: "80%",
+                justifyContent: "space-evenly",
+                flexFlow: "row wrap",
               }}
             >
-              Abort
-            </Button>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{ mb: 2, width: "200px" }}
+              >
+                Create Ticket
+              </Button>
+              <Button
+                variant="outlined"
+                sx={{ mb: 2, width: "200px" }}
+                onClick={() => {
+                  push("./dashboard");
+                }}
+              >
+                Abort
+              </Button>
+            </Box>
           </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
+    </ProtectedRoute>
   );
 };
 

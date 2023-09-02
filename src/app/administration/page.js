@@ -32,7 +32,7 @@ export default function Administration() {
   }, []);
 
   return (
-    <ProtectedRoute>
+    <ProtectedRoute allowedRoles={["ROLE_ADMIN"]}>
       <Container component="main" maxWidth="l">
         <CssBaseline />
         <Box

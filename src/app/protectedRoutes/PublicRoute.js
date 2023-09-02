@@ -2,29 +2,21 @@ import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../contexts/AuthContext";
 
-const ProtectedRoute = ({ children, allowedRoles }) => {
+const PublicRoute = ({ children }) => {
   const router = useRouter();
   const [state] = useContext(AuthContext);
 
   useEffect(() => {
-    if (!state.isLoggedIn) {
-      router.push("/login");
+    if (state.isLoggedIn) {
+      router.push("/");
     }
   }, [router, state.isLoggedIn]);
 
-  if (!state.isLoggedIn) {
-    return null;
-  }
-
-  if (
-    allowedRoles &&
-    !allowedRoles.some((role) => state.user.roles.includes(role))
-  ) {
-    router.push("/");
+  if (state.isLoggedIn) {
     return null;
   }
 
   return children;
 };
 
-export default ProtectedRoute;
+export default PublicRoute;
