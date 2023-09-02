@@ -11,10 +11,8 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useRouter } from "next/navigation";
-// import { ThemeProvider } from '@mui/material/styles';
 
 import { AuthContext } from "../contexts/AuthContext";
-import ProtectedRoute from "../protectedRoutes/ProtectedRoute";
 import PublicRoute from "../protectedRoutes/PublicRoute";
 
 function Copyright(props) {
@@ -26,7 +24,7 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://www.davidesantonocito.com/">
         Davide Santonocito
       </Link>{" "}
       {new Date().getFullYear()}
@@ -98,7 +96,7 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Sign In
           </Typography>
           <Box
             component="form"
@@ -140,12 +138,12 @@ export default function Login() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="./changepassword" variant="body2">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link href="./register" variant="body2">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

@@ -124,7 +124,7 @@ export default function Register() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Register
+            Sign Up
           </Typography>
 
           {errorsList.length > 0 &&
@@ -207,7 +207,11 @@ export default function Register() {
             </Button>
             <Grid container>
               <Grid item>
-                <Link href="#" style={{ textAlign: "center" }} variant="body2">
+                <Link
+                  href="./login"
+                  style={{ textAlign: "center" }}
+                  variant="body2"
+                >
                   {"Already Registered? Click here to login."}
                 </Link>
               </Grid>
