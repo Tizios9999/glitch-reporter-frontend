@@ -6,13 +6,8 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
   const router = useRouter();
   const [state] = useContext(AuthContext);
 
-  useEffect(() => {
-    if (!state.isLoggedIn) {
-      router.push("/login");
-    }
-  }, [router, state.isLoggedIn]);
-
   if (!state.isLoggedIn) {
+    router.push("/login");
     return null;
   }
 

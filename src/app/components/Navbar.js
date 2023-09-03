@@ -21,8 +21,6 @@ import { AuthContext } from "../contexts/AuthContext";
 
 import CheckTokenComponent from "./CheckTokenComponent";
 
-import getMetadata from "../services/metadata.service";
-
 const pages = [
   { label: "Login", showRule: "Not logged in" },
   {
@@ -83,12 +81,12 @@ function Navbar() {
     }
   };
 
-  useEffect(() => {
-    // if (state.user) {
-    //   getMetadata().then(
-    //     (response) => { console.log('metadata', response.data)})
-    // }
-  }, [state.user]);
+  // useEffect(() => {
+  //   // if (state.user) {
+  //   //   getMetadata().then(
+  //   //     (response) => { console.log('metadata', response.data)})
+  //   // }
+  // }, [state.user]);
 
   return (
     <AppBar

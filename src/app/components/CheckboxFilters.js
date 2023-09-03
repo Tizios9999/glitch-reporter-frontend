@@ -40,7 +40,7 @@ export default function CheckboxFilters(props) {
       type: "UPDATE_FILTERS",
       payload: { name: props.name, values: [...idArr] },
     });
-  }, [state, appDispatch, props.filtersArr, props.name]);
+  }, [state]);
 
   function mapFilterNameToId(name, filterObj) {
     const found = filterObj.find((element) => element.name === name);

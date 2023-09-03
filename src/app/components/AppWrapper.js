@@ -25,7 +25,7 @@ export default function AppWrapper({ children }) {
       type: "LOAD_LOCALSTORAGE",
       payload: savedInfo,
     });
-  });
+  }, []);
 
   useEffect(() => {
     if (appState.metadata === null) {
