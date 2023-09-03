@@ -29,6 +29,7 @@ const createTicket = (ticket) => {
 const getPage = (page, pageSize) => {
   return axios.get(API_URL + "getpage", {
     params: { page: page, pageSize: pageSize },
+    headers: authHeader(),
   });
 };
 
@@ -55,6 +56,7 @@ const getFilteredPage = (page, pageSize, priorityIds, statusIds) => {
       priorityIds: serializeArray(validPriorityIds),
       statusIds: serializeArray(validStatusIds),
     },
+    headers: authHeader(),
     paramsSerializer: (params) => {
       return qs.stringify(params, { arrayFormat: "comma" });
     },
@@ -63,12 +65,16 @@ const getFilteredPage = (page, pageSize, priorityIds, statusIds) => {
 
 const getTicketById = (id) => {
   console.log("request started");
-  return axios.get(API_URL + id);
+  return axios.get(API_URL + id, {
+    headers: authHeader(),
+  });
 };
 
 const updateTicketStatus = (updateData, ticketId) => {
   return axios
-    .put(API_URL + `${ticketId}/update-status`, updateData)
+    .put(API_URL + `${ticketId}/update-status`, updateData, {
+      headers: authHeader(),
+    })
     .then((response) => {
       console.log("Ticket updated: ", response.data);
     })
@@ -79,7 +85,9 @@ const updateTicketStatus = (updateData, ticketId) => {
 
 const addMessage = (message, ticketId) => {
   return axios
-    .post(API_URL + `${ticketId}/add-message`, message)
+    .post(API_URL + `${ticketId}/add-message`, message, {
+      headers: authHeader(),
+    })
     .then((response) => {
       console.log("Added message: ");
     })
