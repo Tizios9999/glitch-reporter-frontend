@@ -1,13 +1,16 @@
 import axios from "axios";
 import qs from "qs";
+import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:8080/api/ticket/";
 
 const createTicket = (ticket) => {
   console.log("ticket sent: ", ticket);
+  const additionalHeaders = { "Content-Type": "application/json" };
+  const combinedHeaders = { ...additionalHeaders, ...authHeader() };
   return axios
     .post(API_URL + "post", ticket, {
-      headers: { "Content-Type": "application/json" },
+      headers: combinedHeaders,
     })
     .then((response) => {
       console.log("Response from server: ", response.data);
