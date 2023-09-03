@@ -25,13 +25,13 @@ export default function AppWrapper({ children }) {
       type: "LOAD_LOCALSTORAGE",
       payload: savedInfo,
     });
-  }, []);
+  });
 
   useEffect(() => {
     if (appState.metadata === null) {
       loadMetadata();
     }
-  }, []);
+  }, [appState.metadata]);
 
   return (
     <body style={{ marginTop: "80px " }}>
