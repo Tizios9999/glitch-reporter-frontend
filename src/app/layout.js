@@ -6,6 +6,7 @@ import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@mui/material/styles";
 import createEmotionCache from "./createEmotionCache";
 import theme from "./theme";
+import Head from "next/head";
 
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { AppContextProvider } from "./contexts/AppContext";
@@ -24,6 +25,9 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <Head>
+        <title>{metadata.title}</title>
+      </Head>
       <CacheProvider value={emotionCache}>
         <ThemeProvider theme={theme}>
           <AppContextProvider>

@@ -7,10 +7,14 @@ import "@fontsource/roboto/700.css";
 
 import * as React from "react";
 import Main from "./components/Main";
+import Head from "next/head";
 
 export default function Home() {
   return (
     <div>
+      <Head>
+        <title>Glitch Reporter</title>
+      </Head>
       <Main />
     </div>
   );
