@@ -10,9 +10,9 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
 import { updateTicketStatus, addMessage } from "../services/ticket.service";
-import getCurrentDateTimeISO from "../js/getCurrentDateTimeISO";
+import getCurrentDateTimeISO from "../common/js/getCurrentDateTimeISO";
 
-import capitalizeString from "../js/capitalizeString";
+import capitalizeString from "../common/js/capitalizeString";
 
 function TicketManagementBox({ user, ticket, statuses }) {
   const router = useRouter();

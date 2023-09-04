@@ -5,15 +5,15 @@ import { useRouter } from "next/navigation";
 import { Typography } from "@mui/material";
 import { Box, Button } from "@mui/material";
 
-import getMetadataObject from "../js/getMetadataObject";
+import getMetadataObject from "../common/js/getMetadataObject";
 
 import { AppContext } from "../contexts/AppContext";
 
-import renderChipField from "../rendering/renderChipField";
+import renderChipField from "../common/rendering/renderChipField";
 
-import convertISOStringToLocalFormat from "../js/convertISOStringToLocalFormat";
+import convertISOStringToLocalFormat from "../common/js/convertISOStringToLocalFormat";
 
-import getScreenSize from "../rendering/getScreenSize";
+import getScreenSize from "../common/rendering/getScreenSize";
 
 export default function TicketCardElement(props) {
   const { data, headers } = props;

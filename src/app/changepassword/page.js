@@ -12,7 +12,7 @@ import {
 
 import AuthService from "../services/auth.service";
 
-import validateForm from "../js/validateForm";
+import validateForm from "../common/js/validateForm";
 
 function PasswordChangeForm() {
   const [username, setUsername] = useState("");

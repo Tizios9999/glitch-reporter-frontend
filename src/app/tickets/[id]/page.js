@@ -9,8 +9,8 @@ import TicketManagementBox from "@/app/components/TicketManagementBox";
 import { getTicketById } from "@/app/services/ticket.service";
 import { addMessage } from "@/app/services/ticket.service";
 
-import uploadFilesToCloud from "@/app/js/uploadFilesToCloud";
-import getCurrentDateTimeISO from "@/app/js/getCurrentDateTimeISO";
+import uploadFilesToCloud from "@/app/common/js/uploadFilesToCloud";
+import getCurrentDateTimeISO from "@/app/common/js/getCurrentDateTimeISO";
 
 import { AppContext } from "../../contexts/AppContext";
 import { AuthContext } from "@/app/contexts/AuthContext";
@@ -27,10 +27,10 @@ import {
   Chip,
 } from "@mui/material";
 
-import getMetadataObject from "../../js/getMetadataObject";
-import convertISOStringToLocalFormat from "@/app/js/convertISOStringToLocalFormat";
+import getMetadataObject from "../../common/js/getMetadataObject";
+import convertISOStringToLocalFormat from "@/app/common/js/convertISOStringToLocalFormat";
 
-import getScreenSize from "@/app/rendering/getScreenSize";
+import getScreenSize from "@/app/common/rendering/getScreenSize";
 
 import TicketMessage from "../../components/TicketMessage";
 import FileUpload from "../../components/FileUpload";

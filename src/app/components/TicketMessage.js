@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import UploadedFileElement from "./UploadedFileElement";
 
-import convertISOStringToLocalFormat from "../js/convertISOStringToLocalFormat";
+import convertISOStringToLocalFormat from "../common/js/convertISOStringToLocalFormat";
 
 export default function TicketMessage({ messageData }) {
   return (

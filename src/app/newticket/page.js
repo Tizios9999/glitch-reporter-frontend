@@ -23,8 +23,8 @@ import { AppContext } from "../contexts/AppContext";
 import CustomSelect from "../components/CustomSelect";
 import FileUpload from "../components/FileUpload";
 
-import uploadFilesToCloud from "../js/uploadFilesToCloud";
-import getCurrentDateTimeISO from "../js/getCurrentDateTimeISO";
+import uploadFilesToCloud from "../common/js/uploadFilesToCloud";
+import getCurrentDateTimeISO from "../common/js/getCurrentDateTimeISO";
 
 import { createTicket } from "../services/ticket.service";
 

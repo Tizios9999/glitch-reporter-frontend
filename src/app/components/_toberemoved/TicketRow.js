@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 
 import { useRouter } from "next/navigation";
 
-import getMetadataObject from "../../js/getMetadataObject";
+import getMetadataObject from "../../common/js/getMetadataObject";
 
 import { AuthContext } from "../../contexts/AuthContext";
 import { AppContext } from "../../contexts/AppContext";

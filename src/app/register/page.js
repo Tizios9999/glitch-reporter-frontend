@@ -14,7 +14,7 @@ import Container from "@mui/material/Container";
 import { useRouter } from "next/navigation";
 import Alert from "@mui/material/Alert";
 
-import validateForm from "../js/validateForm";
+import validateForm from "../common/js/validateForm";
 
 import { AuthContext } from "../contexts/AuthContext";
 import PublicRoute from "../protectedRoutes/PublicRoute";

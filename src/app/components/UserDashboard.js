@@ -18,7 +18,7 @@ import { getFilteredPage } from "../services/ticket.service";
 
 import { AppContext } from "../contexts/AppContext";
 
-import getScreenSize from "../rendering/getScreenSize";
+import getScreenSize from "../common/rendering/getScreenSize";
 
 export default function UserDashboard() {
   const [appState, appDispatch] = React.useContext(AppContext);

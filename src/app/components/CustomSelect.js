@@ -1,6 +1,6 @@
 import { Select, FormControl, InputLabel, MenuItem } from "@mui/material";
 
-import capitalizeString from "../js/capitalizeString";
+import capitalizeString from "../common/js/capitalizeString";
 
 export default function CustomSelect(props) {
   return (

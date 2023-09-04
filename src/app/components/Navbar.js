@@ -13,7 +13,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import HiveIcon from "@mui/icons-material/Hive";
 
-import checkVisibility from "../js/checkVisibility";
+import checkVisibility from "../common/js/checkVisibility";
 
 import { useRouter } from "next/navigation";
 

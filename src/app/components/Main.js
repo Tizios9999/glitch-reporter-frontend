@@ -6,7 +6,7 @@ import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { useRouter } from "next/navigation";
-import checkVisibility from "../js/checkVisibility";
+import checkVisibility from "../common/js/checkVisibility";
 
 import { AuthContext } from "../contexts/AuthContext";
 

@@ -10,7 +10,7 @@ import {
   Button,
 } from "@mui/material";
 
-import getScreenSize from "../rendering/getScreenSize";
+import getScreenSize from "../common/rendering/getScreenSize";
 
 import EditDialog from "./EditUserDialog";
 
