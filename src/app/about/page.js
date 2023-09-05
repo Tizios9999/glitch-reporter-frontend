@@ -2,6 +2,7 @@
 import React from "react";
 import { Container, Typography, Link } from "@mui/material";
 
+// About Glitch Reporter page.
 function About() {
   return (
     <Container maxWidth="md" sx={{ padding: "20px" }}>

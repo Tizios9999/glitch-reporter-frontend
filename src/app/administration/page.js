@@ -1,33 +1,36 @@
 "use client";
+/* IMPORTS */
+// React
 import { useState, useEffect } from "react";
+// Next.js
+// External services
+// Internal services
+import { getAll } from "../services/users.service";
+// Components
+import UserTable from "../components/UserTable";
+import ProtectedRoute from "../protectedRoutes/ProtectedRoute";
+// Internal functions
+// Contexts
+// Material UI Components
 import CssBaseline from "@mui/material/CssBaseline";
-import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useRouter } from "next/navigation";
 
-import UserTable from "../components/UserTable";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import ProtectedRoute from "../protectedRoutes/ProtectedRoute";
-
-import { getAll } from "../services/users.service";
-
+This is the Admin page, where only the administrator can enter and
+manage certain settings.
+*/
 export default function Administration() {
-  const { push } = useRouter();
-
-  const users = [
-    { id: 1, username: "user1", roles: ["user"] },
-    { id: 2, username: "user2", roles: ["user", "agent"] },
-    { id: 3, username: "admin1", roles: ["admin"] },
-  ];
-
   const [usersList, setUsersList] = useState(null);
 
   useEffect(() => {
     getAll().then((response) => {
       setUsersList(response.data);
-      console.log(response.data);
     });
   }, []);
 

@@ -1,4 +1,14 @@
+/* IMPORTS */
+// React
 import * as React from "react";
+// Next.js
+// External services
+// Internal services
+// Components
+// Internal functions
+// Contexts
+import { AppContext } from "../contexts/AppContext";
+// Material UI Components
 import Box from "@mui/material/Box";
 import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
@@ -6,7 +16,21 @@ import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 
-import { AppContext } from "../contexts/AppContext";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
+
+This filter group takes an array of filters and renders a Checkbox group.
+Any filter will then update the activeFilters in the appState context.
+
+Parameters:
+- filtersArr: an array with all the filters objects with id and name
+- name: the name of the filter that will be shown on the Checkbox group
+and will be used to update the active filters context.
+
+
+*/
 
 export default function CheckboxFilters(props) {
   const [appState, appDispatch] = React.useContext(AppContext);

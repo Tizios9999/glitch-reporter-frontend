@@ -1,7 +1,14 @@
+/**
+
+Function that returns the current time in an ISO format
+calculating the time offset as well.
+
+*/
+
 function getCurrentDateTimeISO() {
   const currentDate = new Date();
 
-  // Ottieni il fuso orario locale in formato ISO (es. '+02:00')
+  // timezoneOffset will return an ISO format time offset (like: '+02:00')
   const timezoneOffset = currentDate.getTimezoneOffset();
   const timezoneOffsetISO =
     (timezoneOffset < 0 ? "+" : "-") +
@@ -9,7 +16,7 @@ function getCurrentDateTimeISO() {
     ":" +
     ("0" + Math.abs(timezoneOffset % 60)).slice(-2);
 
-  // Formatta la data in formato ISO con inclusi ore e minuti
+  // Formatting the ISO date adding minutes and seconds.
   const dateTimeISO =
     currentDate.toISOString().slice(0, -1) + timezoneOffsetISO;
 

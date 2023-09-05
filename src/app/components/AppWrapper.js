@@ -1,9 +1,29 @@
 "use client";
+/* IMPORTS */
+// React
 import { useEffect, useContext } from "react";
+// Next.js
+// External services
+// Internal services
+// Components
 import Navbar from "./Navbar";
 import Loading from "./Loading";
+// Internal functions
+// Contexts
 import { AuthContext } from "../contexts/AuthContext";
 import { AppContext } from "../contexts/AppContext";
+// Material UI Components
+
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
+
+Wraps the entire application, serves as an inner layout.
+Some general info like the user connected and ticket
+metadata are loaded here as well.
+
+*/
 
 export const siteInfo = {
   title: "Glitch Reporter",

@@ -1,3 +1,9 @@
+/**
+
+Function that returns a random string. For various purposes.
+
+*/
+
 export default function createRandomString(length) {
   let result = "";
   const characters =

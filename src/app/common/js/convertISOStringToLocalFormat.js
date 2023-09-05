@@ -1,3 +1,10 @@
+/**
+
+Function that returns a Local Date format from an 
+ISO Date format.
+
+*/
+
 function convertISOStringToLocalFormat(isoString) {
   const date = new Date(isoString);
   const timezoneOffset = date.getTimezoneOffset();

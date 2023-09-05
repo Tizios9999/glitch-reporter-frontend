@@ -1,6 +1,23 @@
+/* IMPORTS */
+// React
+// Next.js
+// External services
+// Internal services
+// Components
+// Internal functions
+import capitalizeString from "../common/js/capitalizeString";
+// Contexts
+// Material UI Components
 import { Select, FormControl, InputLabel, MenuItem } from "@mui/material";
 
-import capitalizeString from "../common/js/capitalizeString";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
+
+This is a Select with custom properties.
+
+*/
 
 export default function CustomSelect(props) {
   return (

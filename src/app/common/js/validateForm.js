@@ -1,3 +1,9 @@
+/**
+
+Validates form data. Used for registering or changing user credentials.
+
+*/
+
 export default function validateForm(formData) {
   const currentErrors = [];
 

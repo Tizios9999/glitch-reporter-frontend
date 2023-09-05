@@ -1,5 +1,16 @@
 "use client";
+/* IMPORTS */
+// React
 import React, { useState } from "react";
+// Next.js
+// External services
+// Internal services
+import AuthService from "../services/auth.service";
+// Components
+// Internal functions
+import validateForm from "../common/js/validateForm";
+// Contexts
+// Material UI Components
 import {
   Container,
   TextField,
@@ -10,9 +21,14 @@ import {
   Alert,
 } from "@mui/material";
 
-import AuthService from "../services/auth.service";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import validateForm from "../common/js/validateForm";
+This is the form to change the password if the user forgot their one.
+
+*/
 
 function PasswordChangeForm() {
   const [username, setUsername] = useState("");

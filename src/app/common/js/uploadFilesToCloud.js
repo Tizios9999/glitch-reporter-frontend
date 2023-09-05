@@ -1,3 +1,9 @@
+/**
+
+Uploades files to the Google Cloud storage.
+
+*/
+
 import createRandomString from "./createRandomString";
 import { ref, uploadBytes } from "firebase/storage";
 
@@ -8,6 +14,7 @@ export default async function uploadFilesToCloud(files, storage) {
     try {
       const fileName = file.name;
 
+      //A randomized folder ensures that all links to the file will be different.
       const randomizedFolder = createRandomString(12);
 
       const storageRef = ref(
