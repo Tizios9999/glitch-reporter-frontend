@@ -1,6 +1,24 @@
-import { Box, Link } from "@mui/material";
-import { firebaseConfig, app } from "../firebase/firebaseConfig";
+/* IMPORTS */
+// React
+// Next.js
+// External services
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { firebaseConfig, app } from "../firebase/firebaseConfig";
+// Internal services
+// Components
+// Internal functions
+// Contexts
+// Material UI Components
+import { Box, Link } from "@mui/material";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
+
+Returns a link component to an uploaded file in the storage.
+Used to make available uploaded files from ticket messages.
+
+*/
 
 function UploadedFileElement({ file }) {
   function handleClick() {

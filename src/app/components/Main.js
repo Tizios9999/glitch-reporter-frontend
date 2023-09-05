@@ -1,14 +1,31 @@
 "use client";
+/* IMPORTS */
+// React
 import { useContext, useEffect } from "react";
+// Next.js
+import { useRouter } from "next/navigation";
+// External services
+// Internal services
+// Components
+// Internal functions
+import checkVisibility from "../common/js/checkVisibility";
+// Contexts
+import { AuthContext } from "../contexts/AuthContext";
+// Material UI Components
 import CssBaseline from "@mui/material/CssBaseline";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useRouter } from "next/navigation";
-import checkVisibility from "../common/js/checkVisibility";
 
-import { AuthContext } from "../contexts/AuthContext";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
+
+Main page. Welcomes the user.
+
+*/
 
 export default function Main() {
   const [state, dispatch, register, login, logout] = useContext(AuthContext);

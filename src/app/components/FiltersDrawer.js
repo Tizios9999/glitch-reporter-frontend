@@ -1,13 +1,30 @@
+/* IMPORTS */
+// React
 import * as React from "react";
+// Next.js
+// External services
+// Internal services
+// Components
+import CheckboxFilters from "./CheckboxFilters";
+import NewTicketButton from "./NewTicketButton";
+// Internal functions
+// Contexts
+import { AppContext } from "../contexts/AppContext";
+// Material UI Components
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 
-import CheckboxFilters from "./CheckboxFilters";
-import NewTicketButton from "./NewTicketButton";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import { AppContext } from "../contexts/AppContext";
+Drawer that opens up from the left side of the screen.
+If the screen length is enough, it's fixed.
+
+*/
 
 export default function FiltersDrawer(props) {
   const [appState, appDispatch] = React.useContext(AppContext);

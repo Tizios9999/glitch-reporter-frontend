@@ -1,9 +1,15 @@
+/* IMPORTS */
+// React
 import React, { useState } from "react";
-
+// Next.js
+// External services
+// Internal services
 import { changeRole, deleteUser } from "../services/users.service";
-
+// Components
 import AlertDialog from "./AlertDialog";
-
+// Internal functions
+// Contexts
+// Material UI Components
 import {
   Dialog,
   DialogActions,
@@ -15,6 +21,16 @@ import {
   Radio,
   RadioGroup,
 } from "@mui/material";
+
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
+
+Modal used to modify the user role or to delete it.
+Opens from the UserTable component, to be used only by Admins.
+
+*/
 
 const EditUserDialog = ({ open, onClose, user }) => {
   const [selectedRole, setSelectedRole] = useState(user.roles[0].name || ""); // Assuming user.roles[0] is the selected role

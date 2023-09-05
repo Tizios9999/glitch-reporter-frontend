@@ -1,6 +1,21 @@
 "use client";
+/* IMPORTS */
+// React
 import * as React from "react";
-
+// Next.js
+// External services
+// Internal services
+import { getFilteredPage } from "../services/ticket.service";
+// Components
+import TicketRowElement from "./TicketRowElement";
+import TicketCardElement from "./TicketCardElement";
+import FiltersDrawer from "./FiltersDrawer";
+import NewTicketButton from "./NewTicketButton";
+// Internal functions
+import getScreenSize from "../common/rendering/getScreenSize";
+// Contexts
+import { AppContext } from "../contexts/AppContext";
+// Material UI Components
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
@@ -9,16 +24,14 @@ import Badge from "@mui/material/Badge";
 import Box from "@mui/material/Box";
 import Pagination from "@mui/material/Pagination";
 
-import TicketRowElement from "./TicketRowElement";
-import TicketCardElement from "./TicketCardElement";
-import FiltersDrawer from "./FiltersDrawer";
-import NewTicketButton from "./NewTicketButton";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import { getFilteredPage } from "../services/ticket.service";
+The dashboard that shows the list of ticket previews.
 
-import { AppContext } from "../contexts/AppContext";
-
-import getScreenSize from "../common/rendering/getScreenSize";
+*/
 
 export default function UserDashboard() {
   const [appState, appDispatch] = React.useContext(AppContext);
@@ -110,7 +123,7 @@ export default function UserDashboard() {
   }
 
   function countActiveFilters(filters) {
-    // Calcola il conteggio totale degli elementi in tutti gli array
+    // Counting all the total filters activated
     const totalCount = Object.values(filters).reduce((acc, array) => {
       return acc + array.length;
     }, 0);

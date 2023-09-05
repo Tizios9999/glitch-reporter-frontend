@@ -1,7 +1,24 @@
-import { Box, Typography } from "@mui/material";
+/* IMPORTS */
+// React
+// Next.js
+// External services
+// Internal services
+// Components
 import UploadedFileElement from "./UploadedFileElement";
-
+// Internal functions
 import convertISOStringToLocalFormat from "../common/js/convertISOStringToLocalFormat";
+// Contexts
+// Material UI Components
+import { Box, Typography } from "@mui/material";
+
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
+
+Renders a single message inside the Ticket page.
+
+*/
 
 export default function TicketMessage({ messageData }) {
   return (

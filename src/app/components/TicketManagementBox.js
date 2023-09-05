@@ -1,7 +1,17 @@
-import { useState, useEffect } from "react";
-
+/* IMPORTS */
+// React
+import { useState } from "react";
+// Next.js
 import { useRouter } from "next/navigation";
-
+// External services
+// Internal services
+import { updateTicketStatus, addMessage } from "../services/ticket.service";
+// Components
+// Internal functions
+import capitalizeString from "../common/js/capitalizeString";
+import getCurrentDateTimeISO from "../common/js/getCurrentDateTimeISO";
+// Contexts
+// Material UI Components
 import { Box, Typography, Button } from "@mui/material";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -9,10 +19,18 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 
-import { updateTicketStatus, addMessage } from "../services/ticket.service";
-import getCurrentDateTimeISO from "../common/js/getCurrentDateTimeISO";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import capitalizeString from "../common/js/capitalizeString";
+Box used to update a ticket status.
+
+The authorized user (Agent or Admin) can:
+- Take charge of the ticket
+- Modify the ticket status to a different one (in progress, solved etc)
+
+*/
 
 function TicketManagementBox({ user, ticket, statuses }) {
   const router = useRouter();

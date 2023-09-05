@@ -1,11 +1,20 @@
+/* IMPORTS */
+// React
+// Next.js
+// External services
+import { ref, uploadBytes } from "firebase/storage";
+// Internal services
+// Components
+// Internal functions
+import createRandomString from "./createRandomString";
+// Contexts
+// Material UI Components
+
 /**
 
 Uploades files to the Google Cloud storage.
 
 */
-
-import createRandomString from "./createRandomString";
-import { ref, uploadBytes } from "firebase/storage";
 
 export default async function uploadFilesToCloud(files, storage) {
   const uploadedFiles = [];
@@ -14,7 +23,7 @@ export default async function uploadFilesToCloud(files, storage) {
     try {
       const fileName = file.name;
 
-      //A randomized folder ensures that all links to the file will be different.
+      // A randomized folder ensures that all links to the file will be different.
       const randomizedFolder = createRandomString(12);
 
       const storageRef = ref(

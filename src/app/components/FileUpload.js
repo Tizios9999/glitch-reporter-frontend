@@ -1,8 +1,28 @@
+/* IMPORTS */
+// React
 import React from "react";
 import { useState } from "react";
+// Next.js
+// External services
+// Internal services
+// Components
+// Internal functions
+// Contexts
+// Material UI Components
 import { Box, Button, Input, Typography, IconButton } from "@mui/material";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import DeleteIcon from "@mui/icons-material/Delete";
+
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
+
+Used to select files to be uploaded on cloud.
+Used when adding an uploaded file from the file system as an attachment
+to a new ticket or message.
+
+*/
 
 const FileUpload = ({ onFileChange }) => {
   const [uploadActive, setUploadActive] = useState(false);
@@ -23,7 +43,7 @@ const FileUpload = ({ onFileChange }) => {
 
       setUploadedFiles(filesList);
 
-      // Notifica il componente genitore (NewTicket) dei file selezionati
+      // Notifies the parent component (NewTicket) of the selected files
       onFileChange(filesList);
     }
 
@@ -36,6 +56,7 @@ const FileUpload = ({ onFileChange }) => {
 
     setUploadedFiles(filesList);
 
+    // Notifies the parent component (NewTicket) of the updated files list
     onFileChange(filesList);
   };
 

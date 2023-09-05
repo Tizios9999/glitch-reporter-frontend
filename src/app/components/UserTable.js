@@ -1,4 +1,15 @@
+/* IMPORTS */
+// React
 import React from "react";
+// Next.js
+// External services
+// Internal services
+// Components
+import EditDialog from "./EditUserDialog";
+// Internal functions
+import getScreenSize from "../common/rendering/getScreenSize";
+// Contexts
+// Material UI Components
 import {
   Table,
   TableBody,
@@ -10,9 +21,20 @@ import {
   Button,
 } from "@mui/material";
 
-import getScreenSize from "../common/rendering/getScreenSize";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import EditDialog from "./EditUserDialog";
+List of all available users.
+For Admin use only.
+
+Either renders a list of user cards (for smaller screen) or
+a standard users list table.
+
+From here the Admin can see the users data and change it.
+
+*/
 
 const UserTable = ({ users }) => {
   const [editDialogOpen, setEditDialogOpen] = React.useState(false);

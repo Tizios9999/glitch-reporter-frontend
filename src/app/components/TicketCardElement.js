@@ -1,19 +1,30 @@
+/* IMPORTS */
+// React
 import { useContext } from "react";
-
+// Next.js
 import { useRouter } from "next/navigation";
-
+// External services
+// Internal services
+// Components
+// Internal functions
+import convertISOStringToLocalFormat from "../common/js/convertISOStringToLocalFormat";
+import getScreenSize from "../common/rendering/getScreenSize";
+import renderChipField from "../common/rendering/renderChipField";
+import getMetadataObject from "../common/js/getMetadataObject";
+// Contexts
+import { AppContext } from "../contexts/AppContext";
+// Material UI Components
 import { Typography } from "@mui/material";
 import { Box, Button } from "@mui/material";
 
-import getMetadataObject from "../common/js/getMetadataObject";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import { AppContext } from "../contexts/AppContext";
+Card that shows a single ticket data. Suitable for medium/smaller screens.
 
-import renderChipField from "../common/rendering/renderChipField";
-
-import convertISOStringToLocalFormat from "../common/js/convertISOStringToLocalFormat";
-
-import getScreenSize from "../common/rendering/getScreenSize";
+*/
 
 export default function TicketCardElement(props) {
   const { data, headers } = props;

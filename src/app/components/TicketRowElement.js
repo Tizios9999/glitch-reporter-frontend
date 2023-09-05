@@ -1,18 +1,35 @@
+/* IMPORTS */
+// React
 import { useContext } from "react";
-
+// Next.js
+import { useRouter } from "next/navigation";
+// External services
+// Internal services
+// Components
+// Internal functions
+import convertISOStringToLocalFormat from "../common/js/convertISOStringToLocalFormat";
+import renderChipField from "../common/rendering/renderChipField";
+import getMetadataObject from "../common/js/getMetadataObject";
+// Contexts
+import { AuthContext } from "../contexts/AuthContext";
+import { AppContext } from "../contexts/AppContext";
+// Material UI Components
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import { useRouter } from "next/navigation";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import getMetadataObject from "../common/js/getMetadataObject";
+Row component to show a single ticket data. 
+This component can either be used:
+- As the table header
+- As a ticket data row
 
-import { AuthContext } from "../contexts/AuthContext";
-import { AppContext } from "../contexts/AppContext";
+Suitable for large screens.
 
-import renderChipField from "../common/rendering/renderChipField";
-
-import convertISOStringToLocalFormat from "../common/js/convertISOStringToLocalFormat";
+*/
 
 export default function TicketRowElement(props) {
   const { type, data, headers } = props;

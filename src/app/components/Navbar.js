@@ -1,4 +1,17 @@
+/* IMPORTS */
+// React
 import React, { useContext, useEffect } from "react";
+// Next.js
+import { useRouter } from "next/navigation";
+// External services
+// Internal services
+// Components
+import CheckTokenComponent from "./CheckTokenComponent";
+// Internal functions
+import checkVisibility from "../common/js/checkVisibility";
+// Contexts
+import { AuthContext } from "../contexts/AuthContext";
+// Material UI Components
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -13,40 +26,14 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import HiveIcon from "@mui/icons-material/Hive";
 
-import checkVisibility from "../common/js/checkVisibility";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import { useRouter } from "next/navigation";
+Main menu of Glitch Reporter.
 
-import { AuthContext } from "../contexts/AuthContext";
-
-import CheckTokenComponent from "./CheckTokenComponent";
-
-const pages = [
-  { label: "Login", showRule: "Not logged in" },
-  {
-    label: "Register",
-    showRule: "Not logged in",
-  },
-  {
-    label: "About",
-    showRule: "Always",
-  },
-  {
-    label: "Dashboard",
-    showRule: "Users level",
-  },
-  {
-    label: "Administration",
-    showRule: "Admin only",
-  },
-];
-
-const settingsItems = [
-  {
-    label: "Logout",
-    action: "logout",
-  },
-];
+*/
 
 function Navbar() {
   const { push } = useRouter();
@@ -55,6 +42,33 @@ function Navbar() {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   const [state, dispatch, register, login, logout] = useContext(AuthContext);
+
+  const pages = [
+    { label: "Login", showRule: "Not logged in" },
+    {
+      label: "Register",
+      showRule: "Not logged in",
+    },
+    {
+      label: "About",
+      showRule: "Always",
+    },
+    {
+      label: "Dashboard",
+      showRule: "Users level",
+    },
+    {
+      label: "Administration",
+      showRule: "Admin only",
+    },
+  ];
+
+  const settingsItems = [
+    {
+      label: "Logout",
+      action: "logout",
+    },
+  ];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -80,13 +94,6 @@ function Navbar() {
       return logout();
     }
   };
-
-  // useEffect(() => {
-  //   // if (state.user) {
-  //   //   getMetadata().then(
-  //   //     (response) => { console.log('metadata', response.data)})
-  //   // }
-  // }, [state.user]);
 
   return (
     <AppBar
