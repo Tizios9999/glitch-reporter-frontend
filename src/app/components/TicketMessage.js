@@ -21,6 +21,8 @@ Renders a single message inside the Ticket page.
 */
 
 export default function TicketMessage({ messageData }) {
+  const messageLines = messageData.message.split("\n");
+
   return (
     <Box>
       <Box
@@ -39,7 +41,13 @@ export default function TicketMessage({ messageData }) {
           {convertISOStringToLocalFormat(messageData.messageDate)}
         </Typography>
       </Box>
-      <Box sx={{ p: "5px", minHeight: "100px" }}>{messageData.message}</Box>
+      <Box sx={{ p: "5px", minHeight: "100px" }}>
+        {messageLines.map((line, index) => (
+          <Typography variant="body1" key={index}>
+            {line}
+          </Typography>
+        ))}
+      </Box>
       <Box sx={{ backgroundColor: "#cccccc" }}>
         {messageData.uploadedFiles.map((file) => {
           return <UploadedFileElement file={file} key={file.id} />;
