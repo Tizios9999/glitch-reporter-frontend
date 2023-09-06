@@ -1,3 +1,9 @@
+/**
+
+Reducer used by AppContext.
+
+*/
+
 export function appReducer(state, action) {
   const { type, payload } = action;
 

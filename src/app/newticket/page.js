@@ -140,7 +140,7 @@ const NewTicket = () => {
   }
 
   return (
-    <ProtectedRoute allowedRoles={["ROLE_USER", "ROLE_AGENT", "ROLE_USER"]}>
+    <ProtectedRoute allowedRoles={["ROLE_USER", "ROLE_AGENT", "ROLE_ADMIN"]}>
       <Container component="main" maxWidth="md">
         <CssBaseline />
         <Box
