@@ -1,22 +1,32 @@
 "use client";
-import { usePathname } from "next/navigation";
+
+/* IMPORTS */
+
+// React
 import { useEffect, useState, useContext } from "react";
+// Next.js
+import { usePathname } from "next/navigation";
+// External services
 import { firebaseConfig, app } from "../../firebase/firebaseConfig";
 import { getStorage } from "firebase/storage";
-
-import TicketManagementBox from "@/app/components/TicketManagementBox";
-
+// Internal services
 import { getTicketById } from "@/app/services/ticket.service";
 import { addMessage } from "@/app/services/ticket.service";
-
+// Components
+import ProtectedRoute from "@/app/protectedRoutes/ProtectedRoute";
+import TicketMessage from "../../components/TicketMessage";
+import FileUpload from "../../components/FileUpload";
+import TicketManagementBox from "@/app/components/TicketManagementBox";
+// Internal functions
+import getMetadataObject from "../../common/js/getMetadataObject";
+import convertISOStringToLocalFormat from "@/app/common/js/convertISOStringToLocalFormat";
+import getScreenSize from "@/app/common/rendering/getScreenSize";
 import uploadFilesToCloud from "@/app/common/js/uploadFilesToCloud";
 import getCurrentDateTimeISO from "@/app/common/js/getCurrentDateTimeISO";
-
+// Contexts
 import { AppContext } from "../../contexts/AppContext";
 import { AuthContext } from "@/app/contexts/AuthContext";
-
-import ProtectedRoute from "@/app/protectedRoutes/ProtectedRoute";
-
+// Material UI Components
 import {
   Container,
   CssBaseline,
@@ -27,13 +37,14 @@ import {
   Chip,
 } from "@mui/material";
 
-import getMetadataObject from "../../common/js/getMetadataObject";
-import convertISOStringToLocalFormat from "@/app/common/js/convertISOStringToLocalFormat";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import getScreenSize from "@/app/common/rendering/getScreenSize";
+Single ticket page.
 
-import TicketMessage from "../../components/TicketMessage";
-import FileUpload from "../../components/FileUpload";
+*/
 
 const TicketPage = () => {
   const storage = getStorage(app);

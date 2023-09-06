@@ -1,6 +1,27 @@
+/* IMPORTS */
+// React
 import React, { createContext, useReducer } from "react";
+// Next.js
+// External services
+// Internal services
 import getMetadata from "../services/metadata.service";
+// Components
+// Internal functions
+
+// Contexts and reducers
 import { appReducer } from "../reducers/appReducer";
+// Material UI Components
+
+/*
++-----------------------+
+| CONTEXT DESCRIPTION |   
++-----------------------+
+
+The Application Context is a shared state about all the application
+elements such as the metadata, if the app is loading, active filters
+and so on.
+
+*/
 
 const AppContext = createContext();
 

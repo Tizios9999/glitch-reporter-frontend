@@ -1,5 +1,19 @@
 "use client";
-import React, { useState, useRef, useContext } from "react";
+
+/* IMPORTS */
+// React
+import React, { useState, useContext } from "react";
+// Next.js
+import { useRouter } from "next/navigation";
+// External services
+// Internal services
+// Components
+import PublicRoute from "../protectedRoutes/PublicRoute";
+// Internal functions
+import validateForm from "../common/js/validateForm";
+// Contexts
+import { AuthContext } from "../contexts/AuthContext";
+// Material UI Components
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,14 +24,16 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-
-import { useRouter } from "next/navigation";
 import Alert from "@mui/material/Alert";
 
-import validateForm from "../common/js/validateForm";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import { AuthContext } from "../contexts/AuthContext";
-import PublicRoute from "../protectedRoutes/PublicRoute";
+Register page.
+
+*/
 
 function Copyright(props) {
   return (

@@ -1,6 +1,25 @@
+/* IMPORTS */
+// React
+import { useContext } from "react";
+// Next.js
 import { useRouter } from "next/navigation";
-import { useContext, useEffect } from "react";
+// External services
+// Internal services
+// Components
+// Internal functions
+// Contexts
 import { AuthContext } from "../contexts/AuthContext";
+// Material UI Components
+
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
+
+The components / pages inside Protected route can be accessed only
+by the logged user. Some of them require a specific role to enter.
+
+*/
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const router = useRouter();

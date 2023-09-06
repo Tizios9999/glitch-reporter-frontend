@@ -1,8 +1,25 @@
+/* IMPORTS */
+// React
 import React, { createContext, useReducer } from "react";
-import { authReducer } from "../reducers/authReducer";
+// Next.js
 import { useRouter } from "next/navigation";
-
+// External services
+// Internal services
 import AuthService from "../services/auth.service";
+// Components
+// Internal functions
+// Contexts and Reducers
+import { authReducer } from "../reducers/authReducer";
+// Material UI Components
+
+/*
++-----------------------+
+| CONTEXT DESCRIPTION |   
++-----------------------+
+
+Shared state that covers user authentication.
+
+*/
 
 // Context creation
 const AuthContext = createContext();

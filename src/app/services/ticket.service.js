@@ -2,6 +2,12 @@ import axios from "axios";
 import qs from "qs";
 import authHeader from "./auth-header";
 
+/**
+
+Ticket related services.
+
+*/
+
 const API_URL = "http://localhost:8080/api/ticket/";
 
 const createTicket = (ticket) => {

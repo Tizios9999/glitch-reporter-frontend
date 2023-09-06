@@ -1,12 +1,14 @@
-// Methods for retrieving data from server. In the case we access protected resources, the HTTP request needs Authorization header.
+/* 
 
+Returns an authorization header. Used in API Requests.
+
+*/
 export default function authHeader() {
-    const user = JSON.parse(localStorage.getItem('user'));
-  
-    if (user && user.accessToken) {
-      return { Authorization: 'Bearer ' + user.accessToken };
-    } else {
-      return {};
-    }
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  if (user && user.accessToken) {
+    return { Authorization: "Bearer " + user.accessToken };
+  } else {
+    return {};
   }
-  
+}

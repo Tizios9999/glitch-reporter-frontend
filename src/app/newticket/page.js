@@ -1,34 +1,42 @@
 "use client";
 
-import { useEffect, useContext } from "react";
+/* IMPORTS */
+// React
+import { useContext } from "react";
+import { useState } from "react";
+// Next.js
+import { useRouter } from "next/navigation";
+// External services
 import { firebaseConfig, app } from "../firebase/firebaseConfig";
 import { getStorage } from "firebase/storage";
-
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-
+// Internal services
+import { createTicket } from "../services/ticket.service";
+// Components
+import ProtectedRoute from "../protectedRoutes/ProtectedRoute";
+import CustomSelect from "../components/CustomSelect";
+import FileUpload from "../components/FileUpload";
+// Internal functions
+import uploadFilesToCloud from "../common/js/uploadFilesToCloud";
+import getCurrentDateTimeISO from "../common/js/getCurrentDateTimeISO";
+// Contexts
+import { AuthContext } from "../contexts/AuthContext";
+import { AppContext } from "../contexts/AppContext";
+// Material UI Components
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
-import { Button, IconButton } from "@mui/material";
-// import Input from '@mui/material/Input';
-// import FileUploadIcon from '@mui/icons-material/FileUpload';
-// import DeleteIcon from '@mui/icons-material/Delete';
+import { Button } from "@mui/material";
 
-import { AuthContext } from "../contexts/AuthContext";
-import { AppContext } from "../contexts/AppContext";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import CustomSelect from "../components/CustomSelect";
-import FileUpload from "../components/FileUpload";
+Page that allows the user to open a new ticket.
 
-import uploadFilesToCloud from "../common/js/uploadFilesToCloud";
-import getCurrentDateTimeISO from "../common/js/getCurrentDateTimeISO";
-
-import { createTicket } from "../services/ticket.service";
-
-import ProtectedRoute from "../protectedRoutes/ProtectedRoute";
+*/
 
 const NewTicket = () => {
   const { push } = useRouter();

@@ -1,5 +1,17 @@
 "use client";
-import React, { useState, useRef, useContext } from "react";
+/* IMPORTS */
+// React
+import React, { useState, useContext } from "react";
+// Next.js
+import { useRouter } from "next/navigation";
+// External services
+// Internal services
+// Components
+import PublicRoute from "../protectedRoutes/PublicRoute";
+// Internal functions
+// Contexts
+import { AuthContext } from "../contexts/AuthContext";
+// Material UI Components
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,10 +22,15 @@ import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useRouter } from "next/navigation";
 
-import { AuthContext } from "../contexts/AuthContext";
-import PublicRoute from "../protectedRoutes/PublicRoute";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
+
+Login page.
+
+*/
 
 function Copyright(props) {
   return (

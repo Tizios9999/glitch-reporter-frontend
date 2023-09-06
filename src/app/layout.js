@@ -1,19 +1,35 @@
 "use client";
+
+/* IMPORTS */
+
+// CSS
 import "./globals.css";
-import { useEffect, useContext } from "react";
-import { Inter } from "next/font/google";
+// React
+// Next.js
+import Head from "next/head";
+// External services
+// Internal services
+// Components
+import AppWrapper from "./components/AppWrapper";
+// Internal functions
+// Contexts providers
+import { AuthContextProvider } from "./contexts/AuthContext";
+import { AppContextProvider } from "./contexts/AppContext";
+// Material UI
 import { CacheProvider } from "@emotion/react";
 import { ThemeProvider } from "@mui/material/styles";
 import createEmotionCache from "./createEmotionCache";
 import theme from "./theme";
-import Head from "next/head";
 
-import { AuthContextProvider } from "./contexts/AuthContext";
-import { AppContextProvider } from "./contexts/AppContext";
+/*
++-----------------------+
+| COMPONENT DESCRIPTION |   
++-----------------------+
 
-import AppWrapper from "./components/AppWrapper";
+Layout page. All the context providers are wrapping the
+application here.
 
-// const inter = Inter({ subsets: ['latin'] })
+*/
 
 export const metadata = {
   title: "Glitch Reporter",
