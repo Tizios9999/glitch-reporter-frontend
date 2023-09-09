@@ -18,6 +18,15 @@ export function appReducer(state, action) {
         },
       };
 
+    case "SET_LOADING":
+      return {
+        ...state,
+        loading: payload,
+        activeFilters: {
+          ...state.activeFilters,
+        },
+      };
+
     case "UPDATE_FILTERS":
       return {
         ...state,

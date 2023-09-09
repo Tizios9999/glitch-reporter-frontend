@@ -25,17 +25,17 @@ and so on.
 
 const AppContext = createContext();
 
-const initialState = {
-  metadata: null,
-  loading: true,
-  ticketsPerPage: 15,
-  activeFilters: {
-    priority: [],
-    status: [],
-  },
-};
-
 const AppContextProvider = ({ children }) => {
+  const initialState = {
+    metadata: null,
+    loading: true,
+    ticketsPerPage: 15,
+    activeFilters: {
+      priority: [],
+      status: [],
+    },
+  };
+
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   const loadMetadata = () => {
