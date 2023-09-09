@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 // Internal services
 // Components
 import PublicRoute from "../protectedRoutes/PublicRoute";
+import Copyright from "../components/Copyright";
 // Internal functions
 import validateForm from "../common/js/validateForm";
 // Contexts
@@ -34,24 +35,6 @@ import Alert from "@mui/material/Alert";
 Register page.
 
 */
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Davide Santonocito
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 export default function Register() {
   const { push } = useRouter();

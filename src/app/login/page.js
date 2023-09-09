@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 // Internal services
 // Components
 import PublicRoute from "../protectedRoutes/PublicRoute";
+import Copyright from "../components/Copyright";
 // Internal functions
 // Contexts
 import { AuthContext } from "../contexts/AuthContext";
@@ -31,24 +32,6 @@ import Container from "@mui/material/Container";
 Login page.
 
 */
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://www.davidesantonocito.com/">
-        Davide Santonocito
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 export default function Login() {
   const { push } = useRouter();
