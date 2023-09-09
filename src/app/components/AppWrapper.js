@@ -3,7 +3,6 @@
 // React
 import { useEffect, useContext } from "react";
 // Next.js
-import { useRouter } from "next/navigation";
 // External services
 // Internal services
 // Components
@@ -56,7 +55,7 @@ export default function AppWrapper({ children }) {
 
   return (
     <body style={{ marginTop: "80px " }}>
-      {authState.loading || appState.loading ? (
+      {authState.loading || appState.loading || appState.routeLoading ? (
         <Loading />
       ) : (
         <>
