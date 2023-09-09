@@ -55,9 +55,10 @@ export default function Login() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  const [state, dispatch, register, login, logout] = useContext(AuthContext);
+  const [authState, authDispatch, authRegister, login, logout] =
+    useContext(AuthContext);
 
   const onChangeUsername = (event) => {
     const username = event.target.value;
@@ -72,7 +73,10 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setLoading(true);
+    authDispatch({
+      type: "SET_LOADING",
+      payload: true,
+    });
 
     const data = new FormData(event.currentTarget);
     console.log({
@@ -83,10 +87,12 @@ export default function Login() {
     login(username, password)
       .then(() => {
         push("/");
+        authDispatch({
+          type: "SET_LOADING",
+          payload: false,
+        });
       })
-      .catch(() => {
-        setLoading(false);
-      });
+      .catch(() => {});
   };
 
   return (

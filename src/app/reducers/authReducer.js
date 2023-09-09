@@ -15,6 +15,11 @@ export function authReducer(state, action) {
         isLoggedIn: payload.isLoggedIn,
         loading: false,
       };
+    case "SET_LOADING":
+      return {
+        ...state,
+        loading: payload,
+      };
     case "REGISTER_SUCCESS":
       return {
         ...state,
