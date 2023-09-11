@@ -3,7 +3,7 @@ import authHeader from "./auth-header";
 
 /**
 
-Ticket related services.
+User related services.
 
 */
 
