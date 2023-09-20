@@ -1,6 +1,7 @@
+"use client";
 /* IMPORTS */
 // React
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 // Next.js
 // External services
 // Internal services
@@ -9,6 +10,7 @@ import { changeRole, deleteUser } from "../services/users.service";
 import AlertDialog from "./AlertDialog";
 // Internal functions
 // Contexts
+import { AppContext } from "../contexts/AppContext";
 // Material UI Components
 import {
   Dialog,
@@ -33,6 +35,7 @@ Opens from the UserTable component, to be used only by Admins.
 */
 
 const EditUserDialog = ({ open, onClose, user }) => {
+  const [appState, appDispatch] = useContext(AppContext);
   const [selectedRole, setSelectedRole] = useState(user.roles[0].name || ""); // Assuming user.roles[0] is the selected role
 
   const [showAlertDialog, setShowAlertDialog] = useState(false);
@@ -54,10 +57,25 @@ const EditUserDialog = ({ open, onClose, user }) => {
     changeRole(user.id, selectedRole)
       .then((response) => {
         onClose();
-        location.reload();
+        appDispatch({
+          type: "SET_MESSAGE",
+          payload: "User role changed successfully!",
+        });
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
       })
       .catch((error) => {
-        console.log("Error uploading user role: ", error);
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        appDispatch({
+          type: "SET_MESSAGE",
+          payload: message,
+        });
       });
   };
 
@@ -65,10 +83,25 @@ const EditUserDialog = ({ open, onClose, user }) => {
     deleteUser(user.id)
       .then((response) => {
         onClose();
-        location.reload();
+        appDispatch({
+          type: "SET_MESSAGE",
+          payload: "User deleted successfully!",
+        });
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
       })
       .catch((error) => {
-        console.log("Error deleting user: ", error);
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+        appDispatch({
+          type: "SET_MESSAGE",
+          payload: message,
+        });
       });
   };
 
@@ -100,7 +133,12 @@ const EditUserDialog = ({ open, onClose, user }) => {
             />
           </RadioGroup>
         </FormControl>
-        <Button onClick={handleDelete} color="error">
+        <Button
+          onClick={handleDelete}
+          variant="contained"
+          color="error"
+          sx={{ marginTop: "20px" }}
+        >
           DELETE USER
         </Button>
       </DialogContent>

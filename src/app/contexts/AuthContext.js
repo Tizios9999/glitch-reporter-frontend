@@ -99,6 +99,8 @@ const AuthContextProvider = ({ children }) => {
           type: "LOGIN_FAIL",
         });
 
+        console.log("error", error);
+        console.log("message", message);
         dispatch({
           type: "SET_MESSAGE",
           payload: message,

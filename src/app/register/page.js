@@ -109,6 +109,10 @@ export default function Register() {
           setSuccessful(false);
         });
     } else {
+      dispatch({
+        type: "SET_LOADING",
+        payload: false,
+      });
       setErrorsList(errors);
     }
   };

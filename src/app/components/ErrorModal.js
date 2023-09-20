@@ -26,7 +26,7 @@ Error modal that is shown when an error is generated.
 function ErrorModal({ open, handleClose, errorMessage }) {
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Error</DialogTitle>
+      <DialogTitle>Glitch Reporter</DialogTitle>
       <DialogContent>
         <p>{errorMessage}</p>
       </DialogContent>
