@@ -86,13 +86,26 @@ export default function Register() {
 
     // if ok push to internal section
 
+    dispatch({
+      type: "SET_LOADING",
+      payload: true,
+    });
+
     if (errors.length === 0) {
       register(username, email, password)
         .then(() => {
+          dispatch({
+            type: "SET_LOADING",
+            payload: false,
+          });
           setSuccessful(true);
           clearForm();
         })
         .catch(() => {
+          dispatch({
+            type: "SET_LOADING",
+            payload: false,
+          });
           setSuccessful(false);
         });
     } else {

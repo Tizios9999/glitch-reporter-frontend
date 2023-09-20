@@ -1,4 +1,3 @@
-"use client";
 /* IMPORTS */
 // React
 import { useEffect, useContext } from "react";
@@ -8,6 +7,7 @@ import { useEffect, useContext } from "react";
 // Components
 import Navbar from "./Navbar";
 import Loading from "./Loading";
+import ErrorModal from "./ErrorModal";
 // Internal functions
 // Contexts
 import { AuthContext } from "../contexts/AuthContext";
@@ -53,6 +53,18 @@ export default function AppWrapper({ children }) {
     }
   }, [appState.metadata]);
 
+  const handleErrorClose = (type) => {
+    if (type === "app") {
+      appDispatch({
+        type: "CLEAR_MESSAGE",
+      });
+    } else if (type === "auth") {
+      authDispatch({
+        type: "CLEAR_MESSAGE",
+      });
+    }
+  };
+
   return (
     <body style={{ marginTop: "80px " }}>
       {authState.loading || appState.loading || appState.routeLoading ? (
@@ -63,6 +75,16 @@ export default function AppWrapper({ children }) {
           {children}
           {console.log("auth", authState)}
           {console.log("appState", appState)}
+          <ErrorModal
+            open={!!appState.message}
+            handleClose={() => handleErrorClose("app")}
+            errorMessage={appState.message}
+          />
+          <ErrorModal
+            open={!!authState.message}
+            handleClose={() => handleErrorClose("auth")}
+            errorMessage={authState.message}
+          />
         </>
       )}
     </body>

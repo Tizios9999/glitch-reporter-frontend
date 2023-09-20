@@ -75,7 +75,15 @@ export default function Login() {
           payload: false,
         });
       })
-      .catch(() => {});
+      .catch((error) => {
+        authDispatch({
+          type: "LOGIN_FAIL",
+        });
+        authDispatch({
+          type: "SET_LOADING",
+          payload: false,
+        });
+      });
   };
 
   return (

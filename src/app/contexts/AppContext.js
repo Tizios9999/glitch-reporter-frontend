@@ -30,6 +30,7 @@ const AppContextProvider = ({ children }) => {
     metadata: null,
     loading: true,
     routeLoading: false,
+    message: "",
     ticketsPerPage: 15,
     activeFilters: {
       priority: [],

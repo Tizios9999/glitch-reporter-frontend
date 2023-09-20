@@ -27,6 +27,15 @@ export function appReducer(state, action) {
         },
       };
 
+    case "SET_ROUTE_LOADING":
+      return {
+        ...state,
+        routeLoading: payload,
+        activeFilters: {
+          ...state.activeFilters,
+        },
+      };
+
     case "UPDATE_FILTERS":
       return {
         ...state,
@@ -42,6 +51,24 @@ export function appReducer(state, action) {
         activeFilters: {
           priority: [],
           status: [],
+        },
+      };
+
+    case "SET_MESSAGE":
+      return {
+        ...state,
+        message: payload,
+        activeFilters: {
+          ...state.activeFilters,
+        },
+      };
+
+    case "CLEAR_MESSAGE":
+      return {
+        ...state,
+        message: "",
+        activeFilters: {
+          ...state.activeFilters,
         },
       };
 

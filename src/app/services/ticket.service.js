@@ -33,10 +33,15 @@ const createTicket = (ticket) => {
 
 // Old function, use getFilteredPage instead
 const getPage = (page, pageSize) => {
-  return axios.get(API_URL + "getpage", {
-    params: { page: page, pageSize: pageSize },
-    headers: authHeader(),
-  });
+  return axios
+    .get(API_URL + "getpage", {
+      params: { page: page, pageSize: pageSize },
+      headers: authHeader(),
+    })
+    .catch((error) => {
+      console.error("Error while getting page: " + page, error);
+      throw error;
+    });
 };
 
 const getFilteredPage = (page, pageSize, priorityIds, statusIds) => {
@@ -55,18 +60,23 @@ const getFilteredPage = (page, pageSize, priorityIds, statusIds) => {
     return `[${arrayString}]`;
   }
 
-  return axios.get(API_URL + "getfilteredpage", {
-    params: {
-      page: page,
-      pageSize: pageSize,
-      priorityIds: serializeArray(validPriorityIds),
-      statusIds: serializeArray(validStatusIds),
-    },
-    headers: authHeader(),
-    paramsSerializer: (params) => {
-      return qs.stringify(params, { arrayFormat: "comma" });
-    },
-  });
+  return axios
+    .get(API_URL + "getfilteredpage", {
+      params: {
+        page: page,
+        pageSize: pageSize,
+        priorityIds: serializeArray(validPriorityIds),
+        statusIds: serializeArray(validStatusIds),
+      },
+      headers: authHeader(),
+      paramsSerializer: (params) => {
+        return qs.stringify(params, { arrayFormat: "comma" });
+      },
+    })
+    .catch((error) => {
+      console.error("Error while getting page: " + page, error);
+      throw error;
+    });
 };
 
 const getTicketById = (id) => {
@@ -86,6 +96,7 @@ const updateTicketStatus = (updateData, ticketId) => {
     })
     .catch((error) => {
       console.error("Error during ticket update: ", error);
+      throw error;
     });
 };
 
@@ -95,10 +106,11 @@ const addMessage = (message, ticketId) => {
       headers: authHeader(),
     })
     .then((response) => {
-      console.log("Added message: ");
+      console.log("Added message.");
     })
     .catch((error) => {
       console.error("Error when sending message: ", error);
+      throw error;
     });
 };
 
