@@ -68,16 +68,10 @@ function TicketManagementBox({ user, ticket, statuses }) {
   }
 
   async function handleUpdateButtonClick() {
-    console.log("Update ticket: ", ticketStatusValue, newAssignedUserId);
-
     let statusChanged =
       ticket.statusId === Number(ticketStatusValue) ? false : true;
     let assignedUserChanged =
       Number(newAssignedUserId) === Number(ticket.assignedToId) ? false : true;
-
-    console.log(statusChanged, assignedUserChanged);
-    console.log("Assigned user id", newAssignedUserId);
-    console.log("ticket id", ticket.assignedToId);
 
     if (statusChanged || assignedUserChanged || ticket.assignedToId === 0) {
       /* If the ticket is still unassigned during the update, 

@@ -72,8 +72,6 @@ export default function UserDashboard() {
   React.useEffect(() => {
     pageRequest(currentPage, appState)
       .then((response) => {
-        console.log("tickets: ", response.data);
-
         setTotalPages(
           Math.ceil(response.data.totalTickets / appState.ticketsPerPage)
         );
@@ -148,7 +146,6 @@ export default function UserDashboard() {
   return (
     <div>
       <CssBaseline />
-      {console.log("Size: ", getScreenSize())}
       <Container maxWidth="xl" sx={{ display: "flex" }}>
         <Box sx={{ marginLeft: size === "mobileSize" ? "0" : "200px" }}>
           {size === "mobileSize" && <NewTicketButton type="icon" />}

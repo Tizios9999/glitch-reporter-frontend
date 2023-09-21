@@ -192,7 +192,6 @@ function Navbar() {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page, id) => {
               const isVisible = checkVisibility(state, page.showRule);
-              console.log(page, isVisible);
               if (isVisible) {
                 return (
                   <Button

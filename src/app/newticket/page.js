@@ -96,7 +96,6 @@ const NewTicket = () => {
         // Form conversion into json
         const currentUser = authState.user;
         const currentDateTimeISO = getCurrentDateTimeISO();
-        console.log("isoDate", currentDateTimeISO);
 
         const ticketMessage = {
           sender: currentUser.username,
@@ -118,10 +117,6 @@ const NewTicket = () => {
           assignedTo: null,
           messages: [ticketMessage],
         };
-
-        // Form submit
-        console.log(ticketData);
-        // Proceed with saving the ticketData or performing other actions.
 
         const createdTicket = await createTicket(ticketData);
 

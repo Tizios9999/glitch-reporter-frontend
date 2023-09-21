@@ -22,9 +22,7 @@ const changeRole = (id, role) => {
       { newRoleString: role },
       { headers: authHeader() }
     )
-    .then((response) => {
-      console.log("User role updated: ", response.data);
-    })
+    .then(() => {})
     .catch((error) => {
       console.error("Error during user role update: ", error);
     });
@@ -33,9 +31,7 @@ const changeRole = (id, role) => {
 const deleteUser = (id) => {
   return axios
     .delete(API_URL + `${id}`, { headers: authHeader() })
-    .then((response) => {
-      console.log("User deleted: ", response.data);
-    })
+    .then((response) => {})
     .catch((error) => {
       console.error("Error while deleting user: ", error);
     });

@@ -115,7 +115,6 @@ export default function TicketCardElement(props) {
         width: size === "mobileSize" ? "250px" : "350px",
       }}
     >
-      {console.log("data: ", data)}
       {fieldsArr.map((field, index) => (
         <Box key={index} sx={{ display: "flex" }}>
           {field.type === "normal" && (

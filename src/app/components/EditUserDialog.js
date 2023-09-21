@@ -45,15 +45,10 @@ const EditUserDialog = ({ open, onClose, user }) => {
   };
 
   const handleDelete = () => {
-    console.log("Deleting user: ", user.id);
-
     setShowAlertDialog(true);
   };
 
   const handleSave = () => {
-    console.log("selected role ", selectedRole);
-    console.log("user id", user.id);
-
     changeRole(user.id, selectedRole)
       .then((response) => {
         onClose();

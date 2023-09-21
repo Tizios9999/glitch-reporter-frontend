@@ -61,12 +61,6 @@ export default function Login() {
       payload: true,
     });
 
-    const data = new FormData(event.currentTarget);
-    console.log({
-      username: data.get("username"),
-      password: data.get("password"),
-    });
-
     login(username, password)
       .then(() => {
         push("/");

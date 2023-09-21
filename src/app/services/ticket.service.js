@@ -11,7 +11,6 @@ Ticket related services.
 const API_URL = "http://localhost:8080/api/ticket/";
 
 const createTicket = (ticket) => {
-  console.log("ticket sent: ", ticket);
   const additionalHeaders = { "Content-Type": "application/json" };
   const combinedHeaders = { ...additionalHeaders, ...authHeader() };
   return axios
@@ -19,8 +18,6 @@ const createTicket = (ticket) => {
       headers: combinedHeaders,
     })
     .then((response) => {
-      console.log("Response from server: ", response.data);
-
       const ticketId = response.data.ticketId;
 
       return ticketId;
@@ -80,7 +77,6 @@ const getFilteredPage = (page, pageSize, priorityIds, statusIds) => {
 };
 
 const getTicketById = (id) => {
-  console.log("request started");
   return axios.get(API_URL + id, {
     headers: authHeader(),
   });
@@ -91,9 +87,7 @@ const updateTicketStatus = (updateData, ticketId) => {
     .put(API_URL + `${ticketId}/update-status`, updateData, {
       headers: authHeader(),
     })
-    .then((response) => {
-      console.log("Ticket updated: ", response.data);
-    })
+    .then((response) => {})
     .catch((error) => {
       console.error("Error during ticket update: ", error);
       throw error;
@@ -105,9 +99,7 @@ const addMessage = (message, ticketId) => {
     .post(API_URL + `${ticketId}/add-message`, message, {
       headers: authHeader(),
     })
-    .then((response) => {
-      console.log("Added message.");
-    })
+    .then(() => {})
     .catch((error) => {
       console.error("Error when sending message: ", error);
       throw error;

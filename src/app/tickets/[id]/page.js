@@ -70,18 +70,12 @@ const TicketPage = () => {
     };
 
     fetchId();
-
-    console.log("fetching id");
   }, [pathname]);
 
   useEffect(() => {
-    console.log("getting ticket id");
-
     if (id) {
       getTicketById(id)
         .then((response) => {
-          console.log("ticket arrived: ", response);
-
           setTicket(response.data);
         })
         .catch((error) => {
@@ -145,8 +139,6 @@ const TicketPage = () => {
     event.preventDefault();
 
     const fileLinks = await uploadFilesToCloud(uploadedFiles, storage);
-
-    console.log(authState, "authState");
 
     const currentDateTimeISO = getCurrentDateTimeISO();
 
@@ -247,7 +239,6 @@ const TicketPage = () => {
             })}
           </Box>
 
-          {console.log(ticket, "ticket")}
           <Box
             component="form"
             onSubmit={handleSubmit}

@@ -73,8 +73,6 @@ export default function AppWrapper({ children }) {
         <>
           <Navbar />
           {children}
-          {console.log("auth", authState)}
-          {console.log("appState", appState)}
           <ErrorModal
             open={!!appState.message}
             handleClose={() => handleErrorClose("app")}

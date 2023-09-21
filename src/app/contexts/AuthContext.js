@@ -99,8 +99,6 @@ const AuthContextProvider = ({ children }) => {
           type: "LOGIN_FAIL",
         });
 
-        console.log("error", error);
-        console.log("message", message);
         dispatch({
           type: "SET_MESSAGE",
           payload: message,
@@ -113,8 +111,6 @@ const AuthContextProvider = ({ children }) => {
 
   const logout = () => {
     AuthService.logout();
-
-    console.log("logging out");
 
     dispatch({
       type: "LOGOUT",

@@ -29,11 +29,6 @@ function CheckTokenComponent() {
     ? new Date(state.user.expiration).getTime()
     : null;
 
-  console.log(
-    "valid login: ",
-    tokenExpiryDate && tokenExpiryDate > currentTime
-  );
-
   if (tokenExpiryDate && tokenExpiryDate < currentTime) {
     // Logout
     logout();

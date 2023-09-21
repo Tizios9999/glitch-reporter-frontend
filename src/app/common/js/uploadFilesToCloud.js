@@ -8,6 +8,7 @@ import { ref, uploadBytes } from "firebase/storage";
 // Internal functions
 import createRandomString from "./createRandomString";
 // Contexts
+import { AppContext } from "@/app/contexts/AppContext";
 // Material UI Components
 
 /**
@@ -17,6 +18,8 @@ Uploades files to the Google Cloud storage.
 */
 
 export default async function uploadFilesToCloud(files, storage) {
+  const [appState, appDispatch] = React.useContext(AppContext);
+
   const uploadedFiles = [];
 
   for (const file of files) {
@@ -47,6 +50,18 @@ export default async function uploadFilesToCloud(files, storage) {
     } catch (error) {
       // Handle any potential errors during the upload process for individual files.
       console.error(`Error uploading ${file.name}:`, error);
+
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      appDispatch({
+        type: "SET_MESSAGE",
+        payload: message,
+      });
     }
   }
 

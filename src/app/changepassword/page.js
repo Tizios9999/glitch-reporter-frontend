@@ -47,11 +47,6 @@ function PasswordChangeForm() {
 
     setSuccessful(false);
 
-    console.log("Username:", username);
-    console.log("Email:", email);
-    console.log("New password:", newPassword);
-    console.log("New password confirmation:", newPasswordConfirmation);
-
     const formData = {
       username: username,
       email: email,
