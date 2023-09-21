@@ -38,7 +38,7 @@ export default function FiltersDrawer(props) {
       sx={{
         width: anchor === "top" || anchor === "bottom" ? "auto" : 220,
         zIndex: "-200",
-        marginTop: "90px", // Adjust this value as needed to avoid overlapping with the navbar
+        marginTop: "90px",
       }}
       role="presentation"
     >
@@ -51,7 +51,6 @@ export default function FiltersDrawer(props) {
       />
       <Divider />
       <CheckboxFilters name="status" filtersArr={appState.metadata.statuses} />
-      <Divider />
       {props.size === "mobileSize" && (
         <Box textAlign="center">
           <Button variant="contained" onClick={handleCloseDrawer}>
