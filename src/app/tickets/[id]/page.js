@@ -57,7 +57,7 @@ const TicketPage = () => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const pathname = usePathname();
 
-  const [appState] = useContext(AppContext);
+  const [appState, appDispatch] = useContext(AppContext);
   const [authState] = useContext(AuthContext);
 
   const size = getScreenSize();
@@ -78,11 +78,25 @@ const TicketPage = () => {
     console.log("getting ticket id");
 
     if (id) {
-      getTicketById(id).then((response) => {
-        console.log("ticket arrived: ", response);
+      getTicketById(id)
+        .then((response) => {
+          console.log("ticket arrived: ", response);
 
-        setTicket(response.data);
-      });
+          setTicket(response.data);
+        })
+        .catch((error) => {
+          const message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          appDispatch({
+            type: "SET_MESSAGE",
+            payload: message,
+          });
+        });
     }
   }, [id]);
 

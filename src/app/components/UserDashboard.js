@@ -70,15 +70,29 @@ export default function UserDashboard() {
   ];
 
   React.useEffect(() => {
-    pageRequest(currentPage, appState).then((response) => {
-      console.log("tickets: ", response.data);
+    pageRequest(currentPage, appState)
+      .then((response) => {
+        console.log("tickets: ", response.data);
 
-      setTotalPages(
-        Math.ceil(response.data.totalTickets / appState.ticketsPerPage)
-      );
+        setTotalPages(
+          Math.ceil(response.data.totalTickets / appState.ticketsPerPage)
+        );
 
-      setTicketsList(response.data.ticketList);
-    });
+        setTicketsList(response.data.ticketList);
+      })
+      .catch((error) => {
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        appDispatch({
+          type: "SET_MESSAGE",
+          payload: message,
+        });
+      });
   }, [currentPage, appState.activeFilters]);
 
   React.useEffect(() => {

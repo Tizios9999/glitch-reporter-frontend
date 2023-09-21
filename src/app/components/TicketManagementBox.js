@@ -2,7 +2,6 @@
 // React
 import { useState } from "react";
 // Next.js
-import { useRouter } from "next/navigation";
 // External services
 // Internal services
 import { updateTicketStatus, addMessage } from "../services/ticket.service";
@@ -33,8 +32,6 @@ The authorized user (Agent or Admin) can:
 */
 
 function TicketManagementBox({ user, ticket, statuses }) {
-  const router = useRouter();
-
   const allowedUserRoles = ["ROLE_ADMIN", "ROLE_AGENT"];
 
   const alreadyManagedByThisAgent = ticket.assignedToId == user.id;
@@ -122,7 +119,18 @@ function TicketManagementBox({ user, ticket, statuses }) {
         location.reload();
       } catch (error) {
         console.error("Error during update and message addition: ", error);
-        // Handle the error
+
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        appDispatch({
+          type: "SET_MESSAGE",
+          payload: message,
+        });
       }
     }
   }

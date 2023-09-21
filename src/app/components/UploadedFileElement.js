@@ -51,7 +51,17 @@ function UploadedFileElement({ file }) {
         xhr.send();
       })
       .catch((error) => {
-        // Handle any errors
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        appDispatch({
+          type: "SET_MESSAGE",
+          payload: message,
+        });
 
         console.error(error, "error from storage");
       });

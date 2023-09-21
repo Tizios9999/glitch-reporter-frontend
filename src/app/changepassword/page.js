@@ -10,6 +10,7 @@ import AuthService from "../services/auth.service";
 // Internal functions
 import validateForm from "../common/js/validateForm";
 // Contexts
+import { AuthContext } from "../contexts/AuthContext";
 // Material UI Components
 import {
   Container,
@@ -31,6 +32,8 @@ This is the form to change the password if the user forgot their one.
 */
 
 function PasswordChangeForm() {
+  const [authState, authDispatch] = React.useContext(AuthContext);
+
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -67,8 +70,19 @@ function PasswordChangeForm() {
         .then(() => {
           setSuccessful(true);
         })
-        .catch(() => {
+        .catch((error) => {
           setSuccessful(false);
+          const message =
+            (error.response &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
+
+          authDispatch({
+            type: "SET_MESSAGE",
+            payload: message,
+          });
         });
     } else {
       setErrorsList(errors);

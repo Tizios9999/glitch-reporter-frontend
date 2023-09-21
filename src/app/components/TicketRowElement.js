@@ -11,7 +11,6 @@ import convertISOStringToLocalFormat from "../common/js/convertISOStringToLocalF
 import renderChipField from "../common/rendering/renderChipField";
 import getMetadataObject from "../common/js/getMetadataObject";
 // Contexts
-import { AuthContext } from "../contexts/AuthContext";
 import { AppContext } from "../contexts/AppContext";
 // Material UI Components
 import Box from "@mui/material/Box";
@@ -34,7 +33,6 @@ Suitable for large screens.
 export default function TicketRowElement(props) {
   const { type, data, headers } = props;
 
-  const [authState] = useContext(AuthContext);
   const [appState] = useContext(AppContext);
 
   const { push } = useRouter();

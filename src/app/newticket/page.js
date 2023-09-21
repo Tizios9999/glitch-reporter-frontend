@@ -128,15 +128,22 @@ const NewTicket = () => {
         push(`/tickets/${createdTicket}`);
       } catch (error) {
         console.error("Error creating ticket with files:", error);
-        // Handle any errors that occurred during the file upload or ticket creation process.
+
+        const message =
+          (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+          error.message ||
+          error.toString();
+
+        appDispatch({
+          type: "SET_MESSAGE",
+          payload: message,
+        });
       }
     }
 
     createTicketWithFiles(formState, uploadedFiles, storage);
-
-    {
-      /* Make use of firebase to handle files uploaded */
-    }
   }
 
   return (
