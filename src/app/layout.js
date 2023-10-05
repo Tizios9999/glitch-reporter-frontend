@@ -31,13 +31,13 @@ application here.
 
 */
 
-export const metadata = {
-  title: "Glitch Reporter",
-  description: "Application used for Bug Tracking",
-};
-
 export default function RootLayout({ children }) {
   const emotionCache = createEmotionCache();
+
+  const metadata = {
+    title: "Glitch Reporter",
+    description: "Application used for Bug Tracking",
+  };
 
   return (
     <html lang="en">
