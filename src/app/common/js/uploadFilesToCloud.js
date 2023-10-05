@@ -1,5 +1,6 @@
 /* IMPORTS */
 // React
+import * as React from "react";
 // Next.js
 // External services
 import { ref, uploadBytes } from "firebase/storage";
@@ -18,8 +19,6 @@ Uploades files to the Google Cloud storage.
 */
 
 export default async function uploadFilesToCloud(files, storage) {
-  const [appState, appDispatch] = React.useContext(AppContext);
-
   const uploadedFiles = [];
 
   for (const file of files) {
@@ -51,17 +50,7 @@ export default async function uploadFilesToCloud(files, storage) {
       // Handle any potential errors during the upload process for individual files.
       console.error(`Error uploading ${file.name}:`, error);
 
-      const message =
-        (error.response &&
-          error.response.data &&
-          error.response.data.message) ||
-        error.message ||
-        error.toString();
-
-      appDispatch({
-        type: "SET_MESSAGE",
-        payload: message,
-      });
+      throw error;
     }
   }
 

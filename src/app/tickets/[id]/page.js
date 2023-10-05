@@ -136,25 +136,39 @@ const TicketPage = () => {
   }
 
   async function handleSubmit(event) {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    const fileLinks = await uploadFilesToCloud(uploadedFiles, storage);
+      const fileLinks = await uploadFilesToCloud(uploadedFiles, storage);
 
-    const currentDateTimeISO = getCurrentDateTimeISO();
+      const currentDateTimeISO = getCurrentDateTimeISO();
 
-    const ticketMessage = {
-      ticketId: ticket.ticketId,
-      senderId: authState.user.id,
-      sender: authState.user.username,
-      message: messageText,
-      messageDate: currentDateTimeISO,
-      uploadedFiles: fileLinks,
-    };
+      const ticketMessage = {
+        ticketId: ticket.ticketId,
+        senderId: authState.user.id,
+        sender: authState.user.username,
+        message: messageText,
+        messageDate: currentDateTimeISO,
+        uploadedFiles: fileLinks,
+      };
 
-    await addMessage(ticketMessage, ticket.ticketId);
+      await addMessage(ticketMessage, ticket.ticketId);
 
-    // Reload the page
-    location.reload();
+      // Reload the page
+      location.reload();
+    } catch (error) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      appDispatch({
+        type: "SET_MESSAGE",
+        payload: message,
+      });
+    }
   }
 
   return (
