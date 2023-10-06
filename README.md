@@ -108,24 +108,24 @@ To have a working copy of the interface locally on your device, you can clone it
 
 <!-- USAGE EXAMPLES -->
 
-### Usage
+## Usage
 
 In order to make the application work, you have to run the backend service first.
 You can find the repository and the instructions <a href="https://github.com/Tizios9999/glitch-reporter-backend/">here</a>.
 
-## Registration and Login/Logout
+### Registration and Login/Logout
 
 On the main page, you can access the login and register page.
 These sections are also accessible from the top menu.
 
 In order to log out from the application, you can click on the top right circle icon and click on the "Logout" button.
 
-## New password request
+### New password request
 
 If you ever forget your password, you can create a new one by clicking on the "Forgot password?" link on the Login page.
 You will need to provide both your Username and email used for registration.
 
-## Using the ticket dashboard
+### Using the ticket dashboard
 
 The ticket dashboard is where you can find all the ticket opened on GlitchReporter.
 
@@ -139,7 +139,7 @@ In mobile mode, in order to access the filters section you have to click on the 
 
 To browse a specific ticket, click on the specific ticket ID in Desktop mode, or "See Ticket" button in mobile mode.
 
-## Opening a ticket
+### Opening a ticket
 
 You can access the new ticket page by clicking:
 
@@ -151,18 +151,18 @@ Then add an issue description.
 
 You can also add one or more files to the message, for example screenshots you made, by clicking on the "Add File" button.
 
-## Adding messages to the ticket
+### Adding messages to the ticket
 
 Any user can add messages to an already created ticket to discuss it.
 
-## Agent features: changing the ticket status
+### Agent features: changing the ticket status
 
 As an agent, you can change the ticket status. As the agent, while browsing a ticket you will have access to the Ticket Management box where you can set the new ticket status and assign to take charge of it.
 When an agent changes the ticket status, if the ticket is currently unassigned, it will be automatically assigned to that agent.
 
 The users can be promoted to "Agent" only by the Admin.
 
-## Admin features: the admin board
+### Admin features: the admin board
 
 As the Admin, you can access to the "Administration" section.
 
@@ -175,7 +175,7 @@ The users can be promoted to "Admin" only by other admins.
 
 <!-- ROADMAP -->
 
-### Roadmap of possible future releases
+## Roadmap of possible future releases
 
 - [x] Release the first working version
 - [ ] Adding themes.
@@ -186,7 +186,7 @@ See the [open issues](https://github.com/Tizios9999/glitch-reporter-frontend/iss
 
 <!-- CONTRIBUTING -->
 
-### Contributing
+## Contributing
 
 This is a course project aimed to evaluate my personal skills, so right now it's closed for contributions. Any advice is always kindly appreciated though! You can even submit them directly on my app! :D
 
