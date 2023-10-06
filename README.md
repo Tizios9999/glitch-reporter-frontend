@@ -72,7 +72,7 @@
 GlitchReporter is a complete software application that helps tracking and managing customer support requests. It allows customers to create tickets to report problems or ask questions, and it provides agents with a centralized view of all tickets.
 
 This is the frontend interface, you have to run the backend service first in order to make it work.
-You can find the repository <a href="https://github.com/Tizios9999/glitch-reporter-backend/">here</a>.
+You can find the repository <a href="https://github.com/Tizios9999/glitchreporter-backend/">here</a>.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -111,7 +111,7 @@ To have a working copy of the interface locally on your device, you can clone it
 ## Usage
 
 In order to make the application work, you have to run the backend service first.
-You can find the repository and the instructions <a href="https://github.com/Tizios9999/glitch-reporter-backend/">here</a>.
+You can find the repository and the instructions <a href="https://github.com/Tizios9999/glitchreporter-backend/">here</a>.
 
 ### Registration and Login/Logout
 
