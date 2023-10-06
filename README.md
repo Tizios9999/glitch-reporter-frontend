@@ -167,4 +167,4 @@ Live at: [https://glitch-reporter-frontend-fc42.vercel.app/](https://glitch-repo
 [license-url]: https://github.com/Tizios9999/glitch-reporter-frontend/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/davide-santonocito-36ab84170
-[product-screenshot]: glitchreporterlogo.png
+[product-screenshot]: public/glitchreporterlogo.png
