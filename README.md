@@ -11,7 +11,6 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -35,9 +34,9 @@
     <br />
     <a href="https://glitch-reporter-frontend-fc42.vercel.app/">View Demo</a>
     ·
-    <a href="https://github.com/Tizios9999/glitch-reporter-frontendissues">Report Bug</a>
+    <a href="https://github.com/Tizios9999/glitch-reporter-frontend/issues">Report Bug</a>
     ·
-    <a href="https://github.com/Tizios9999/glitch-reporter-frontendissues">Request Feature</a>
+    <a href="https://github.com/Tizios9999/glitch-reporter-frontend/issues">Request Feature</a>
   </p>
 </div>
 
@@ -72,6 +71,9 @@
 
 GlitchReporter is a complete software application that helps tracking and managing customer support requests. It allows customers to create tickets to report problems or ask questions, and it provides agents with a centralized view of all tickets.
 
+This is the frontend interface, you have to run the backend service first in order to make it work.
+You can find the repository <a href="https://github.com/Tizios9999/glitch-reporter-backend/">here</a>.
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
@@ -81,6 +83,7 @@ GlitchReporter is a complete software application that helps tracking and managi
 - React.js
 - Next.js
 - Material UI
+- Google Cloud Storage
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -88,7 +91,7 @@ GlitchReporter is a complete software application that helps tracking and managi
 
 ## Getting Started
 
-To have a working copy of the project, you can clone it from here.
+To have a working copy of the interface locally on your device, you can clone it from here.
 
 ### Installation
 
@@ -105,28 +108,77 @@ To have a working copy of the project, you can clone it from here.
 
 <!-- USAGE EXAMPLES -->
 
-## Usage
+### Usage
 
-To start meditating, you need to:
+In order to make the application work, you have to run the backend service first.
+You can find the repository and the instructions <a href="https://github.com/Tizios9999/glitch-reporter-backend/">here</a>.
 
-- Set up your timer (if you want)
-- Choose an experience card from the list
-- Click on the "Start Meditation" below
+## Registration and Login/Logout
 
-If a timer has been set, you will be able to start it by clicking
-on the play button. You will hear a bell ring sound at the timer start
-and at the timer end (so you can meditate with your eyes closed if
-you prefer doing it this way)
+On the main page, you can access the login and register page.
+These sections are also accessible from the top menu.
+
+In order to log out from the application, you can click on the top right circle icon and click on the "Logout" button.
+
+## New password request
+
+If you ever forget your password, you can create a new one by clicking on the "Forgot password?" link on the Login page.
+You will need to provide both your Username and email used for registration.
+
+## Using the ticket dashboard
+
+The ticket dashboard is where you can find all the ticket opened on GlitchReporter.
+
+From the ticket dashboard you can:
+
+- Filter by ticket status or priority
+- Browse a specific ticket
+- Open a ticket (explained in the next section)
+
+In mobile mode, in order to access the filters section you have to click on the downright filter circle icon.
+
+To browse a specific ticket, click on the specific ticket ID in Desktop mode, or "See Ticket" button in mobile mode.
+
+## Opening a ticket
+
+You can access the new ticket page by clicking:
+
+- On the "New Ticket" button at the top of the filters section
+- In mobile mode, also by clicking on the "+" downright button.
+
+Opening a ticket is pretty straightforward, write the ticket subject and select the issue priority & area of interest.
+Then add an issue description.
+
+You can also add one or more files to the message, for example screenshots you made, by clicking on the "Add File" button.
+
+## Adding messages to the ticket
+
+Any user can add messages to an already created ticket to discuss it.
+
+## Agent features: changing the ticket status
+
+As an agent, you can change the ticket status. As the agent, while browsing a ticket you will have access to the Ticket Management box where you can set the new ticket status and assign to take charge of it.
+When an agent changes the ticket status, if the ticket is currently unassigned, it will be automatically assigned to that agent.
+
+The users can be promoted to "Agent" only by the Admin.
+
+## Admin features: the admin board
+
+As the Admin, you can access to the "Administration" section.
+
+From here, you can access the app users list. By clicking the button "Edit", you can modify the user role, or even delete it.
+Beware that if you delete an user, it cannot be recovered from here.
+
+The users can be promoted to "Admin" only by other admins.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- ROADMAP -->
 
-## Roadmap of possible future releases
+### Roadmap of possible future releases
 
 - [x] Release the first working version
-- [ ] Update the timer settings to allow user to select seconds as well.
-- [ ] Make it full stack by setting up a server that will provide the experiences via API call.
+- [ ] Adding themes.
 
 See the [open issues](https://github.com/Tizios9999/glitch-reporter-frontend/issues) for a full list of proposed features (and known issues).
 
@@ -134,9 +186,9 @@ See the [open issues](https://github.com/Tizios9999/glitch-reporter-frontend/iss
 
 <!-- CONTRIBUTING -->
 
-## Contributing
+### Contributing
 
-This is a course project aimed to evaluate my personal skills, so right now it's closed for contributions. Any advice is always kindly appreciated though!
+This is a course project aimed to evaluate my personal skills, so right now it's closed for contributions. Any advice is always kindly appreciated though! You can even submit them directly on my app! :D
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -155,7 +207,6 @@ Live at: [https://glitch-reporter-frontend-fc42.vercel.app/](https://glitch-repo
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/Tizios9999/meditation-app.svg?style=for-the-badge
 [contributors-url]: https://github.com/Tizios9999/glitch-reporter-frontend/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/Tizios9999/meditation-app.svg?style=for-the-badge
 [forks-url]: https://github.com/Tizios9999/glitch-reporter-frontend/network/members
