@@ -8,7 +8,7 @@ Ticket related services.
 
 */
 
-const API_URL = "http://localhost:8080/api/ticket/";
+const API_URL = "https://spring-glitchreporter.onrender.com/api/ticket/";
 
 const createTicket = (ticket) => {
   const additionalHeaders = { "Content-Type": "application/json" };

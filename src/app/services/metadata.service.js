@@ -7,7 +7,7 @@ Service that fetches ticket metadata from the backend.
 
 */
 
-const API_URL = "http://localhost:8080/api/metadata/get";
+const API_URL = "https://spring-glitchreporter.onrender.com/api/metadata/get";
 
 const getMetadata = () => {
   return axios.get(API_URL);

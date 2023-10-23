@@ -7,7 +7,7 @@ User related services.
 
 */
 
-const API_URL = "http://localhost:8080/api/users/";
+const API_URL = "https://spring-glitchreporter.onrender.com/api/users/";
 
 const getAll = () => {
   return axios.get(API_URL + "getall", {
