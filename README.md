@@ -71,8 +71,10 @@
 
 GlitchReporter is a complete software application that helps tracking and managing customer support requests. It allows customers to create tickets to report problems or ask questions, and it provides agents with a centralized view of all tickets.
 
-This is the frontend interface, you have to run the backend service first in order to make it work.
-You can find the repository <a href="https://github.com/Tizios9999/glitchreporter-backend/">here</a>.
+You can access the application at this address: <a href="https://glitch-reporter-frontend-fc42.vercel.app/">https://glitch-reporter-frontend-fc42.vercel.app/</a>
+<strong>IMPORTANT: The initial loading might take some minutes, since the application is on a test environment.</strong>
+
+If you are interested about the backend service instead, you can find the repository <a href="https://github.com/Tizios9999/glitchreporter-backend/">here</a>.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -110,8 +112,9 @@ To have a working copy of the interface locally on your device, you can clone it
 
 ## Usage
 
-In order to make the application work, you have to run the backend service first.
-You can find the repository and the instructions <a href="https://github.com/Tizios9999/glitchreporter-backend/">here</a>.
+You can access the application at this address: <a href="https://glitch-reporter-frontend-fc42.vercel.app/">https://glitch-reporter-frontend-fc42.vercel.app/</a>
+<strong>IMPORTANT: The initial loading might take some minutes, since the application is on a test environment.</strong>
+You can find the backend repository <a href="https://github.com/Tizios9999/glitchreporter-backend/">here</a> as well.
 
 ### Registration and Login/Logout
 
